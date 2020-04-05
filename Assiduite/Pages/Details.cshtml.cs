@@ -10,22 +10,33 @@ using Assiduite.Models;
 
 namespace Assiduite.Pages
 {
-    public class IndexModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly Assiduite.Data.ApplicationDbContext _context;
 
-        public IndexModel(Assiduite.Data.ApplicationDbContext context)
+        public DetailsModel(Assiduite.Data.ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IList<Etudiant> Etudiant { get;set; }
+        public Etudiant Etudiant { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             Etudiant = await _context.etudiant
                 .Include(e => e.Filiere)
-                .Include(e => e.User).ToListAsync();
+                .Include(e => e.User).FirstOrDefaultAsync(m => m.Id_Etudiant == id);
+
+            if (Etudiant == null)
+            {
+                return NotFound();
+            }
+            return Page();
         }
     }
 }
