@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Assiduite.Pages
 {
-    [Authorize]
     public class page1Model : PageModel
     {
         public void OnGet()

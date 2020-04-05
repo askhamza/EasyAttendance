@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ASKOUR\\Desktop\\Projet\\Assiduite\\Assiduite.csproj": {}
+    "C:\\Users\\ASKOUR\\Desktop\\Projet\\EasyAttendance\\Assiduite\\Assiduite.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ASKOUR\\Desktop\\Projet\\Assiduite\\Assiduite.csproj": {
+    "C:\\Users\\ASKOUR\\Desktop\\Projet\\EasyAttendance\\Assiduite\\Assiduite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASKOUR\\Desktop\\Projet\\Assiduite\\Assiduite.csproj",
+        "projectUniqueName": "C:\\Users\\ASKOUR\\Desktop\\Projet\\EasyAttendance\\Assiduite\\Assiduite.csproj",
         "projectName": "Assiduite",
-        "projectPath": "C:\\Users\\ASKOUR\\Desktop\\Projet\\Assiduite\\Assiduite.csproj",
+        "projectPath": "C:\\Users\\ASKOUR\\Desktop\\Projet\\EasyAttendance\\Assiduite\\Assiduite.csproj",
         "packagesPath": "C:\\Users\\ASKOUR\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASKOUR\\Desktop\\Projet\\Assiduite\\obj\\",
+        "outputPath": "C:\\Users\\ASKOUR\\Desktop\\Projet\\EasyAttendance\\Assiduite\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
