@@ -1,5 +1,5 @@
 ﻿@page
-@model Assiduite.Pages.UtilisateurModel
+@model Assiduite.Pages.utilisateurModel
 @{
     ViewData["Title"] = "Utilisateur";
     Layout = "~/Pages/Shared/_LayoutMaster.cshtml";
@@ -18,117 +18,117 @@
             </div>
             <div class="card-body">
                 <div class="chart-area">
-                   
-                        <table class="table tablesorter" >
-                            <thead class=" text-primary">
-                                <tr>
-                                    <th>
-                                        Matricule
-                                    </th>
-                                    <th>
-                                        Nom
-                                    </th>
-                                    <th>
-                                        Prénom
-                                    </th>
-                                    <th class="text-center">
-                                        Type
-                                    </th>
-                                    <th>
-                                        Modifier
-                                    </th>
-                                    <th>
-                                        Supprimer
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        ASKOUR-Hamza20
-                                    </td>
-                                    <td>
-                                        ASKOUR
-                                    </td>
-                                    <td>
-                                        Hamza
-                                    </td>
-                                    <td class="text-center">
-                                        Administrateur
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        HILALI-Ahmed18
-                                    </td>
-                                    <td>
-                                        HILALI
-                                    </td>
-                                    <td>
-                                        Ahmed
-                                    </td>
-                                    <td class="text-center">
-                                        Administrateur
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        MIDAOUI-Omar00
-                                    </td>
-                                    <td>
-                                        MIDAOUI
-                                    </td>
-                                    <td>
-                                        Omar
-                                    </td>
-                                    <td class="text-center">
-                                        Professeur
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Philip Chaney
-                                    </td>
-                                    <td>
-                                        Korea, South
-                                    </td>
-                                    <td>
-                                        Overland Park
-                                    </td>
-                                    <td class="text-center">
-                                        Professeur
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Doris Greene
-                                    </td>
-                                    <td>
-                                        Malawi
-                                    </td>
-                                    <td>
-                                        Feldkirchen in Kärnten
-                                    </td>
-                                    <td class="text-center">
-                                        $63,542
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Jon Porter
-                                    </td>
-                                    <td>
-                                        Portugal
-                                    </td>
-                                    <td>
-                                        Gloucester
-                                    </td>
-                                    <td class="text-center">
-                                        $98,615
-                                    </td>
-                                </tr>
-                            </tbody>
-                   
+
+                    <table class="table tablesorter">
+                        <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    Matricule
+                                </th>
+                                <th>
+                                    Nom
+                                </th>
+                                <th>
+                                    Prénom
+                                </th>
+                                <th class="text-center">
+                                    Type
+                                </th>
+                                <th>
+                                    Modifier
+                                </th>
+                                <th>
+                                    Supprimer
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    ASKOUR-Hamza20
+                                </td>
+                                <td>
+                                    ASKOUR
+                                </td>
+                                <td>
+                                    Hamza
+                                </td>
+                                <td class="text-center">
+                                    Administrateur
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    HILALI-Ahmed18
+                                </td>
+                                <td>
+                                    HILALI
+                                </td>
+                                <td>
+                                    Ahmed
+                                </td>
+                                <td class="text-center">
+                                    Administrateur
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    MIDAOUI-Omar00
+                                </td>
+                                <td>
+                                    MIDAOUI
+                                </td>
+                                <td>
+                                    Omar
+                                </td>
+                                <td class="text-center">
+                                    Professeur
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Philip Chaney
+                                </td>
+                                <td>
+                                    Korea, South
+                                </td>
+                                <td>
+                                    Overland Park
+                                </td>
+                                <td class="text-center">
+                                    Professeur
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Doris Greene
+                                </td>
+                                <td>
+                                    Malawi
+                                </td>
+                                <td>
+                                    Feldkirchen in Kärnten
+                                </td>
+                                <td class="text-center">
+                                    $63,542
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Jon Porter
+                                </td>
+                                <td>
+                                    Portugal
+                                </td>
+                                <td>
+                                    Gloucester
+                                </td>
+                                <td class="text-center">
+                                    $98,615
+                                </td>
+                            </tr>
+                        </tbody>
+
                     </table>
                 </div>
             </div>
@@ -145,82 +145,75 @@
                 </div>
             </div>
             <div class="card-body">
-               
+                <div class="row">
+                    <div class="col-md-12">
 
+                        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
 
-
-                    
-                        <div class="row">
-                            <div class="col-md-12">
-                               
-                                <form>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label asp-for="Input.Email"></label>
-                                                <input asp-for="Input.Email" class="form-control" />
-                                                <span asp-validation-for="Input.Email" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Nom</label>
-                                                <input type="text" class="form-control" placeholder="Company" value="Mike">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Prénom</label>
-                                                <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
-                                            </div>
-                                        </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label asp-for="Input.Email"></label>
+                                        <input asp-for="Input.Email" class="form-control" />
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Mot de passe</label>
-                                                <input type="password" class="form-control" placeholder="Company" value="Mike">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Confirmation de mot de passe </label>
-                                                <input type="password" class="form-control" placeholder="Last Name" value="Andrew">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Type</label>
-                                                <select class="form-control">
-                                                    <option class="form-control" style="background-color:rgb(82, 95, 127)">Professeur</option>
-                                                    <option class="form-control" style="background-color:rgb(82, 95, 127)">Administrateur</option>
-                                                    <option class="form-control" style="background-color:rgb(82, 95, 127)">Etudiant </option>
-                                                </select>
-                                             </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-fill btn-primary">Ajouter</button>
-                                    </div>
-                               
+                                </div>
                             </div>
-                        
-                        
-                </div>
-
-
-
-
-
-
-
-
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Input.Nom_User">Nom</label>
+                                        <input asp-for="Input.Nom_User" class="form-control" />
+                                        <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Input.Prenom_User">Prénom</label>
+                                        <input asp-for="Input.Prenom_User" class="form-control" />
+                                        <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Input.Password">Mot de passe </label>
+                                        <input asp-for="Input.Password" class="form-control" />
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Input.ConfirmPassword"> Confirmation de Mot de passe</label>
+                                        <input asp-for="Input.ConfirmPassword" class="form-control" />
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label asp-for="Input.Type_User">Type d'utilisateur</label>
+                                        <select asp-for="Input.Type_User" class="form-control">
+                                            <option value="Etudiant"> Etudiant</option>
+                                            <option value="Professeur"> Professeur</option>
+                                            <option value="Adminitrateur"> Administrateur</option>
+                                        </select>
+                                        <span asp-validation-for="Input.Type_User" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit"  class="btn btn-fill btn-primary">Ajouter</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
-
 
 
 
