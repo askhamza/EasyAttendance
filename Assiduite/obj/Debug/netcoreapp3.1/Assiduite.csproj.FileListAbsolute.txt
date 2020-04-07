@@ -446,10 +446,6 @@ C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\
 C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Assiduite.dll
 C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Assiduite.pdb
 C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Assiduite.genruntimeconfig.cache
-C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Create.cshtml.g.cs
-C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Delete.cshtml.g.cs
-C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Details.cshtml.g.cs
-C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Edit.cshtml.g.cs
 C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_LayoutEmpty.cshtml.g.cs
 C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\bin\Debug\netcoreapp3.1\appsettings.json
@@ -682,3 +678,10 @@ C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\De
 C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Details.cshtml.g.cs
 C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Edit.cshtml.g.cs
 C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Index.cshtml.g.cs
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Debug.dll
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Create.cshtml.g.cs
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Delete.cshtml.g.cs
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Details.cshtml.g.cs
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Edit.cshtml.g.cs
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Index.cshtml.g.cs
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\utilisateur.cshtml.g.cs
