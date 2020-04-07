@@ -103,8 +103,8 @@ namespace Assiduite.Areas.Identity.Pages.Account
                     Nom_User = Input.Nom_User,
                     Prenom_User = Input.Prenom_User,
                     Mat_User = Input.Mat_User,
-                    Type_User = Input.Type_User,    
-                };
+                    Type_User = Input.Type_User,
+                  };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -124,6 +124,15 @@ namespace Assiduite.Areas.Identity.Pages.Account
 
                     }
 
+                    if(user.Type_User == "E") { 
+                    await _userManager.AddToRoleAsync(user, GestionRole.EtudUser);
+                    }
+                    else  if (user.Type_User == "A") { 
+                    await _userManager.AddToRoleAsync(user, GestionRole.AdminUser);
+                    }
+                    else if (user.Type_User == "P") { 
+                    await _userManager.AddToRoleAsync(user, GestionRole.ProfUser);
+                    }
 
                     _logger.LogInformation("User created a new account with password.");
 

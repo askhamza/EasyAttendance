@@ -1,5 +1,5 @@
 ﻿@page
-@model Assiduite.Pages.utilisateurModel
+@model Assiduite.Pages.UtilisateurModel
 @{
     ViewData["Title"] = "Utilisateur";
     Layout = "~/Pages/Shared/_LayoutMaster.cshtml";
@@ -156,6 +156,11 @@
                                 <form>
                                     <div class="row">
                                         <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="Input.Email"></label>
+                                                <input asp-for="Input.Email" class="form-control" />
+                                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                            </div>
                                             <div class="form-group">
                                                 <label>Nom</label>
                                                 <input type="text" class="form-control" placeholder="Company" value="Mike">
