@@ -26,12 +26,18 @@
                 </p>
                 <form method="post" action="">
                     <div class="form-group">
-                        <label>Matricule</label>
-                        <input type="text" class="form-control" placeholder="Matricule">
+                        <label></label>
+                        <!--  <input type="text" class="form-control" placeholder="Matricule">-->
+                        <label asp-for="Input.Email">Matricule</label>
+                        <input asp-for="Input.Email" class="form-control" placeholder="Matricule" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label>Mot de passe</label>
-                        <input type="password" class="form-control" placeholder="Password">
+                        <!--<label>Mot de passe</label>
+    <input type="password" class="form-control" placeholder="Password">-->
+                        <label asp-for="Input.Password"></label>
+                        <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
                     <div style="text-align:center">
                         <button type="submit" class="btn btn-fill btn-primary">Connexion</button>
