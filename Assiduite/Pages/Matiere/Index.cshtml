@@ -1,0 +1,57 @@
+@page
+@model Assiduite.Pages.Matiere.IndexModel
+
+@{
+    ViewData["Title"] = "Gestion Matière";
+}
+
+<h1>Gestion des matières</h1>
+
+<p>
+    <a asp-page="Create">Creation d'une nouvelle matière</a>
+</p>
+<table class="table" id="MatiereTable" >
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Matiere[0].Nom_Mat)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Matiere) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom_Mat)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id_Mat">Modifier</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id_Mat">Informations</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id_Mat">Supprimer</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var table = $('#MatiereTable').DataTable({
+                "pagingType": "simple",
+                "language": {
+                    "lengthMenu": "Affichage _MENU_ matières par page",
+                    "info": "Page: _PAGE_ sur _PAGES_",
+                },
+                "paginate": {
+                    "first": "Première",
+                    "last": "Dernière",
+                    "previous": "Precedent",
+                    "next": "Suivant",
+                }
+            });
+            $( table.table().container() ).removeClass( 'form-inline' );
+        } );
+    </script>
+}
