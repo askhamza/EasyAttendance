@@ -1,0 +1,222 @@
+﻿@page
+@model Assiduite.Pages.utilisateurModel
+@{
+    ViewData["Title"] = "Utilisateur";
+    Layout = "~/Pages/Shared/_LayoutMaster.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-chart">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-category">Utilisateur</h5>
+                        <h2 class="card-title">Tout les utilisateurs</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <table>
+                        <table class="table tablesorter " id="">
+                            <thead class=" text-primary">
+                                <tr>
+                                    <th>
+                                        Matricule
+                                    </th>
+                                    <th>
+                                        Nom
+                                    </th>
+                                    <th>
+                                        Prénom
+                                    </th>
+                                    <th class="text-center">
+                                        Type
+                                    </th>
+                                    <th>
+                                        Modifier
+                                    </th>
+                                    <th>
+                                        Supprimer
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        ASKOUR-Hamza20
+                                    </td>
+                                    <td>
+                                        ASKOUR
+                                    </td>
+                                    <td>
+                                        Hamza
+                                    </td>
+                                    <td class="text-center">
+                                        Administrateur
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        HILALI-Ahmed18
+                                    </td>
+                                    <td>
+                                        HILALI
+                                    </td>
+                                    <td>
+                                        Ahmed
+                                    </td>
+                                    <td class="text-center">
+                                        Administrateur
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        MIDAOUI-Omar00
+                                    </td>
+                                    <td>
+                                        MIDAOUI
+                                    </td>
+                                    <td>
+                                        Omar
+                                    </td>
+                                    <td class="text-center">
+                                        Professeur
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Philip Chaney
+                                    </td>
+                                    <td>
+                                        Korea, South
+                                    </td>
+                                    <td>
+                                        Overland Park
+                                    </td>
+                                    <td class="text-center">
+                                        Professeur
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Doris Greene
+                                    </td>
+                                    <td>
+                                        Malawi
+                                    </td>
+                                    <td>
+                                        Feldkirchen in Kärnten
+                                    </td>
+                                    <td class="text-center">
+                                        $63,542
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Jon Porter
+                                    </td>
+                                    <td>
+                                        Portugal
+                                    </td>
+                                    <td>
+                                        Gloucester
+                                    </td>
+                                    <td class="text-center">
+                                        $98,615
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-category">Utilisateur</h5>
+                        <h2 class="card-title">Ajouter un utilisateur</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+               
+
+
+
+                    
+                        <div class="row">
+                            <div class="col-md-12">
+                               
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nom</label>
+                                                <input type="text" class="form-control" placeholder="Company" value="Mike">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Prénom</label>
+                                                <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Mot de passe</label>
+                                                <input type="password" class="form-control" placeholder="Company" value="Mike">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Confirmation de mot de passe </label>
+                                                <input type="password" class="form-control" placeholder="Last Name" value="Andrew">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Type</label>
+                                                <select class="form-control">
+                                                    <option class="form-control" style="background-color:rgb(82, 95, 127)">Professeur</option>
+                                                    <option class="form-control" style="background-color:rgb(82, 95, 127)">Administrateur</option>
+                                                    <option class="form-control" style="background-color:rgb(82, 95, 127)">Etudiant </option>
+                                                </select>
+                                             </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-fill btn-primary">Ajouter</button>
+                                    </div>
+                               
+                            </div>
+                        
+                        
+                </div>
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
