@@ -19,11 +19,18 @@ namespace Assiduite.Pages
     [AllowAnonymous]
     public class utilisateurModel : PageModel
     {
+       
+
+
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _db;
+
+
+        public IList<Utilisateur> Utilisateur { get; set; }
+
         public utilisateurModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
@@ -52,7 +59,7 @@ namespace Assiduite.Pages
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
+        
         public class InputModel
         {
             [Required]
@@ -87,31 +94,82 @@ namespace Assiduite.Pages
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            Utilisateur = await _db.utilisateur.ToListAsync();
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            
         }
-       
+        public Utilisateur item { get; set; }
+        public async Task<IActionResult> OnPostDelete(string Mat_User)
+        {
+            if (Mat_User == null)
+            {
+                return NotFound();
+            }
+
+            item = await _db.utilisateur.FindAsync(Mat_User);
+
+            if (item != null)
+            {
+                _db.utilisateur.Remove(item);
+                await _db.SaveChangesAsync();
+            }
+            return RedirectToPage("./Index");
+        }
+        public async Task<IActionResult> onPostEdit()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            _db.Attach(item).State = EntityState.Modified;
+
+            try
+            {
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UtilisateurExists(item.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToPage("./utilisateur");
+        }
+        private bool UtilisateurExists(string id)
+        {
+            return _db.utilisateur.Any(e => e.Id == id);
+        }
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            var mat = (await _db.utilisateur.ToListAsync()).ToList();
-            foreach (var item in mat)
-            {
-                if (item.Mat_User == Input.Nom_User + '_' + Input.Prenom_User + '_' + RandomString())
-                {
-                    return Page();
-                }
-            }
             if (ModelState.IsValid)
             {
+                Utilisateur = await _db.utilisateur.ToListAsync();
+                string mat = Input.Nom_User + '_' + Input.Prenom_User + '_' + RandomString();
+                foreach (var item in Utilisateur)
+                {
+                    if (item.Mat_User == mat)
+                    {
+                        return Page();
+                    }
+                }
                 var user = new Utilisateur
                 {
                     UserName = Input.Email,
                     Email = Input.Email,
                     Nom_User = Input.Nom_User,
                     Prenom_User = Input.Prenom_User,
-                    Mat_User = Input.Nom_User  +'_'+ Input.Prenom_User +'_'+RandomString() ,
+                    Mat_User = mat ,
                     Type_User = Input.Type_User,
                 };
                

@@ -12346,6 +12346,20 @@ button.bg-darker:focus {
 .font-weight-bold {
     font-weight: 600 !important;
 }
+.font-inputs-modal {
+    font-weight: initial !important;
+    color: whitesmoke !important;
+}
+.style-modal {
+    background-color: #181c31;
+    border-radius: 5%;
+    top: -6rem;
+    left: 5rem;
+}
+.font-del{
+    color:#9d1414 !important ; 
+    font-weight: bolder !important ;
+}
 
 .font-weight-bolder {
     font-weight: bolder !important;
@@ -20373,6 +20387,9 @@ Copyright (c) 2015 Daniel Eden
 .card-plain:not(.card-subcategories).card-body {
     padding-left: 0;
     padding-right: 0;
+}
+.font-color {
+    color:whitesmoke; 
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
