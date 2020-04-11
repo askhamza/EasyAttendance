@@ -684,4 +684,10 @@ C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\
 C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Details.cshtml.g.cs
 C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Edit.cshtml.g.cs
 C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Index.cshtml.g.cs
-C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\utilisateur.cshtml.g.cs
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Etudiants\Create.cshtml.g.cs
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Etudiants\Delete.cshtml.g.cs
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Etudiants\Details.cshtml.g.cs
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Etudiants\Edit.cshtml.g.cs
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Etudiants\Index.cshtml.g.cs
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Utilisateurs\Index.cshtml.g.cs
+C:\Users\ASKOUR\Desktop\Projet\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Etudiants\Index0.cshtml.g.cs

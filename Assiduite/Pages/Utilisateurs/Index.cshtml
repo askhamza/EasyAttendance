@@ -1,13 +1,10 @@
 ﻿@page
-@model Assiduite.Pages.utilisateurModel
+@model Assiduite.Pages.Utilisateurs.IndexModel
 @{
     ViewData["Title"] = "Utilisateur";
-    Layout = "~/Pages/Shared/_LayoutMaster.cshtml";
 }
 
-    
         <!-- Card for Add User -->
-        <div class="col-12">
             <div class="card">
                 <div class="card-header ">
                     <div class="row">
@@ -85,9 +82,7 @@
                     </div>
                 </div>
             </div>
-        </div>
         <!-- Card for list All users-->
-        <div class="col-12">
             <div class="card">
                 <div class="card-header ">
                     <div class="row">
@@ -121,29 +116,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in  Model.Utilisateur)
+                                    @foreach (var _user in  Model.Utilisateur)
                                     {
                                         <tr>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Mat_User)
+                                                @Html.DisplayFor(modelItem => _user.Mat_User)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Nom_User)
+                                                @Html.DisplayFor(modelItem => _user.Nom_User)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Prenom_User)
+                                                @Html.DisplayFor(modelItem => _user.Prenom_User)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Type_User)
+                                                @Html.DisplayFor(modelItem => _user.Type_User)
                                             </td>
                                             <td>
-                                                <a data-toggle="modal" data-target="#edit_@item.Mat_User" asp-page="./Edit">Modifier</a> |
-                                                <a data-toggle="modal" data-target="#info_@item.Mat_User" asp-page="./Details">Informations</a> |
-                                                <a data-toggle="modal" data-target="#del_@item.Mat_User" asp-page="./Delete">Supprimer</a>
+                                                <a data-toggle="modal" data-target="#edit_@_user.Mat_User" asp-page="./Edit">Modifier</a> |
+                                                <a data-toggle="modal" data-target="#info_@_user.Mat_User" asp-page="./Details">Informations</a> |
+                                                <a data-toggle="modal" data-target="#del_@_user.Mat_User" asp-page="./Delete">Supprimer</a>
                                             </td>
                                         </tr>
                                         <!-- Modal Edit -->
-                                        <div class="modal fade" id="edit_@item.Mat_User" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                        <div class="modal fade" id="edit_@_user.Mat_User" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content style-modal">
                                                     <div class="modal-header">
@@ -154,13 +149,13 @@
                                                     </div>
                                                     <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
                                                     <div class="modal-body">
-                                                        <form asp-page-handler="Edit" method="post">
+                                                        <form asp-page-handler="Edit" asp-route-id="@_user.Id" method="post">
                                                             <div class="row" style="align-content:center">
                                                                 <div class="col-md-3"></div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group" style="text-align:center">
                                                                         <label asp-for="Input.Mat_User">Matricule</label>
-                                                                        <input asp-for="Input.Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@item.Mat_User" disabled />
+                                                                        <input name="Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_user.Mat_User" readonly />
                                                                         <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
@@ -170,14 +165,14 @@
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label asp-for="Input.Nom_User">Nom</label>
-                                                                        <input asp-for="Input.Nom_User" class="form-control font-inputs-modal" value="@item.Nom_User" />
+                                                                        <input name="Nom_User" class="form-control font-inputs-modal" value="@_user.Nom_User" />
                                                                         <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label asp-for="Input.Prenom_User">Prénom</label>
-                                                                        <input asp-for="Input.Prenom_User" class="form-control font-inputs-modal" value="@item.Prenom_User" />
+                                                                        <input name="Prenom_User" class="form-control font-inputs-modal" value="@_user.Prenom_User" />
                                                                         <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
@@ -186,7 +181,7 @@
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label asp-for="Input.Email"></label>
-                                                                        <input asp-for="Input.Email" class="form-control font-inputs-modal" value="@item.Email" />
+                                                                        <input name="Email" class="form-control font-inputs-modal" value="@_user.Email" />
                                                                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
@@ -196,8 +191,18 @@
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label asp-for="Input.Type_User">Type d'utilisateur</label>
-                                                                        <select asp-for="Input.Type_User" class="form-control" value="@item.Type_User">
-                                                                            <option value="Professeur"> Professeur</option>
+                                                                        <select name="Type_User" class="form-control" value="@_user.Type_User">
+                                                                            @if (_user.Type_User == "Professeur")
+                                                                            {
+                                                                                <option value="Professeur" selected> Professeur</option>
+                                                                                <option value="Administrateur"> Administrateur</option>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <option value="Professeur" > Professeur</option>
+                                                                                <option value="Administrateur" selected> Administrateur</option>
+                                                                            }
+
                                                                             <option value="Administrateur"> Administrateur</option>
                                                                         </select>
                                                                         <span asp-validation-for="Input.Type_User" class="text-danger"></span>
@@ -213,7 +218,7 @@
                                             </div>
                                         </div>
                                         <!-- Modal Information -->
-                                        <div class="modal fade" id="info_@item.Mat_User" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                        <div class="modal fade" id="info_@_user.Mat_User" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content style-modal">
                                                     <div class="modal-header">
@@ -230,7 +235,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group" style="text-align:center">
                                                                     <label asp-for="Input.Mat_User">Matricule</label>
-                                                                    <input asp-for="Input.Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@item.Mat_User" disabled />
+                                                                    <input asp-for="Input.Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_user.Mat_User" readonly />
                                                                     <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
                                                                 </div>
                                                             </div>
@@ -240,14 +245,14 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label asp-for="Input.Nom_User">Nom</label>
-                                                                    <input asp-for="Input.Nom_User" class="form-control font-inputs-modal" value="@item.Nom_User" disabled />
+                                                                    <input asp-for="Input.Nom_User" class="form-control font-inputs-modal" value="@_user.Nom_User" readonly />
                                                                     <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label asp-for="Input.Prenom_User">Prénom</label>
-                                                                    <input asp-for="Input.Prenom_User" class="form-control font-inputs-modal" value="@item.Prenom_User" disabled />
+                                                                    <input asp-for="Input.Prenom_User" class="form-control font-inputs-modal" value="@_user.Prenom_User" readonly />
                                                                     <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
                                                                 </div>
                                                             </div>
@@ -256,7 +261,7 @@
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <label asp-for="Input.Email"></label>
-                                                                    <input asp-for="Input.Email" class="form-control font-modal font-inputs-modal" value="@item.Email" disabled />
+                                                                    <input asp-for="Input.Email" class="form-control font-modal font-inputs-modal" value="@_user.Email" readonly />
                                                                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                                                                 </div>
                                                             </div>
@@ -266,18 +271,18 @@
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <label asp-for="Input.Type_User">Type d'utilisateur</label>
-                                                                    <input asp-for="Input.Email" class="form-control font-inputs-modal" value="@item.Type_User" disabled />
+                                                                    <input asp-for="Input.Email" class="form-control font-inputs-modal" value="@_user.Type_User" readonly />
                                                                     <span asp-validation-for="Input.Type_User" class="text-danger"></span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @if (item.Type_User == "Professeur")
+                                                        @if (_user.Type_User == "Professeur")
                                                         {
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label asp-for="Input.Type_User">Matiere</label>
-                                                                        <input asp-for="Input.Email" class="form-control font-inputs-modal" value="Marketing  -  Management   -   Gestion des entreprises" disabled />
+                                                                        <input asp-for="Input.Email" class="form-control font-inputs-modal" value="Marketing  -  Management   -   Gestion des entreprises" readonly />
                                                                         <span asp-validation-for="Input.Type_User" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
@@ -288,7 +293,7 @@
                                             </div>
                                         </div>
                                         <!--Modal Delete-->
-                                        <div class="modal fade" id="del_@item.Mat_User" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                        <div class="modal fade" id="del_@_user.Mat_User" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content style-modal" style="top: 100px ; border-radius: 2rem;">
                                                     <div class="modal-header">
@@ -300,25 +305,22 @@
                                                     <h5 class="font-modal" style="text-align:center;"> Easy Attendance </h5>
                                                     <div class="modal-body">
                                                         <p class="font-inputs-modal" style="font-weight:bold ; text-align:center">
-                                                            Est-ce que vous voullez vraiment supprimer l'utilisateur <span class="font-del">@item.Nom_User</span>  <span class="font-del">@item.Prenom_User</span>
+                                                            Est-ce que vous voullez vraiment supprimer l'utilisateur <span class="font-del">@_user.Nom_User</span>  <span class="font-del">@_user.Prenom_User</span>
                                                             immatriculé par :
                                                         </p>
-                                                        <form asp-page-handler="Delete" method="post">
+                                                        <form asp-page-handler="Delete" method="post" asp-route-id="@_user.Id">
                                                             <div class="row" style="align-content:center">
                                                                 <div class="col-md-3"></div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group" style="text-align:center">
-                                                                        <input asp-for="item.Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@item.Mat_User" readonly />
-                                                                        <input type="hidden" asp-for="item.Id" />
-                                                                        <input type="submit" value="Supprimer" class="btn btn-danger" />
+                                                                        <input asp-for="_user.Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_user.Mat_User" readonly />
+                                                                       <br />
+                                                                        <button type="submit"  class="btn btn-danger" >Supprimer</button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-3"></div>
                                                             </div>
-                                                            <!--  <div class="card-footer" style="text-align:center">
-          <button type="submit" class="btn btn-fill btn-primary">Supprimer</button>
-      </div>-->
-                                                        </form>
+                                                            </form>
                                                     </div>
                                                     
                                                 </div>
@@ -332,10 +334,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-   
-
-
+        
 @section Scripts {
 <script>
     $(document).ready(function () {

@@ -14,24 +14,20 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Assiduite.Pages
+namespace Assiduite.Pages.Utilisateurs
 {
     [AllowAnonymous]
-    public class utilisateurModel : PageModel
+    public class IndexModel : PageModel
     {
-       
-
-
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _db;
 
-
         public IList<Utilisateur> Utilisateur { get; set; }
 
-        public utilisateurModel(
+        public IndexModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
@@ -99,53 +95,35 @@ namespace Assiduite.Pages
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             
         }
-        public Utilisateur item { get; set; }
-        public async Task<IActionResult> OnPostDelete(string Mat_User)
+        public Utilisateur _user { get; set; }
+        public async Task<IActionResult> OnPostDelete(string? id)
         {
-            if (Mat_User == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            item = await _db.utilisateur.FindAsync(Mat_User);
+            _user = await _db.utilisateur.FindAsync(id);
 
-            if (item != null)
+            if (_user != null)
             {
-                _db.utilisateur.Remove(item);
+                _db.utilisateur.Remove(_user);
                 await _db.SaveChangesAsync();
             }
+
             return RedirectToPage("./Index");
         }
-        public async Task<IActionResult> onPostEdit()
+
+
+        public ActionResult OnPostEdit(Utilisateur _user, string id)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _db.Attach(item).State = EntityState.Modified;
-
-            try
-            {
-                await _db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UtilisateurExists(item.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./utilisateur");
-        }
-        private bool UtilisateurExists(string id)
-        {
-            return _db.utilisateur.Any(e => e.Id == id);
+            var item = _db.utilisateur.Find(id);
+            item.Nom_User = _user.Nom_User;
+            item.Prenom_User = _user.Prenom_User;
+            item.Type_User = _user.Type_User;
+            item.Email = _user.Email;
+            _db.SaveChanges();
+            return RedirectToPage("./Index");
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -216,7 +194,7 @@ namespace Assiduite.Pages
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            return Page();
+            return RedirectToPage("./Index");
         }
     }
 }
