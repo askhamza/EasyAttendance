@@ -1,0 +1,87 @@
+﻿@page
+@model Assiduite.Pages.Filiere.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Gestion de filière</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-page-handler="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Filiere.Nom_Fil" class="control-label"></label>
+                <input asp-for="Filiere.Nom_Fil" class="form-control" />
+                <span asp-validation-for="Filiere.Nom_Fil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Filiere.Annee_Fil" class="control-label"></label>
+                <input asp-for="Filiere.Annee_Fil" class="form-control" max="5" min="0" />
+                <span asp-validation-for="Filiere.Annee_Fil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table" id="FiliereTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Filieres[0].Nom_Fil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Filieres[0].Annee_Fil)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Filieres)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom_Fil)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Annee_Fil)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id_Fil">Informations</a>
+                    <a asp-page="./Delete" asp-route-id="@item.Id_Fil">Supprimer</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+    $(document).ready(function () {
+        var table = $('#FiliereTable').DataTable({
+            "pagingType": "simple",
+            "language": {
+                "lengthMenu": "Affichage _MENU_ filière par page",
+                "info": "Page: _PAGE_ sur _PAGES_",
+            },
+            "paginate": {
+                "first": "Première",
+                "last": "Dernière",
+                "previous": "Precedent",
+                "next": "Suivant",
+            }
+        });
+        $(table.table().container()).removeClass('form-inline');
+    });
+</script>
+}
