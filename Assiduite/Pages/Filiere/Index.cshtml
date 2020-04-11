@@ -2,7 +2,7 @@
 @model Assiduite.Pages.Filiere.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Gestion de filière";
 }
 
 <h1>Gestion de filière</h1>
@@ -55,33 +55,125 @@
                     @Html.DisplayFor(modelItem => item.Annee_Fil)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id_Fil">Informations</a>
-                    <a asp-page="./Delete" asp-route-id="@item.Id_Fil">Supprimer</a>
+                    <a data-toggle="modal" data-target="#edit_@item.Id_Fil" asp-route-id="@item.Id_Fil">Informations</a>
+                    <a data-toggle="modal" data-target="#del_@item.Id_Fil" asp-route-id="@item.Id_Fil">Supprimer</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
+<span asp-validation-for="Filiere.Id_Fil" class="text-danger"></span>
+<span asp-validation-for="Filiere.Nom_Fil" class="text-danger"></span>
+<span asp-validation-for="Filiere.Annee_Fil" class="text-danger"></span>
+
+@foreach (var item in Model.Filieres)
+{
+    <!-- Modal Edit -->
+    <div class="modal fade" id="edit_@item.Id_Fil" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content style-modal">
+                <div class="modal-header">
+                    <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
+                <div class="modal-body">
+                    <form asp-page-handler="Edit" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Filiere.Id_Fil" value="@item.Id_Fil" />
+                        <div class="row" style="align-content:center">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <div class="form-group" style="text-align:center">
+                                    <label>Nom de la filière</label>
+                                    <input style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@item.Nom_Fil" disabled />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Filiere.Nom_Fil">Nom de la filière</label>
+                                    <input asp-for="Filiere.Nom_Fil" class="form-control font-inputs-modal" value="@item.Nom_Fil" />
+                                    <span asp-validation-for="Filiere.Nom_Fil" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Filiere.Annee_Fil">Prénom</label>
+                                    <input asp-for="Filiere.Annee_Fil" class="form-control font-inputs-modal" max="5" min="0" value="@item.Annee_Fil" />
+                                    <span asp-validation-for="Filiere.Annee_Fil" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer" style="text-align:center">
+                            <button type="submit" class="btn btn-fill btn-primary">Enregistrer les modifications</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal Delete-->
+    <div class="modal fade" id="del_@item.Id_Fil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content style-modal" style="top: 100px ; border-radius: 2rem;">
+                <div class="modal-header">
+                    <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <h5 class="font-modal" style="text-align:center;"> Easy Attendance </h5>
+                <div class="modal-body">
+                    <p class="font-inputs-modal" style="font-weight:bold ; text-align:center">
+                        Est-ce que vous voullez vraiment supprimer la filière <span class="font-del">@item.Nom_Fil</span>
+                    </p>
+                    <form asp-page-handler="Delete" method="post">
+                        <div class="row" style="align-content:center">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <div class="form-group" style="text-align:center">
+                                    <input type="hidden" name="id" value="@item.Id_Fil" />
+                                    <input type="submit" value="Delete @item.Id_Fil" class="btn btn-danger" />
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
-    $(document).ready(function () {
-        var table = $('#FiliereTable').DataTable({
-            "pagingType": "simple",
-            "language": {
-                "lengthMenu": "Affichage _MENU_ filière par page",
-                "info": "Page: _PAGE_ sur _PAGES_",
-            },
-            "paginate": {
-                "first": "Première",
-                "last": "Dernière",
-                "previous": "Precedent",
-                "next": "Suivant",
-            }
+        $(document).ready(function () {
+            var table = $('#FiliereTable').DataTable({
+                "pagingType": "simple",
+                "language": {
+                    "lengthMenu": "Affichage _MENU_ filière par page",
+                    "info": "Page: _PAGE_ sur _PAGES_",
+                },
+                "paginate": {
+                    "first": "Première",
+                    "last": "Dernière",
+                    "previous": "Precedent",
+                    "next": "Suivant",
+                }
+            });
+            $(table.table().container()).removeClass('form-inline');
         });
-        $(table.table().container()).removeClass('form-inline');
-    });
-</script>
+    </script>
 }

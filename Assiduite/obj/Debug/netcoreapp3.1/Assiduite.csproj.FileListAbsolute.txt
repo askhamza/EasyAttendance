@@ -677,8 +677,9 @@ C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\De
 C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Assiduite.pdb
 C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Assiduite.genruntimeconfig.cache
 C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Debug.dll
-C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Create.cshtml.g.cs
-C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Delete.cshtml.g.cs
-C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Details.cshtml.g.cs
-C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Edit.cshtml.g.cs
-C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Matiere\Index.cshtml.g.cs
+C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\utilisateur.cshtml.g.cs
+C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Filiere\Create.cshtml.g.cs
+C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Filiere\Delete.cshtml.g.cs
+C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Filiere\Details.cshtml.g.cs
+C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Filiere\Edit.cshtml.g.cs
+C:\Users\ahmed\Documents\4IIR\S2\ASP.Core\Devoir\EasyAttendance\Assiduite\obj\Debug\netcoreapp3.1\Razor\Pages\Filiere\Index.cshtml.g.cs

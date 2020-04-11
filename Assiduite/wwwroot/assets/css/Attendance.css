@@ -5166,8 +5166,8 @@ input[type="button"].btn-block {
 
 .card-footer {
     padding: 1.25rem 1.5rem;
-    background-color: #f6f9fc;
     border-top: 0.0625rem solid rgba(34, 42, 66, 0.05);
+    background-color: initial;
 }
 
 .card-footer:last-child {
@@ -13019,10 +13019,10 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
 
 .btn-primary {
     background: #247bb0;
-    background-image: -webkit-linear-gradient(to bottom left, #247bb0, #ba54f5, #247bb0);
-    background-image: -o-linear-gradient(to bottom left, #247bb0, #ba54f5, #247bb0);
-    background-image: -moz-linear-gradient(to bottom left, #247bb0, #ba54f5, #247bb0);
-    background-image: linear-gradient(to bottom left, #247bb0, #ba54f5, #247bb0);
+    background-image: -webkit-linear-gradient(to bottom, #051937, #102f54, #194772, #206091, #247bb0);
+    background-image: -o-linear-gradient(to bottom, #051937, #102f54, #194772, #206091, #247bb0);
+    background-image: -moz-linear-gradient(to bottom, #051937, #102f54, #194772, #206091, #247bb0);
+    background-image: linear-gradient(to bottom, #051937, #102f54, #194772, #206091, #247bb0);
     background-size: 210% 210%;
     background-position: top right;
     background-color: #247bb0;
@@ -13036,22 +13036,22 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
     transition: 0.3s ease-in-out;
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.btn-primary:active:focus,
-.btn-primary:active:hover,
-.btn-primary.active:focus,
-.btn-primary.active:hover {
-    background-color: #ba54f5 !important;
-    background-image: linear-gradient(to bottom left, #247bb0, #ba54f5, #247bb0) !important;
-    background-image: -webkit-linear-gradient(to bottom left, #247bb0, #ba54f5, #247bb0) !important;
-    background-image: -o-linear-gradient(to bottom left, #247bb0, #ba54f5, #247bb0) !important;
-    background-image: -moz-linear-gradient(to bottom left, #247bb0, #ba54f5, #247bb0) !important;
-    color: #ffffff;
-    box-shadow: none;
-}
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active,
+    .btn-primary.active,
+    .btn-primary:active:focus,
+    .btn-primary:active:hover,
+    .btn-primary.active:focus,
+    .btn-primary.active:hover {
+        background-color: #ba54f5 !important;
+        background-image: linear-gradient(to top, #051937,#194772, #206091, #247bb0) !important;
+        background-image: -webkit-linear-gradient(to top, #051937,#194772, #206091, #247bb0) !important;
+        background-image: -o-linear-gradient(to top, #051937,#194772, #206091, #247bb0) !important;
+        background-image: -moz-linear-gradient(to top, #051937,#194772, #206091, #247bb0) !important;
+        color: #ffffff;
+        box-shadow: none;
+    }
 
 .btn-primary:active {
     box-shadow: none !important;
@@ -13120,14 +13120,14 @@ fieldset[disabled] .btn-primary.active {
 .btn-primary.btn-simple.active:not(:disabled):not(.disabled):active {
     color: #ffffff;
     border-color: #247bb0;
-    background-image: linear-gradient(to bottom left, #247bb0, #ba54f5, #247bb0) !important;
-    background-image: -webkit-linear-gradient(to bottom left, #247bb0, #ba54f5, #247bb0) !important;
-    background-image: -o-linear-gradient(to bottom left, #247bb0, #ba54f5, #247bb0) !important;
-    background-image: -moz-linear-gradient(to bottom left, #247bb0, #ba54f5, #247bb0) !important;
+    background-image: linear-gradient(to top, #051937,#194772, #206091, #247bb0);
+    background-image: -webkit-linear-gradient(to top, #051937,#194772, #206091, #247bb0);
+    background-image: -o-linear-gradient(to bottom, #051937, #102f54, #194772, #206091, #247bb0) !important;
+    background-image: -moz-linear-gradient(to bottom, #051937, #102f54, #194772, #206091, #247bb0) !important;
     background-color: #ba54f5 !important;
     box-shadow: none;
 }
-
+linear-gradient(to top, #051937,#194772, #206091, #247bb0)
 .btn-primary.btn-link {
     color: #247bb0;
 }
@@ -14764,7 +14764,9 @@ img {
 }
 
 .modal-content {
-    border: 0;
+    border: 0.06rem solid #247bb0;
+    border-radius: 2rem;
+    background-color: #1e1e2f;
 }
 
 .modal-content .modal-header {
@@ -18989,7 +18991,7 @@ code {
 .form-control[disabled],
 .form-control[readonly],
 fieldset[disabled] .form-control {
-    background-color: #1d253b;
+    background-color: initial;
     color: #344675;
     cursor: not-allowed;
 }

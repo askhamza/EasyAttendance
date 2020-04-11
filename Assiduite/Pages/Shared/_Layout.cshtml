@@ -10,14 +10,16 @@
         @ViewData["Title"] - Easy Attendance
     </title>
     <!--     Fonts and icons     -->
-    <link href="~/lib/fontawesome-pro/css/all.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome-pro/css/all.css" rel="stylesheet" runat="server"/>
+
     <!-- CSS Files -->
-    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="~/lib/DataTables/css/jquery.dataTables.css"/>
-    <!-- CSS Pluging-->
-    <link rel="stylesheet" type="text/css" href="~/lib/DataTables/css/dataTables.bootstrap4.css"/>
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.css" runat="server"/>
+    <link rel="stylesheet" type="text/css" href="~/lib/DataTables/css/jquery.dataTables.css" runat="server"/>
     
-    <link href="~/assets/css/EasyAttendance.css" rel="stylesheet" />
+    <!-- CSS Pluging-->
+    <link rel="stylesheet" type="text/css" href="~/lib/DataTables/css/dataTables.bootstrap4.css" runat="server"/>
+    
+    <link href="~/assets/css/Attendance.css" rel="stylesheet" runat="server" type="text/css"/>
 </head>
 
 <body class="">
@@ -54,7 +56,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a asp-page="./Filiere/Index">
                             <i class="fad fa-university"></i>
                             <p>Filières</p>
                         </a>
@@ -145,10 +147,10 @@
     </div>
    
     <!--   Core JS Files   -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/assets/js/core/popper.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js" runat="server"></script>
+    <script src="~/assets/js/core/popper.min.js" runat="server"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" runat="server"></script>
+    <script src="~/assets/js/plugins/perfect-scrollbar.jquery.min.js" runat="server"></script>
     <!--  Notifications Plugin    -->
     <script src="~/assets/js/plugins/bootstrap-notify.js"></script>
 

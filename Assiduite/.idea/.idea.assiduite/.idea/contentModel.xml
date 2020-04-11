@@ -135,11 +135,7 @@
         <e p="_ViewStart.cshtml" t="Include" />
         <e p="Error.cshtml" t="Include" />
         <e p="Error.cshtml.cs" t="Include" />
-        <e p="Index.cshtml" t="Include" />
-        <e p="Index.cshtml.cs" t="Include" />
-        <e p="Login.cshtml" t="Include" />
-        <e p="Login.cshtml.cs" t="Include" />
-        <e p="Matiere" t="Include">
+        <e p="Filiere" t="Include">
           <e p="Create.cshtml" t="Include" />
           <e p="Create.cshtml.cs" t="Include" />
           <e p="Delete.cshtml" t="Include" />
@@ -151,6 +147,10 @@
           <e p="Index.cshtml" t="Include" />
           <e p="Index.cshtml.cs" t="Include" />
         </e>
+        <e p="Index.cshtml" t="Include" />
+        <e p="Index.cshtml.cs" t="Include" />
+        <e p="Login.cshtml" t="Include" />
+        <e p="Login.cshtml.cs" t="Include" />
         <e p="page1.cshtml" t="Include" />
         <e p="page1.cshtml.cs" t="Include" />
         <e p="Privacy.cshtml" t="Include" />
@@ -162,6 +162,8 @@
           <e p="_LoginPartial.cshtml" t="Include" />
           <e p="_ValidationScriptsPartial.cshtml" t="Include" />
         </e>
+        <e p="utilisateur.cshtml" t="Include" />
+        <e p="Utilisateur.cshtml.cs" t="Include" />
       </e>
       <e p="Program.cs" t="Include" />
       <e p="Properties" t="Include">
@@ -172,6 +174,9 @@
       <e p="wwwroot" t="Include">
         <e p="assets" t="Include">
           <e p="css" t="Include">
+            <e p="black-dashboard.css" t="Include" />
+            <e p="black-dashboard.css.map" t="Include" />
+            <e p="black-dashboard.min.css" t="Include" />
             <e p="EasyAttendance.css" t="Include" />
             <e p="nucleo-icons.css" t="Include" />
             <e p="style.css" t="Include" />

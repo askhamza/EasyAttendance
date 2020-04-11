@@ -25,27 +25,93 @@ namespace Assiduite.Pages.Filiere
         [BindProperty]
         public Models.Filiere Filiere { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync( int? id)
         {
             Filieres = await _context.filiere.ToListAsync();
+
+            if (id != null)
+            {
+                Filiere = await _context.filiere.FirstOrDefaultAsync(m => m.Id_Fil == id);
+
+                if (Filiere == null)
+                {
+                    return NotFound();
+                }
+            }
 
             return Page();
         }
 
         //CREATE
-
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostCreate()
         {
             if (!ModelState.IsValid)
             {
+                Filieres = await _context.filiere.ToListAsync();
                 return Page();
             }
 
             _context.filiere.Add(Filiere);
             await _context.SaveChangesAsync();
+
+            Filieres = await _context.filiere.ToListAsync();
+
+            return Page();
+        }
+
+        //Update
+        public async Task<IActionResult> OnPostEdit()
+        {
+            if (!ModelState.IsValid)
+            {
+                Filieres = await _context.filiere.ToListAsync();
+                return Page();
+            }
+
+            _context.Attach(Filiere).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FiliereExists(Filiere.Id_Fil))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            Filieres = await _context.filiere.ToListAsync();
+
+            return Page();
+        }
+
+        private bool FiliereExists(int id)
+        {
+            return _context.filiere.Any(e => e.Id_Fil == id);
+        }
+
+        //Delete
+        public async Task<IActionResult> OnPostDeleteAsync(int? id)
+        {
+            if (id == null)
+            {
+                Filieres = await _context.filiere.ToListAsync();
+                return NotFound();
+            }
+
+            Filiere = await _context.filiere.FindAsync(id);
+
+            if (Filiere != null)
+            {
+                _context.filiere.Remove(Filiere);
+                await _context.SaveChangesAsync();
+            }
 
             Filieres = await _context.filiere.ToListAsync();
 
