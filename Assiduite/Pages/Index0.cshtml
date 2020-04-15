@@ -1,5 +1,5 @@
 ﻿@page
-@model Assiduite.Pages.Etudiants.IndexModel
+@model Assiduite.Pages.Etudiants.IndexStudentModel
 
 @{
     ViewData["Title"] = "Index";
@@ -25,7 +25,7 @@
     <tbody>
 @foreach (var item in Model.Etudiant) {
         <tr>
-            <td>
+            <td>s
                 @Html.DisplayFor(modelItem => item.User.Id)
             </td>
             <td>

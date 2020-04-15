@@ -15,7 +15,7 @@ namespace Assiduite.Models
         public int Id_Etudiant { get; set; }
         public string Id_User_Etudiant { get; set; } // user de type Etudiant 
         [ForeignKey("Id_User_Etudiant")]
-        public IdentityUser User { get; set; }
+        public Utilisateur User { get; set; }
         public int Id_Fil_Etudiant { get; set; } // id de filiere d'etudiant 
         [ForeignKey("Id_Fil_Etudiant")]
         public Filiere Filiere { get; set; }

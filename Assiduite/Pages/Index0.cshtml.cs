@@ -10,11 +10,11 @@ using Assiduite.Models;
 
 namespace Assiduite.Pages.Etudiants
 {
-    public class IndexModel : PageModel
+    public class IndexStudentModel : PageModel
     {
         private readonly Assiduite.Data.ApplicationDbContext _context;
 
-        public IndexModel(Assiduite.Data.ApplicationDbContext context)
+        public IndexStudentModel(Assiduite.Data.ApplicationDbContext context)
         {
             _context = context;
         }
