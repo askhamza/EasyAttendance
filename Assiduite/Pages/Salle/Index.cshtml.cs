@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Assiduite.Data;
 using Assiduite.Models;
 
-namespace Assiduite.Pages.Matieres
+namespace Assiduite.Pages.Salle
 {
     public class IndexModel : PageModel
     {
@@ -19,20 +19,20 @@ namespace Assiduite.Pages.Matieres
             _context = context;
         }
 
-        public IList<Matiere> Matieres { get;set; }
+        public IList<Models.Salle> Salles { get;set; }
 
         [BindProperty]
-        public Matiere Matiere { get; set; }
+        public Models.Salle Salle { get; set; }
 
-        public async Task<IActionResult> OnGetAsync( int? id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            Matieres = await _context.matiere.ToListAsync();
+            Salles = await _context.salle.ToListAsync();
 
-            if( id != null)
+            if (id != null)
             {
-                Matiere = await _context.matiere.FirstOrDefaultAsync(m => m.Id_Mat == id);
+                Salle = await _context.salle.FirstOrDefaultAsync(m => m.Id_Salle == id);
 
-                if (Matiere == null)
+                if (Salle == null)
                 {
                     return NotFound();
                 }
@@ -46,14 +46,14 @@ namespace Assiduite.Pages.Matieres
         {
             if (!ModelState.IsValid)
             {
-                Matieres = await _context.matiere.ToListAsync();
+                Salles = await _context.salle.ToListAsync();
                 return Page();
             }
 
-            _context.matiere.Add(Matiere);
+            _context.salle.Add(Salle);
             await _context.SaveChangesAsync();
 
-            Matieres = await _context.matiere.ToListAsync();
+            Salles = await _context.salle.ToListAsync();
 
             return Page();
         }
@@ -63,11 +63,11 @@ namespace Assiduite.Pages.Matieres
         {
             if (!ModelState.IsValid)
             {
-                Matieres = await _context.matiere.ToListAsync();
+                Salles = await _context.salle.ToListAsync();
                 return Page();
             }
 
-            _context.Attach(Matiere).State = EntityState.Modified;
+            _context.Attach(Salle).State = EntityState.Modified;
 
             try
             {
@@ -75,7 +75,7 @@ namespace Assiduite.Pages.Matieres
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MatiereExists(Matiere.Id_Mat))
+                if (!SalleExists(Salle.Id_Salle))
                 {
                     return NotFound();
                 }
@@ -85,12 +85,12 @@ namespace Assiduite.Pages.Matieres
                 }
             }
 
-            Matieres = await _context.matiere.ToListAsync();
+            Salles = await _context.salle.ToListAsync();
 
             return Page();
         }
 
-        private bool MatiereExists(int id)
+        private bool SalleExists(int id)
         {
             return _context.matiere.Any(e => e.Id_Mat == id);
         }
@@ -100,19 +100,19 @@ namespace Assiduite.Pages.Matieres
         {
             if (id == null)
             {
-                Matieres = await _context.matiere.ToListAsync();
+                Salles = await _context.salle.ToListAsync();
                 return NotFound();
             }
 
-            Matiere = await _context.matiere.FindAsync(id);
+            Salle = await _context.salle.FindAsync(id);
 
-            if (Matiere != null)
+            if (Salle != null)
             {
-                _context.matiere.Remove(Matiere);
+                _context.salle.Remove(Salle);
                 await _context.SaveChangesAsync();
             }
 
-            Matieres = await _context.matiere.ToListAsync();
+            Salles = await _context.salle.ToListAsync();
 
             return Page();
         }

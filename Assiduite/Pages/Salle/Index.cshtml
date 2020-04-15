@@ -1,11 +1,11 @@
 ﻿@page
-@model Assiduite.Pages.Matieres.IndexModel
+@model Assiduite.Pages.Salle.IndexModel
 
 @{
-    ViewData["Title"] = "Gestion des matières";
+    ViewData["Title"] = "Gestion des salles";
 }
 
-    <h1>Gestion des matières</h1>
+<h1>Gestion des salles</h1>
 
 <p>
     <a asp-page="Create">Ajouter une nouvelle matière</a>
@@ -16,9 +16,14 @@
         <form method="post" asp-page-handler="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Matiere.Nom_Mat" class="control-label"></label>
-                <input asp-for="Matiere.Nom_Mat" class="form-control" />
-                <span asp-validation-for="Matiere.Nom_Mat" class="text-danger"></span>
+                <label asp-for="Salle.Nom_Salle" class="control-label"></label>
+                <input asp-for="Salle.Nom_Salle" class="form-control" />
+                <span asp-validation-for="Salle.Nom_Salle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salle.Capacite_Salle" class="control-label"></label>
+                <input asp-for="Salle.Capacite_Salle" class="form-control" />
+                <span asp-validation-for="Salle.Capacite_Salle" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Ajouter" class="btn btn-primary" />
@@ -27,35 +32,41 @@
     </div>
 </div>
 
-<table class="table" id="MatiereTable">
+<table class="table" id="SalleTable">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Matieres[0].Nom_Mat)
+                @Html.DisplayNameFor(model => model.Salles[0].Nom_Salle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salles[0].Capacite_Salle)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Matieres)
+        @foreach (var item in Model.Salles)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Nom_Mat)
+                    @Html.DisplayFor(modelItem => item.Nom_Salle)
                 </td>
                 <td>
-                    <a data-toggle="modal" data-target="#edit_@item.Id_Mat" asp-route-id="@item.Id_Mat">Informations</a>
-                    <a data-toggle="modal" data-target="#del_@item.Id_Mat" asp-route-id="@item.Id_Mat">Supprimer</a>
+                    @Html.DisplayFor(modelItem => item.Capacite_Salle)
+                </td>
+                <td>
+                    <a data-toggle="modal" data-target="#edit_@item.Id_Salle" asp-route-id="@item.Id_Salle">Informations</a>
+                    <a data-toggle="modal" data-target="#del_@item.Id_Salle" asp-route-id="@item.Id_Salle">Supprimer</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-@foreach (var item in Model.Matieres)
+@foreach (var item in Model.Salles)
 {
     <!-- Modal Edit -->
-    <div class="modal fade" id="edit_@item.Id_Mat" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="edit_@item.Id_Salle" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content style-modal">
                 <div class="modal-header">
@@ -68,22 +79,29 @@
                 <div class="modal-body">
                     <form asp-page-handler="Edit" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="Matiere.Id_Mat" value="@item.Id_Mat" />
+                        <input type="hidden" asp-for="Salle.Id_Salle" value="@item.Id_Salle" />
                         <div class="row" style="display: flex ; justify-content: center;">
                             <div style="width: 13rem;">
                                 <div class="form-group" style="text-align:center">
                                     <label>Nom de la matière</label>
-                                    <input style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@item.Nom_Mat" disabled />
+                                    <input style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@item.Nom_Salle" disabled />
                                     <span class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label asp-for="Matiere.Nom_Mat">Nom de la filière</label>
-                                    <input asp-for="Matiere.Nom_Mat" class="form-control font-inputs-modal" value="@item.Nom_Mat" />
-                                    <span asp-validation-for="Matiere.Nom_Mat" class="text-danger"></span>
+                                    <label asp-for="Salle.Nom_Salle">Nom de la filière</label>
+                                    <input asp-for="Salle.Nom_Salle" class="form-control font-inputs-modal" value="@item.Nom_Salle" />
+                                    <span asp-validation-for="Salle.Nom_Salle" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Salle.Capacite_Salle">Nom de la filière</label>
+                                    <input asp-for="Salle.Capacite_Salle" class="form-control font-inputs-modal" value="@item.Capacite_Salle" />
+                                    <span asp-validation-for="Salle.Capacite_Salle" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +116,7 @@
     </div>
 
     <!--Modal Delete-->
-    <div class="modal fade" id="del_@item.Id_Mat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal fade" id="del_@item.Id_Salle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content style-modal" style="top: 100px ; border-radius: 2rem;">
                 <div class="modal-header">
@@ -110,15 +128,15 @@
                 <h5 class="font-modal" style="text-align:center;"> Easy Attendance </h5>
                 <div class="modal-body">
                     <p class="font-inputs-modal" style="font-weight:bold ; text-align:center">
-                        Est-ce que vous voullez vraiment supprimer la matière <span class="font-del">@item.Nom_Mat</span>
+                        Est-ce que vous voullez vraiment supprimer la matière <span class="font-del">@item.Nom_Salle</span>
                     </p>
                     <form asp-page-handler="Delete" method="post">
                         <div class="row" style="align-content:center">
                             <div class="col-md-3"></div>
                             <div class="col-md-6">
                                 <div class="form-group" style="text-align:center">
-                                    <input type="hidden" name="id" value="@item.Id_Mat" />
-                                    <input type="submit" value="Delete @item.Id_Mat" class="btn btn-danger" />
+                                    <input type="hidden" name="id" value="@item.Id_Salle" />
+                                    <input type="submit" value="Delete @item.Id_Salle" class="btn btn-danger" />
                                 </div>
                             </div>
                             <div class="col-md-3"></div>
@@ -137,7 +155,7 @@
 
     <script>
         $(document).ready(function () {
-            var table = $('#MatiereTable').DataTable({
+            var table = $('#SalleTable').DataTable({
                 "pagingType": "simple",
                 "language": {
                     "lengthMenu": "Affichage _MENU_ matières par page",
