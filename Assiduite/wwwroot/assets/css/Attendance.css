@@ -18970,6 +18970,8 @@ code {
 .form-group {
     margin-bottom: 10px;
     position: relative;
+    width: 20rem;
+    margin: 1rem;
 }
 
 .input-group .form-control-static,
@@ -20395,3 +20397,14 @@ Copyright (c) 2015 Daniel Eden
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
+
+.form-group-input{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+.option {
+    background-color: #2b3553;
+}

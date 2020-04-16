@@ -1,0 +1,143 @@
+﻿@page
+@model Assiduite.Pages.Seance.IndexModel
+
+@{
+    ViewData["Title"] = "Gestion des séance";
+}
+
+<h1>Gestion de séance</h1>
+
+<p>
+    <a>Ajouter une nouvelle Séance</a>
+</p>
+
+<div class="row">
+    <form method="post" asp-page-handler="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group-input" style="display: flex; justify-content: center; ">
+            <div class="form-group">
+                <label asp-for="Seance.Id_Mat_Seance" class="control-label">Matière</label>
+                <select asp-for="Seance.Id_Mat_Seance" class="form-control" asp-items="ViewBag.Id_Mat_Seance"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seance.Id_Prof_Seance" class="control-label">Professeur</label>
+                <select asp-for="Seance.Id_Prof_Seance" class="form-control" asp-items="ViewBag.Id_Prof_Seance"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seance.Id_Fil_Seance" class="control-label">Filière</label>
+                <select asp-for="Seance.Id_Fil_Seance" class="form-control" asp-items="ViewBag.Id_Fil_Seance"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seance.Id_Salle_Seance" class="control-label">Salle</label>
+                <select asp-for="Seance.Id_Salle_Seance" class="form-control" asp-items="ViewBag.Id_Salle_Seance"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seance.HeureDebut_Seance" class="control-label"></label>
+                <input asp-for="Seance.HeureDebut_Seance" class="form-control" />
+                <span asp-validation-for="Seance.HeureDebut_Seance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seance.HeureFin_Seance" class="control-label"></label>
+                <input asp-for="Seance.HeureFin_Seance" class="form-control" />
+                <span asp-validation-for="Seance.HeureFin_Seance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seance.Date_Seance" class="control-label"></label>
+                <input asp-for="Seance.Date_Seance" class="form-control" />
+                <span asp-validation-for="Seance.Date_Seance" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<table class="table" id="SeanceTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Seances[0].Matriere)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seances[0].User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seances[0].Filiere)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seances[0].Salle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seances[0].HeureDebut_Seance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seances[0].HeureFin_Seance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seances[0].Date_Seance)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Seances)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Matriere.Nom_Mat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Nom_User) @Html.DisplayFor(modelItem => item.User.Prenom_User)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Filiere.Annee_Fil) @Html.DisplayFor(modelItem => item.Filiere.Nom_Fil)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salle.Nom_Salle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HeureDebut_Seance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HeureFin_Seance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date_Seance)
+                </td>
+                <td>
+                    <a data-toggle="modal" data-target="#edit_@item.Id_Seance" asp-route-id="@item.Id_Seance">Informations</a>
+                    <a data-toggle="modal" data-target="#del_@item.Id_Seance" asp-route-id="@item.Id_Seance">Supprimer</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@foreach (var item in Model.Seances)
+{
+
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            var table = $('#SeanceTable').DataTable({
+                "pagingType": "simple",
+                "language": {
+                    "lengthMenu": "Affichage _MENU_ séance par page",
+                    "info": "Page: _PAGE_ sur _PAGES_",
+                },
+                "paginate": {
+                    "first": "Première",
+                    "last": "Dernière",
+                    "previous": "Precedent",
+                    "next": "Suivant",
+                }
+            });
+            $(table.table().container()).removeClass('form-inline');
+        });
+    </script>
+}
