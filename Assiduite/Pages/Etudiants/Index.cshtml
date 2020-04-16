@@ -1,8 +1,342 @@
 ﻿@page
-@model Assiduite.Pages.Etudiants.etudiantModel
+@model Assiduite.Pages.Etudiants.IndexModel
 @{
-    ViewData["Title"] = "etudiant";
+    ViewData["Title"] = "Index";
 }
 
-<h1>etudiant</h1>
 
+<!-- Card for Add User -->
+<div class="card">
+    <div class="card-header ">
+        <div class="row">
+            <div class="col-sm-6 text-left">
+                <h5 class="card-category">Etudiant</h5>
+                <h2 class="card-title">Ajouter un Etudiant</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+
+                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Input.Email"></label>
+                                <input asp-for="Input.Email" class="form-control" />
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Input.Nom_User">Nom</label>
+                                <input asp-for="Input.Nom_User" class="form-control" />
+                                <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Input.Prenom_User">Prénom</label>
+                                <input asp-for="Input.Prenom_User" class="form-control" />
+                                <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Input.Password">Mot de passe </label>
+                                <input asp-for="Input.Password" class="form-control" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Input.ConfirmPassword"> Confirmation de Mot de passe</label>
+                                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Input.Type_User">Filière</label>
+                                <select asp-for="Input.Type_User" class="form-control">
+                                    @foreach ( var _fil in Model.Filieres)
+                                    {
+                                        <option value="@_fil.Id_Fil">@_fil.Nom_Fil</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="Input.Type_User" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-fill btn-primary">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Card for list All users-->
+<div class="card">
+    <div class="card-header ">
+        <div class="row">
+            <div class="col-sm-6 text-left">
+                <h5 class="card-category">Etudiant</h5>
+                <h2 class="card-title">Tout les Etudiants</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table" id="UserTable" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>
+                                Matricule
+                            </th>
+                            <th>
+                                Nom
+                            </th>
+                            <th>
+                                Prénom
+                            </th>
+                            <th>
+                                Filière
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var _Etud in Model.Student)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => _Etud.User.Mat_User)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => _Etud.User.Nom_User)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => _Etud.User.Prenom_User)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => _Etud.Filiere.Nom_Fil)
+                                </td>
+                                <td>
+                                    <a data-toggle="modal" data-target="#edit_@_Etud.User.Id" asp-page="./Edit">Modifier</a> |
+                                    <a data-toggle="modal" data-target="#info_@_Etud.User.Id" asp-page="./Details">Informations</a> |
+                                    <a data-toggle="modal" data-target="#del_@_Etud.User.Id" asp-page="./Delete">Supprimer</a>
+                                </td>
+                            </tr>
+                            <!-- Modal Edit -->
+                            <div class="modal fade" id="edit_@_Etud.User.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content style-modal">
+                                        <div class="modal-header">
+                                            <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
+                                        <div class="modal-body">
+                                            <form asp-page-handler="Edit" asp-route-id="@_Etud.User.Id" method="post">
+                                                <div class="row" style="align-content:center">
+                                                    <div class="col-md-3"></div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group" style="text-align:center">
+                                                            <label asp-for="Input.Mat_User">Matricule</label>
+                                                            <input name="Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_Etud.User.Mat_User" readonly />
+                                                            <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label asp-for="Input.Nom_User">Nom</label>
+                                                            <input name="Nom_User" class="form-control font-inputs-modal" value="@_Etud.User.Nom_User" />
+                                                            <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label asp-for="Input.Prenom_User">Prénom</label>
+                                                            <input name="Prenom_User" class="form-control font-inputs-modal" value="@_Etud.User.Prenom_User" />
+                                                            <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="Input.Email"></label>
+                                                            <input name="Email" class="form-control font-inputs-modal" value="@_Etud.User.Email" />
+                                                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="Input.Type_User">Filière</label>
+                                                            <select asp-for="Input.Type_User" class="form-control">
+                                                                @foreach (var _fil in Model.Filieres)
+                                                                {
+                                                                    <option value="@_fil.Id_Fil">@_fil.Nom_Fil</option>
+                                                                }
+                                                            </select>
+                                                            <span asp-validation-for="Input.Type_User" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer" style="text-align:center">
+                                                    <button type="submit" class="btn btn-fill btn-primary">Enregistrer les modifications</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal Information -->
+                            <div class="modal fade" id="info_@_Etud.User.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content style-modal">
+                                        <div class="modal-header">
+                                            <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <h5 class="font-modal" style="text-align:center;"> Easy Attendance </h5>
+                                        <div class="modal-body">
+
+                                            <div class="row" style="align-content:center">
+                                                <div class="col-md-3"></div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group" style="text-align:center">
+                                                        <label asp-for="Input.Mat_User">Matricule</label>
+                                                        <input asp-for="Input.Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_Etud.User.Mat_User" readonly />
+                                                        <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="Input.Nom_User">Nom</label>
+                                                        <input asp-for="Input.Nom_User" class="form-control font-inputs-modal" value="@_Etud.User.Nom_User" readonly />
+                                                        <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="Input.Prenom_User">Prénom</label>
+                                                        <input asp-for="Input.Prenom_User" class="form-control font-inputs-modal" value="@_Etud.User.Prenom_User" readonly />
+                                                        <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label asp-for="Input.Email"></label>
+                                                        <input asp-for="Input.Email" class="form-control font-modal font-inputs-modal" value="@_Etud.User.Email" readonly />
+                                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label asp-for="Input.Type_User">Filière</label>
+                                                        <input asp-for="Input.Email" class="form-control font-inputs-modal" value="@_Etud.Filiere.Nom_Fil" readonly />
+                                                        <span asp-validation-for="Input.Type_User" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Modal Delete-->
+                            <div class="modal fade" id="del_@_Etud.User.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content style-modal" style="top: 100px ; border-radius: 2rem;">
+                                        <div class="modal-header">
+                                            <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <h5 class="font-modal" style="text-align:center;"> Easy Attendance </h5>
+                                        <div class="modal-body">
+                                            <p class="font-inputs-modal" style="font-weight:bold ; text-align:center">
+                                                Est-ce que vous voullez vraiment supprimer l'étudiant <span class="font-del">@_Etud.User.Nom_User</span>  <span class="font-del">@_Etud.User.Prenom_User</span>
+                                                immatriculé par :
+                                            </p>
+                                            <form asp-page-handler="Delete" method="post" asp-route-id="@_Etud.User.Id">
+                                                <div class="row" style="align-content:center">
+                                                    <div class="col-md-3"></div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group" style="text-align:center">
+                                                            <input asp-for="_user.Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_Etud.User.Mat_User" readonly />
+                                                            <br />
+                                                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3"></div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            var table = $('#UserTable').DataTable({
+                "pagingType": "simple",
+                "language": {
+                    "lengthMenu": "Affichage _MENU_ matières par page",
+                    "info": "Page: _PAGE_ sur _PAGES_",
+                },
+                "paginate": {
+                    "first": "Première",
+                    "last": "Dernière",
+                    "previous": "Precedent",
+                    "next": "Suivant",
+                }
+            });
+            $(table.table().container()).removeClass('form-inline');
+        });
+    </script>
+}
