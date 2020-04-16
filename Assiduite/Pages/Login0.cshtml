@@ -1,7 +1,7 @@
 ﻿@page
 @model Assiduite.Pages.LoginModel
 @{
-    Layout = "../Pages/Shared/_LayoutMaster";
+     Layout = "../Pages/Shared/_LayoutMaster";
 }
 <div class="content">
     <div class="row">
@@ -17,7 +17,7 @@
                             <div class="block block-four"></div>
                             <a href="javascript:void(0)">
                                 <img class="avatar" src="../assets/img/emilyz.jpg" alt="...">
-                                
+
                             </a>
                     <p class="description">
                         Se Connecter
@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group">
                         <!--<label>Mot de passe</label>
-    <input type="password" class="form-control" placeholder="Password">-->
+                        <input type="password" class="form-control" placeholder="Password">-->
                         <label asp-for="Input.Password"></label>
                         <input asp-for="Input.Password" class="form-control" placeholder="Password" />
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
@@ -45,18 +45,18 @@
                 </form>
             </div>
             <div class="card-footer">
-                <h5 class="title" style="text-align:center" >Easy Attendance</h5>
+                <h5 class="title" style="text-align:center">Easy Attendance</h5>
                 <!--<div class="button-container">
-        <button href="javascript:void(0)" class="btn btn-icon btn-round btn-facebook">
-            <i class="fab fa-facebook"></i>
-        </button>
-        <button href="javascript:void(0)" class="btn btn-icon btn-round btn-twitter">
-            <i class="fab fa-twitter"></i>
-        </button>
-        <button href="javascript:void(0)" class="btn btn-icon btn-round btn-google">
-            <i class="fab fa-google-plus"></i>
-        </button>
-    </div>-->
+                    <button href="javascript:void(0)" class="btn btn-icon btn-round btn-facebook">
+                        <i class="fab fa-facebook"></i>
+                    </button>
+                    <button href="javascript:void(0)" class="btn btn-icon btn-round btn-twitter">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                    <button href="javascript:void(0)" class="btn btn-icon btn-round btn-google">
+                        <i class="fab fa-google-plus"></i>
+                    </button>
+                </div>-->
             </div>
         </div>
     </div>
