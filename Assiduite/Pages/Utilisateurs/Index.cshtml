@@ -150,65 +150,49 @@
                                         <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
                                         <div class="modal-body">
                                             <form asp-page-handler="Edit" asp-route-id="@_user.Id" method="post">
-                                                <div class="row" style="align-content:center">
-                                                    <div class="col-md-3"></div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group" style="text-align:center">
-                                                            <label asp-for="Input.Mat_User">Matricule</label>
-                                                            <input name="Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_user.Mat_User" readonly />
-                                                            <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3"></div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label asp-for="Input.Nom_User">Nom</label>
-                                                            <input name="Nom_User" class="form-control font-inputs-modal" value="@_user.Nom_User" />
-                                                            <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label asp-for="Input.Prenom_User">Prénom</label>
-                                                            <input name="Prenom_User" class="form-control font-inputs-modal" value="@_user.Prenom_User" />
-                                                            <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
-                                                        </div>
+                                                <div style="display: flex ; justify-content: center;">
+                                                    <div class="form-group" style="text-align:center">
+                                                        <label asp-for="Input.Mat_User">Matricule</label>
+                                                        <input name="Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_user.Mat_User" readonly />
+                                                        <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label asp-for="Input.Email"></label>
-                                                            <input name="Email" class="form-control font-inputs-modal" value="@_user.Email" />
-                                                            <span asp-validation-for="Input.Email" class="text-danger"></span>
-                                                        </div>
+                                                <div style="display: flex ; justify-content: center; flex-wrap: wrap">
+                                                    <div class="Input-Model">
+                                                        <label asp-for="Input.Nom_User">Nom</label>
+                                                        <input name="Nom_User" class="form-control font-inputs-modal" value="@_user.Nom_User" />
+                                                        <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
                                                     </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label asp-for="Input.Type_User">Type d'utilisateur</label>
-                                                            <select name="Type_User" class="form-control" value="@_user.Type_User">
-                                                                @if (_user.Type_User == "Professeur")
-                                                                {
-                                                                    <option value="Professeur" selected> Professeur</option>
-                                                                    <option value="Administrateur"> Administrateur</option>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <option value="Professeur"> Professeur</option>
-                                                                    <option value="Administrateur" selected> Administrateur</option>
-                                                                }
-
+                                                    <div class="Input-Model">
+                                                        <label asp-for="Input.Prenom_User">Prénom</label>
+                                                        <input name="Prenom_User" class="form-control font-inputs-modal" value="@_user.Prenom_User" />
+                                                        <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="Input-Model">
+                                                        <label asp-for="Input.Email"></label>
+                                                        <input name="Email" class="form-control font-inputs-modal" value="@_user.Email" />
+                                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="Input-Model">
+                                                        <label asp-for="Input.Type_User">Type d'utilisateur</label>
+                                                        <select name="Type_User" class="form-control" value="@_user.Type_User">
+                                                            @if (_user.Type_User == "Professeur")
+                                                            {
+                                                                <option value="Professeur" selected> Professeur</option>
                                                                 <option value="Administrateur"> Administrateur</option>
-                                                            </select>
-                                                            <span asp-validation-for="Input.Type_User" class="text-danger"></span>
-                                                        </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="Professeur"> Professeur</option>
+                                                                <option value="Administrateur" selected> Administrateur</option>
+                                                            }
+
+                                                            <option value="Administrateur"> Administrateur</option>
+                                                        </select>
+                                                        <span asp-validation-for="Input.Type_User" class="text-danger"></span>
                                                     </div>
                                                 </div>
+
                                                 <div class="card-footer" style="text-align:center">
                                                     <button type="submit" class="btn btn-fill btn-primary">Enregistrer les modifications</button>
                                                 </div>

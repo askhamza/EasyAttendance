@@ -69,22 +69,18 @@
                     <form asp-page-handler="Edit" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="Matiere.Id_Mat" value="@item.Id_Mat" />
-                        <div class="row" style="display: flex ; justify-content: center;">
-                            <div style="width: 13rem;">
-                                <div class="form-group" style="text-align:center">
-                                    <label>Nom de la matière</label>
-                                    <input style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@item.Nom_Mat" disabled />
-                                    <span class="text-danger"></span>
-                                </div>
+                        <div style="display: flex ; justify-content: center;">
+                            <div class="form-group" style="text-align:center">
+                                <label>Nom de la matière</label>
+                                <input style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@item.Nom_Mat" disabled />
+                                <span class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label asp-for="Matiere.Nom_Mat">Nom de la filière</label>
-                                    <input asp-for="Matiere.Nom_Mat" class="form-control font-inputs-modal" value="@item.Nom_Mat" />
-                                    <span asp-validation-for="Matiere.Nom_Mat" class="text-danger"></span>
-                                </div>
+                        <div style="display: flex ; justify-content: center; flex-wrap: wrap">
+                            <div class="Input-Model">
+                                <label asp-for="Matiere.Nom_Mat">Nom de la matière</label>
+                                <input asp-for="Matiere.Nom_Mat" class="form-control font-inputs-modal" value="@item.Nom_Mat" />
+                                <span asp-validation-for="Matiere.Nom_Mat" class="text-danger"></span>
                             </div>
                         </div>
 
