@@ -384,7 +384,7 @@ namespace Assiduite.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                    b.HasOne("Assiduite.Models.Utilisateur", "User")
                         .WithMany()
                         .HasForeignKey("Id_User_Etudiant");
                 });

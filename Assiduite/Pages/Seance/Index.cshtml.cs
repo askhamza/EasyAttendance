@@ -85,6 +85,25 @@ namespace Assiduite.Pages.Seance
             }
 
             _context.seance.Add(Seance);
+
+
+            await _context.SaveChangesAsync();
+
+            List<Etudiant> Etudiants = await _context.etudiant.Where(e => e.Id_Fil_Etudiant == Seance.Id_Fil_Seance).ToListAsync();
+
+            foreach (Etudiant e in Etudiants)
+            {
+                var P = new Presence
+                {
+                    Id_Seance_Pres = Seance.Id_Seance,
+                    Id_Etudiant_Pres = e.Id_Etudiant,
+                    Etat_Pres = -1,
+                };
+
+                _context.presence.Add(P);
+
+            }
+
             await _context.SaveChangesAsync();
 
 
@@ -123,13 +142,7 @@ namespace Assiduite.Pages.Seance
                 }
             }
 
-            Seances = await _context.seance
-                .Include(s => s.Filiere)
-                .Include(s => s.Matriere)
-                .Include(s => s.Salle)
-                .Include(s => s.User).ToListAsync();
-
-            return Page();
+            return Redirect("/Seance");
         }
 
         private bool SeanceExists(int id)
@@ -159,13 +172,7 @@ namespace Assiduite.Pages.Seance
                 await _context.SaveChangesAsync();
             }
 
-            Seances = await _context.seance
-                .Include(s => s.Filiere)
-                .Include(s => s.Matriere)
-                .Include(s => s.Salle)
-                .Include(s => s.User).ToListAsync();
-
-            return Page();
+            return Redirect("/Seance");
         }
     }
 }

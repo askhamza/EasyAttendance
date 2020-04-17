@@ -18,6 +18,6 @@ namespace Assiduite.Models
         public int Id_Etudiant_Pres { get; set; }
         [ForeignKey("Id_Etudiant_Pres")]
         public Etudiant Etudiant { get; set; }
-        public Boolean Etat_Pres { get; set; } // true => prensent (1) | false => absent (0)
+        public int Etat_Pres { get; set; } // true => prensent (1) | false => absent (0)
     }
 }

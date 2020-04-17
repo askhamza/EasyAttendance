@@ -20408,3 +20408,10 @@ Copyright (c) 2015 Daniel Eden
 .option {
     background-color: #2b3553;
 }
+
+.Input-Model {
+    margin-bottom: 10px;
+    position: relative;
+    width: 10rem;
+    margin: 1rem;
+}
