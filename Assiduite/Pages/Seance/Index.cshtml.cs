@@ -59,7 +59,7 @@ namespace Assiduite.Pages.Seance
             ViewData["Id_Salle_Seance"] = new SelectList(_context.salle, "Id_Salle", "Nom_Salle");
 
             List<Object> Prof_List = new List<object>();
-            foreach (var Prof in _context.utilisateur)
+            foreach (var Prof in _context.utilisateur.Where(e=> e.Type_User =="Professeur"))
                 Prof_List.Add(new
                 {
                     Id = Prof.Id,
