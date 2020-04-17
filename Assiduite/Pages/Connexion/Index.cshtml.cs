@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace Assiduite.Areas.Identity.Pages.Account
+namespace Assiduite.Pages.Connexion
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
@@ -50,7 +50,7 @@ namespace Assiduite.Areas.Identity.Pages.Account
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Mémoriser le mot de passe ?")]
             public bool RememberMe { get; set; }
         }
 
