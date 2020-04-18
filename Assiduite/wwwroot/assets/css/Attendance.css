@@ -20161,6 +20161,7 @@ Copyright (c) 2015 Daniel Eden
 
 .card-chart {
     overflow: hidden;
+    margin-bottom: 0;
 }
 
 .card-chart .card-header .card-title i {
