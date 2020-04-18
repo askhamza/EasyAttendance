@@ -16,71 +16,66 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-12">
+        <div class="row container">
 
-                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label asp-for="Input.Email"></label>
-                                <input asp-for="Input.Email" class="form-control" />
-                                <span asp-validation-for="Input.Email" class="text-danger"></span>
-                            </div>
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <div class="row container">
+                    <div class="form-group">
+                        <label asp-for="Input.Email"></label>
+                        <input asp-for="Input.Email" class="form-control" style="width:60rem;" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Input.Nom_User">Nom</label>
+                            <input asp-for="Input.Nom_User" class="form-control" style="width:27rem;" />
+                            <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="Input.Nom_User">Nom</label>
-                                <input asp-for="Input.Nom_User" class="form-control" />
-                                <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="Input.Prenom_User">Prénom</label>
-                                <input asp-for="Input.Prenom_User" class="form-control" />
-                                <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
-                            </div>
+                    <div class="col-md-6">
+                        <div class="form-group" style="margin-left: 7rem;">
+                            <label asp-for="Input.Prenom_User">Prénom</label>
+                            <input asp-for="Input.Prenom_User" class="form-control" style="width:27rem;" />
+                            <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="Input.Password">Mot de passe </label>
-                                <input asp-for="Input.Password" class="form-control" />
-                                <span asp-validation-for="Input.Password" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="Input.ConfirmPassword"> Confirmation de Mot de passe</label>
-                                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Input.Password">Mot de passe </label>
+                            <input asp-for="Input.Password" class="form-control" style="width:27rem;" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label asp-for="Input.Type_User">Filière</label>
-                                <select asp-for="Input.Type_User" class="form-control">
-                                    @foreach (var _fil in Model.Filieres)
-                                    {
-                                        <option value="@_fil.Id_Fil">@_fil.Nom_Fil</option>
-                                    }
-                                </select>
-                                <span asp-validation-for="Input.Type_User" class="text-danger"></span>
-                            </div>
+                    <div class="col-md-6">
+                        <div class="form-group" style="margin-left: 7rem;">
+                            <label asp-for="Input.ConfirmPassword"> Confirmation de Mot de passe</label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" style="width:27rem;" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-fill btn-primary">Ajouter</button>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="Input.Type_User">Filière</label>
+                            <select asp-for="Input.Type_User" class="form-control" style="width:60rem;">
+                                @foreach (var _fil in Model.Filieres)
+                                {
+                                    <option value="@_fil.Id_Fil">@_fil.Nom_Fil</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Input.Type_User" class="text-danger"></span>
+                        </div>
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-fill btn-primary">Ajouter</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
