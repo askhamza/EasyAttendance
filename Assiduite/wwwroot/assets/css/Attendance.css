@@ -2074,7 +2074,7 @@ pre code {
 
 .form-control {
     display: block;
-    width: 100%;
+    width: 18rem ;
     height: calc(2.25rem + 2px);
     padding: 0.5rem 0.7rem;
     font-size: 0.875rem;
@@ -2089,6 +2089,7 @@ pre code {
     transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+
 @media (prefers-reduced-motion: reduce) {
     .form-control {
         transition: none;
@@ -2102,7 +2103,7 @@ pre code {
 
 .form-control:focus {
     color: rgba(255, 255, 255, 0.8);
-    background-color: #ffffff;
+    background-color: rgba(50, 151, 211, 0.25);
     border-color: rgba(50, 151, 211, 0.25);
     outline: 0;
     box-shadow: none, none;

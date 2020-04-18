@@ -4,5 +4,252 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="content">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Edit Profile</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label asp-for="Input.Mat_User" style="margin-left:7.5rem">Matricule</label>
+                                    <input name="Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@Model._user.Mat_User" readonly />
+                                    <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 pr-md-1">
+                                <div class="Input-Model">
+                                    <label asp-for="Input.Nom_User">Nom</label>
+                                    <input asp-for="Input.Nom_User" type="text" name="Nom_User" class="form-control" placeholder="Nom" value="@Model._user.Nom_User">
+                                    <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 pr-md-1">
+                                <div class="Input-Model">
+                                    <label asp-for="Input.Prenom_User">Prénom</label>
+                                    <input asp-for="Input.Prenom_User" name="Prenom_User" type="text" class="form-control" placeholder="Prénom" value="@Model._user.Prenom_User">
+                                    <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 pr-md-1">
+                                <div class="form-group">
+                                    <label asp-for="Input.Email">Email</label>
+                                    <input asp-for="Input.Email" name="Email" type="email" class="form-control" placeholder="Nom" value="@Model._user.Email">
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pr-md-1">
+                                <div class="form-group">
+                                    <label asp-for="Input.PhoneNumber">Tél</label>
+                                    @if (Model._user.PhoneNumber == null)
+                                    {
+                                        <input asp-for="Input.PhoneNumber" name="PhoneNumber" type="text" style="text-align:center ; color:#356c96;" class="form-Inputs font-weight-bold" placeholder="Nom" value="Compléter Votre profil" readonly>
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="Input.PhoneNumber" name="PhoneNumber" type="text" class="form-control" placeholder="Nom" value="@Model._user.PhoneNumber">
+                                    }
+                                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @if (Model._user.Type_User == "Etudiant")
+                            {
+                                <div class="col-md-6 pr-md-1">
+                                    <div class="form-group">
+                                        <label asp-for="Input.Type_User">Compte</label>
+                                        <input asp-for="Input.Type_User" name="Type_User" type="text" placeholder="Compte" value="@Model._user.Type_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" readonly>
+                                        <span asp-validation-for="Input.Type_User" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 pr-md-1">
+                                    <div class="form-group">
+
+                                        <label asp-for="Input.Nom_Fil">Filière</label>
+                                        <input asp-for="Input.Nom_Fil" type="text" placeholder="Compte" value="@Model._filiere.Nom_Fil" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" readonly>
+                                        <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-3"></div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label asp-for="Input.Type_User" style="margin-left:7.5rem">Compte</label>
+                                        <input asp-for="Input.Type_User" name="Type_User" type="text" placeholder="Compte" value="@Model._user.Type_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" readonly>
+                                        <span asp-validation-for="Input.Type_User" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4"></div>
+
+                            }
+                        </div>
+
+                        <div class="card-footer" style="text-align:center ;">
+                            <button type="submit" class="btn btn-fill btn-primary">Sauvegarder les modifications</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-user">
+                <div class="card-body">
+                    <p class="card-text">
+                        <div class="author">
+                            <div class="block block-one"></div>
+                            <div class="block block-two"></div>
+                            <div class="block block-three"></div>
+                            <div class="block block-four"></div>
+                            <img class="avatar" src="../EasyAttendance.png">
+                            <h4 class="title" style="font-weight:bold ; color:lightgray">@Model._user.Nom_User @Model._user.Prenom_User</h4>
+
+                            <h5 class="description">
+                               @Model._user.Type_User
+                            </h5>
+                        </div>
+                    </p>
+                    <div class="card-description" style="text-align:center">
+                        <div>
+                            <button class="btn btn-fill" data-toggle="modal" data-target="#ChangePwd_@Model._user.Id">
+                                Changer Mot de passe
+                            </button>
+                        </div>
+                        <div>
+                            <button class="btn btn-fill" data-toggle="modal" data-target="#AddPhone_@Model._user.Id">
+                                Compléter votre profil
+                            </button>
+                        </div>
+                        <!--Modal for Add Number Phone -->
+                        <div class="modal fade" id="AddPhone_@Model._user.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content style-modal">
+                                    <div class="modal-header">
+                                        <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
+                                    <div class="modal-body">
+                                        <form asp-page-handler="AddPhone" asp-route-id="@Model._user.Id" method="post">
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="Input.Mat_User" style="margin-right: 4rem;">Matricule</label>
+                                                        <input name="Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@Model._user.Mat_User" readonly />
+                                                        <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="Input.PhoneNumber" style="margin-right: 4rem;"></label>
+                                                        <input asp-for="Input.PhoneNumber" name="PhoneNumber" class="form-control font-inputs-modal" style="text-align:center ; color:#356c96;" value="@Model._user.PhoneNumber" />
+                                                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4"></div>
+                                            </div>
+                                            <button type="submit" style="text-align:center" class="btn btn-fill btn-primary">Ajouter</button>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Modal for Change Password -->
+                        <div class="modal fade" id="ChangePwd_@Model._user.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content style-modal">
+                                    <div class="modal-header">
+                                        <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
+                                    <div class="modal-body">
+                                        <form asp-page-handler="ChangePwd" asp-route-id="@Model._user.Id" method="post">
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="Input.Mat_User" style="margin-right: 4rem;">Matricule</label>
+                                                        <input name="Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@Model._user.Mat_User" readonly />
+                                                        <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="Input.OldPassword" style="margin-right: 4rem;">Ancien Mot de passe</label>
+                                                        <input  asp-for="Input.OldPassword" class="form-control font-inputs-modal" style="text-align:center ; color:#356c96;" />
+                                                        <span asp-validation-for="Input.OldPassword" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label asp-for="Input.NewPassword" style="margin-right: 7rem;">Nouveau Mot de passe </label>
+                                                        <input asp-for="Input.NewPassword" class="form-control" style="width: 60%;" />
+                                                        <span asp-validation-for="Input.NewPassword" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1"></div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label asp-for="Input.ConfirmPassword"> Confirmation de Mot de passe</label>
+                                                        <input asp-for="Input.ConfirmPassword" class="form-control" style="width: 60%;margin-left: 4rem"/>
+                                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-footer" style="text-align:center">
+                                                <button type="submit" class="btn btn-fill btn-primary">Sauvegarder</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <h5 style="font-weight:bold ;text-align:center">Easy Attendance</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
 

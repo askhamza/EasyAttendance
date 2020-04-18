@@ -5,56 +5,58 @@
     ViewData["Title"] = "Index";
 }
 
-
-<div class="content">
-    <div class="row">
-        <div class="card card-user" style="width:auto; border-radius:3rem">
-            <div class="card-body">
-                <p class="card-text">
-                    <div class="author">
-                        <div class="block block-one"></div>
-                        <div class="block block-two"></div>
-                        <div class="block block-three"></div>
-                        <div class="block block-four"></div>
-                        <img class="avatar" src="../EasyAttendance.png">
-                        <p class="description"> <b>Scanner Student </b></p>
-                     </div>
-                 </p>
-            <form method="post">
+        <div class="form-group-input" style="display: flex; justify-content: center; ">
+            <div class="content">
                 <div class="row">
-                    <div class="form-group-input" style="display: flex; justify-content: center;">
-                        <div class="form-group">
-                            <label asp-for="Input.Mat_User"></label>
-                            <input class="form-control" asp-for="Input.Mat_User" placeholder="Matricule" />
-                            <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
+                    <div class="card card-user" style="width:auto; border-radius:3rem">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <div class="author">
+                                    <div class="block block-one"></div>
+                                    <div class="block block-two"></div>
+                                    <div class="block block-three"></div>
+                                    <div class="block block-four"></div>
+                                    <img class="avatar" src="../EasyAttendance.png">
+                            <p class="description"> <b>Scanner Student </b></p>
+                        </div>
+                        </p>
+                        <form method="post">
+                            <div class="row"style="margin-left:1rem;">
+                                <div class="form-group">
+                                    <label asp-for="Input.Mat_User"></label>
+                                    <input class="form-control" asp-for="Input.Mat_User" placeholder="Matricule" />
+                                    <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
 
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Input.Id_Salle">Salle</label>
-                            <select asp-for="Input.Id_Salle" class="form-control">
-                                <option value="">Choisir une Salle</option>
-                                @foreach (var _salle in Model._Salles)
-                                {
-                                    <option value="@_salle.Id_Salle">@_salle.Nom_Salle</option>
-                                }
-                            </select>
-                            <span asp-validation-for="Input.Id_Salle" class="text-danger"></span>
-                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Input.Id_Salle">Salle</label>
+                                    <select asp-for="Input.Id_Salle" class="form-control">
+                                        <option value="">Choisir une Salle</option>
+                                        @foreach (var _salle in Model._Salles)
+                                        {
+                                            <option value="@_salle.Id_Salle">@_salle.Nom_Salle</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="Input.Id_Salle" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div asp-validation-summary="All" class="text-danger" style="font-weight:#b01313;"></div>
+                            <div style="text-align:center">
+                                <button type="submit" class="btn btn-fill btn-primary">Valider</button>
+                            </div>
+                        </form>
                     </div>
+                    <div class="card-footer">
+                        <h5 class="title" style="text-align:center">Easy Attendance</h5>
+                    </div>
+
                 </div>
-                <div asp-validation-summary="All" class="text-danger" style="font-weight:#b01313;"></div>
-                <div style="text-align:center">
-                    <button type="submit" class="btn btn-fill btn-primary">Valider</button>
-                </div>
-            </form>
-        </div>
-        <div class="card-footer">
-            <h5 class="title" style="text-align:center">Easy Attendance</h5>
+            </div>
+
         </div>
 
-    </div>
-</div>
-      
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+       
+
+        @section Scripts {
+            <partial name="_ValidationScriptsPartial" />
+        }
