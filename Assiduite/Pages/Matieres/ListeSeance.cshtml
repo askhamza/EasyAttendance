@@ -1,0 +1,156 @@
+﻿@page
+@model Assiduite.Pages.Matieres.ListeSeanceModel
+@{
+    ViewData["Title"] = "Listes de présence";
+}
+
+<div style="display:flex ; justify-content: center">
+    <div>
+        <h2>
+            Fiches d'absence pour @Model.Matiere.Nom_Mat de la filière @Model.Filiere.Annee_Fil @Model.Filiere.Nom_Fil
+        </h2>
+    </div>
+</div>
+
+<div>
+    @Model.Seances.Count() séances sont enregistré sur cette matière
+</div>
+
+@foreach (var Seance in Model.Presences)
+{
+<div style="display: flex ; justify-content: center; color: white; margin-top: 1rem; align-items: center">
+
+    @{
+        var pourcentage = (Seance.Presences.Where(p => p.Etat_Pres == 2).Count() / @Seance.Presences.Count()) * 100;
+    }
+
+    @if (pourcentage != 0)
+    {
+        <a data-toggle="collapse" href="#collapse_@Seance.Seance.Id_Seance" role="button"
+           aria-expanded="false" aria-controls="collapseExample"
+           class="btn btn-secondary"
+           style=" padding-left: 1rem; padding-right: 1rem; padding-top: 0.5rem; padding-bottom: 0.5rem;">
+            <i class="fal fa-angle-down"></i>
+        </a>
+    }
+
+    <div class="div-container">
+        <strong>Salle :</strong>
+        @{
+            var salle = Model._context.salle.First(s => s.Id_Salle == Seance.Seance.Id_Salle_Seance);
+        }
+        @salle.Nom_Salle
+    </div>
+    
+    <div class="div-container">
+        <strong>Etudiants : </strong> @Seance.Presences.Count()
+
+    </div>
+
+    @if (pourcentage != 0) { 
+        <div class="div-container">
+            <strong>Presence : </strong> @pourcentage %
+        </div>
+     }
+    
+    <div class="div-container">
+        <strong>Date :</strong> @Seance.Seance.Date_Seance
+    </div>
+    <div class="div-container">
+        <strong>Heure : de </strong> @Seance.Seance.HeureDebut_Seance à @Seance.Seance.HeureFin_Seance
+    </div>
+
+</div>
+    
+    {
+        <div class="collapse" id="collapse_@Seance.Seance.Id_Seance">
+            <div class="card card-body">
+                <table class="table" style="text-align: center">
+                    <thead>
+                        <tr>
+                            <th>
+                                Matricule
+                            </th>
+                            <th>
+                                Nom
+                            </th>
+                            <th>
+                                Prenom
+                            </th>
+                            <th>
+                                Etat
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var Etudiant in Seance.Presences)
+                        {
+                            <tr>
+                                @{
+                                    var Student = Model.Etudiants.First(s => s.Id_Etudiant == Etudiant.Id_Etudiant_Pres);
+                                }
+                                <td>
+                                    @Student.User.Mat_User
+                                </td>
+                                <td>
+                                    @Student.User.Nom_User
+                                </td>
+                                <td>
+                                    @Student.User.Prenom_User
+                                </td>
+                                <td>
+                                    @{
+                                        switch (@Etudiant.Etat_Pres)
+                                        {
+                                            case -1:
+                                                <text>
+                                                    NOT SET
+                                                </text>
+                                                break;
+                                            case 1:
+                                                <text>
+                                                    Absent
+                                                </text>
+                                                break;
+                                            case 2:
+                                                <text>
+                                                    Présent
+                                                </text>
+                                                break;
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+    <hr />
+}
+
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $('table.table').DataTable({
+                "pagingType": "simple",
+                "language": {
+                    "lengthMenu": "Affichage _MENU_ etudiants par page",
+                    "info": "Page: _PAGE_ sur _PAGES_",
+                },
+                "paginate": {
+                    "first": "Première",
+                    "last": "Dernière",
+                    "previous": "Precedent",
+                    "next": "Suivant",
+                }
+            });
+            $(table.table().container()).removeClass('form-inline');
+        });
+    </script>
+
+}

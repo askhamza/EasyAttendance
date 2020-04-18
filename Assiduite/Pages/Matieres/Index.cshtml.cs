@@ -12,7 +12,7 @@ namespace Assiduite.Pages.Matieres
 {
     public class IndexModel : PageModel
     {
-        private readonly Assiduite.Data.ApplicationDbContext _context;
+        public readonly Assiduite.Data.ApplicationDbContext _context;
 
         public IndexModel(Assiduite.Data.ApplicationDbContext context)
         {
@@ -24,9 +24,23 @@ namespace Assiduite.Pages.Matieres
         [BindProperty]
         public Matiere Matiere { get; set; }
 
+        public IList<MatiereSeance> _Matieres { get; set; }
+
         public async Task<IActionResult> OnGetAsync( int? id)
         {
-            Matieres = await _context.matiere.ToListAsync();
+            Matieres = await _context.matiere
+                .ToListAsync();
+
+            _Matieres = new List<MatiereSeance>();
+
+            foreach( var Mat in Matieres)
+            {
+                var seance = _context.seance.Where(s => s.Id_Mat_Seance == Mat.Id_Mat)
+                                                                            .Include(s => s.Filiere)
+                                                                            .ToList();
+
+                _Matieres.Add(new MatiereSeance( Mat, seance ) );
+            }
 
             if( id != null)
             {
@@ -37,6 +51,8 @@ namespace Assiduite.Pages.Matieres
                     return NotFound();
                 }
             }
+
+            ViewData["_Matieres"] = _Matieres;
 
             return Page();
         }
@@ -53,9 +69,8 @@ namespace Assiduite.Pages.Matieres
             _context.matiere.Add(Matiere);
             await _context.SaveChangesAsync();
 
-            Matieres = await _context.matiere.ToListAsync();
 
-            return Page();
+            return Redirect("/Matieres");
         }
 
         //Update
@@ -85,9 +100,7 @@ namespace Assiduite.Pages.Matieres
                 }
             }
 
-            Matieres = await _context.matiere.ToListAsync();
-
-            return Page();
+            return Redirect("/Matieres");
         }
 
         private bool MatiereExists(int id)
@@ -112,9 +125,8 @@ namespace Assiduite.Pages.Matieres
                 await _context.SaveChangesAsync();
             }
 
-            Matieres = await _context.matiere.ToListAsync();
-
-            return Page();
+            return Redirect("/Matieres");
         }
+
     }
 }

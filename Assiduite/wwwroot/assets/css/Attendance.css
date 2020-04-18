@@ -20148,6 +20148,7 @@ Copyright (c) 2015 Daniel Eden
 
 .card-body {
     padding: 1.25rem;
+    border-radius: 1rem;
 }
 
 @media (max-width: 767.98px) {
@@ -20413,5 +20414,29 @@ Copyright (c) 2015 Daniel Eden
     margin-bottom: 10px;
     position: relative;
     width: 10rem;
+    margin: 1rem;
+}
+
+.div-container{
+    min-width: 10rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.display-flex{
+    display: flex;
+    align-items: center;
+}
+
+.display-flex.center{
+    justify-content: center;
+}
+
+.display-flex.start{
+    justify-content: flex-start;
+}
+
+.display-content {
+    width: 36rem;
     margin: 1rem;
 }

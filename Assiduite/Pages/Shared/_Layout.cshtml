@@ -41,7 +41,7 @@
                         </a>
                     <li>
                     <li>
-                        <a href="/Utilisateurs" >    
+                        <a href="/Utilisateurs">
                             <i class="fad fa-users"></i>
                             <p>Utilisateur</p>
                         </a>
@@ -98,11 +98,11 @@
                         <span class="navbar-toggler-bar navbar-kebab"></span>
                         <span class="navbar-toggler-bar navbar-kebab"></span>
                     </button>
-                        <div class="collapse navbar-collapse" id="navigation">
-                            <ul class="navbar-nav ml-auto">
-                                <partial name="_LoginPartial"/>
-                            </ul>
-                        </div>
+                    <div class="collapse navbar-collapse" id="navigation">
+                        <ul class="navbar-nav ml-auto">
+                            <partial name="_LoginPartial" />
+                        </ul>
+                    </div>
                 </div>
             </nav>
             <div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
@@ -122,40 +122,47 @@
             <div class="content">
                 @RenderBody()
             </div>
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a href="" class="nav-link">
-                                    Easy Attendance
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="copyright">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script> <i class="tim-icons icon-heart-2"></i>
-                            <a href="" target="_blank">made by Askour & Hilali</a> 
-                        </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                Easy Attendance
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="copyright">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script> <i class="tim-icons icon-heart-2"></i>
+                        <a href="" target="_blank">made by Askour & Hilali</a>
                     </div>
-                </footer>
-            </div>
+                </div>
+            </footer>
+        </div>
     </div>
-   
+
     <!--   Core JS Files   -->
     <script src="~/lib/jquery/dist/jquery.min.js" runat="server"></script>
     <script src="~/assets/js/core/popper.min.js" runat="server"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" runat="server"></script>
     <script src="~/assets/js/plugins/perfect-scrollbar.jquery.min.js" runat="server"></script>
+    <!-- Chart JS -->
+    <script src="~/assets/js/plugins/chartjs.min.js"></script>
+
     <!--  Notifications Plugin    -->
     <script src="~/assets/js/plugins/bootstrap-notify.js"></script>
 
+    <!-- DataTable JS-->
     <script src="~/lib/DataTables/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="~/lib/DataTables/js/dataTables.bootstrap.min.js"></script>
 
+    <!-- EasyAttendance JS -->
+    <script src="~/assets/demo/demo.js"></script>
+
     @RenderSection("Scripts", required: false)
-    
+
     <script>
         $(document).ready(function () {
             $().ready(function () {
@@ -266,6 +273,22 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // Javascript method's body can be found in assets/js/demos.js
+            demo.initDashboardPageCharts();
+
+        });
+    </script>
+    <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+    <script>
+        window.TrackJS &&
+            TrackJS.install({
+                token: "ee6fab19c5a04ac1a32a645abde4613a",
+                application: "black-dashboard-free"
+            });
     </script>
 </body>
 
