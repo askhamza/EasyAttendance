@@ -203,6 +203,14 @@
                                 </select>
                                 <span asp-validation-for="Input.Type_User" class="text-danger"></span>
                             </div>
+                            <div class="Input-Model">
+                                <label>Nombre d'absence</label>
+                                <input  class="form-control font-inputs-modal" value="@_Etud.NbrAbs" readonly/>
+                            </div>
+                            <div class="Input-Model">
+                                <label>Taux d'absence</label>
+                                <input class="form-control font-inputs-modal" value="@_Etud.TauxAbs" readonly/>
+                            </div>
                         </div>
                         <div class="card-footer" style="text-align:center">
                             <button type="submit" class="btn btn-fill btn-primary">Enregistrer les modifications</button>

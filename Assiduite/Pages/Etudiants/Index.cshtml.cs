@@ -119,7 +119,7 @@ namespace Assiduite.Pages.Etudiants
 
                     TotalAbs = await _db.presence.Where(e => e.Id_Etudiant_Pres == _student.Id_Etudiant && e.Etat_Pres == 1).CountAsync();
 
-                    double PourcentageAbs = (TotalAbs / TotalSeance) * 100;
+                    double PourcentageAbs = ((double)TotalAbs / (double)TotalSeance) * 100;
                     
                     _studentAbs.Add(new StudentAbs(_student, TotalAbs, PourcentageAbs));
                 }
