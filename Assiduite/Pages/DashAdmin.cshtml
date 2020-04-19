@@ -49,7 +49,7 @@
                             Matiere
                         </th>
                         <th>
-                            Salle
+                            Prof
                         </th>
                         <th>
                             Filière
@@ -63,14 +63,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach (var Seance in Model.FutureSeance)
+                        @foreach (var Seance in Model.FutureSeance.Take((5)))
                         {
                             <tr>
                                 <td>
-                                    @Seance.Matriere.Nom_Mat
+                                    @Seance.Matriere.Nom_Mat ( @Seance.Salle.Nom_Salle )
                                 </td>
                                 <td>
-                                    @Seance.Salle.Nom_Salle
+                                    @Seance.User.Nom_User @Seance.User.Prenom_User
                                 </td>
                                 <td>
                                     @Seance.Filiere.Annee_Fil @Seance.Filiere.Nom_Fil
@@ -114,7 +114,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach( var Etudiant in Model._studentAbs)
+                        @foreach( var Etudiant in Model._studentAbs.Take(5))
                         { 
                             <tr>
                                 <td>

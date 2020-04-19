@@ -112,6 +112,8 @@ namespace Assiduite.Pages
                                     .Include(s => s.Matriere)
                                     .Include(s => s.Filiere)
                                     .Include(s => s.Salle)
+                                    .Include( s => s.User )
+                                    .OrderBy( s => s.Date_Seance )
                                     .ToArrayAsync();
 
             //Absence Etudiant
