@@ -18,7 +18,7 @@
                                     <div class="block block-four"></div>
                                     <img class="avatar" src="../EasyAttendance.png">
                                 </div>
-                            <div class="description"> <b>Scanner Student </b></div>
+                            <div class="description" style="text-align :center;font-weight:bold"> <b>Scanner Student </b></div>
                         </div>
                         <form method="post">
                             <div class="row"style="margin-left:1rem;">
@@ -32,7 +32,7 @@
                                     <label asp-for="Input.Id_Salle">Salle</label>
                                     <select asp-for="Input.Id_Salle" class="form-control">
                                         <option value="">Choisir une Salle</option>
-                                        @foreach (var _salle in Model._Salles)
+                                        @foreach (var _salle in Model._db.salle.ToArray())
                                         {
                                             <option value="@_salle.Id_Salle">@_salle.Nom_Salle</option>
                                         }

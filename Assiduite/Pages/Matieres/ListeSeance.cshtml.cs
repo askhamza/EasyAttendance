@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Assiduite.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Assiduite.Pages.Matieres
 {
+    [Authorize]
     public class ListeSeanceModel : PageModel
     {
         public readonly Assiduite.Data.ApplicationDbContext _context;

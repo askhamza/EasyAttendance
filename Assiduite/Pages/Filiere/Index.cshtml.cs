@@ -7,12 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Assiduite.Data;
 using Assiduite.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Assiduite.Pages.Filiere
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
-        //READ
         private readonly Assiduite.Data.ApplicationDbContext _context;
 
         public IndexModel(Assiduite.Data.ApplicationDbContext context)

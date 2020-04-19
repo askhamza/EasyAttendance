@@ -10,8 +10,8 @@
     <div class="card-header ">
         <div class="row">
             <div class="col-sm-6 text-left">
-                <h5 class="card-category">Etudiant</h5>
-                <h2 class="card-title">Ajouter un Etudiant</h2>
+                <h2 class="card-title">Gestion des Etudiants</h2>
+                <h5 class="card-category">Ajouter un Etudiant</h5>
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@
                         <div class="form-group">
                             <label asp-for="Input.Type_User">Filière</label>
                             <select asp-for="Input.Type_User" class="form-control" style="width:60rem;">
-                                @foreach (var _fil in Model.Filieres)
+                                @foreach (var _fil in Model._db.filiere.ToArray())
                                 {
                                     <option value="@_fil.Id_Fil">@_fil.Nom_Fil</option>
                                 }
@@ -72,6 +72,7 @@
                         </div>
                     </div>
                 </div>
+                <div asp-validation-summary="All" style="color:#dc3545 ;"></div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-fill btn-primary">Ajouter</button>
                 </div>
@@ -109,29 +110,41 @@
                                 Filière
                             </th>
                             <th>
-
+                                Nombre d'absence
+                            </th>
+                            <th>
+                                Taux d'absence
+                            </th>
+                            <th>
+                                
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var _Etud in Model.Student)
+                        @foreach (var _Etud in Model._studentAbs)
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => _Etud.User.Mat_User)
+                                    @Html.DisplayFor(modelItem => _Etud.Student.User.Mat_User)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => _Etud.User.Nom_User)
+                                    @Html.DisplayFor(modelItem => _Etud.Student.User.Nom_User)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => _Etud.User.Prenom_User)
+                                    @Html.DisplayFor(modelItem => _Etud.Student.User.Prenom_User)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => _Etud.Filiere.Nom_Fil)
+                                    @Html.DisplayFor(modelItem => _Etud.Student.Filiere.Nom_Fil)
                                 </td>
                                 <td>
-                                    <a data-toggle="modal" data-target="#edit_@_Etud.User.Id" asp-page="./Edit">Modifier</a> |
-                                    <a data-toggle="modal" data-target="#del_@_Etud.User.Id" asp-page="./Delete">Supprimer</a>
+                                    @Html.DisplayFor(modelItem => _Etud.NbrAbs)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => _Etud.TauxAbs) %
+                                </td>
+                                <td>
+                                    <a data-toggle="modal" data-target="#edit_@_Etud.Student.User.Id" asp-page="./Edit">Modifier</a> |
+                                    <a data-toggle="modal" data-target="#del_@_Etud.Student.User.Id" asp-page="./Delete">Supprimer</a>
                                 </td>
                             </tr>
 
@@ -143,12 +156,12 @@
         </div>
     </div>
 </div>
-@foreach (var _Etud in Model.Student)
+@foreach (var _Etud in Model._studentAbs)
 {
     <!-- Modal Edit -->
-    <div class="modal fade" id="edit_@_Etud.User.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal fade" id="edit_@_Etud.Student.User.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content style-modal">
+            <div class="modal-content style-modal" style="top: -12rem;">
                 <div class="modal-header">
                     <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -157,41 +170,79 @@
                 </div>
                 <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
                 <div class="modal-body">
-                    <form asp-page-handler="Edit" asp-route-id="@_Etud.User.Id" method="post">
-                        <div style="display: flex ; justify-content: center;">
-                            <div class="form-group" style="text-align:center">
-                                <label asp-for="Input.Mat_User">Matricule</label>
-                                <input name="Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_Etud.User.Mat_User" readonly />
-                                <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
+                    <form asp-page-handler="Edit" asp-route-id="@_Etud.Student.User.Id" method="post">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label asp-for="Input.Mat_User" style="margin-left:7.5rem">Matricule</label>
+                                    <input  name="Mat_User" style="text-align:center ; color:#356c96; margin-left:1rem;" class="form-control font-weight-bold" value="@_Etud.Student.User.Mat_User" readonly />
+                                    <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
+                                </div>
+                            </div> 
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="Input-Model">
+                                    <label asp-for="Input.Nom_User"  >Nom</label>
+                                    <input asp-for="Input.Nom_User" name="Nom_User" class="form-control font-inputs-modal" value="@_Etud.Student.User.Nom_User"  style="width: 13rem;" />
+                                    <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="Input-Model">
+                                    <label asp-for="Input.Prenom_User">Prénom</label>
+                                    <input asp-for="Input.Prenom_User" name="Prenom_User" class="form-control font-inputs-modal" value="@_Etud.Student.User.Prenom_User" style="width: 13rem; margin-left:-1rem"  />
+                                    <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
+                                </div>
                             </div>
                         </div>
-                        <div style="display: flex ; justify-content: center; flex-wrap: wrap">
-                            <div class="Input-Model">
-                                <label asp-for="Input.Nom_User">Nom</label>
-                                <input name="Nom_User" class="form-control font-inputs-modal" value="@_Etud.User.Nom_User" />
-                                <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="Input-Model">
+                                    <label asp-for="Input.Email"></label>
+                                    <input name="Email" class="form-control font-inputs-modal" value="@_Etud.Student.User.Email" style="width: 13rem;" />
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="Input-Model">
-                                <label asp-for="Input.Prenom_User">Prénom</label>
-                                <input name="Prenom_User" class="form-control font-inputs-modal" value="@_Etud.User.Prenom_User" />
-                                <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
-                            </div>
-                            <div class="Input-Model">
-                                <label asp-for="Input.Email"></label>
-                                <input name="Email" class="form-control font-inputs-modal" value="@_Etud.User.Email" />
-                                <span asp-validation-for="Input.Email" class="text-danger"></span>
-                            </div>
-                            <div class="Input-Model">
-                                <label asp-for="Input.Type_User">Filière</label>
-                                <select asp-for="Input.Type_User" class="form-control">
-                                    @foreach (var _fil in Model.Filieres)
-                                    {
-                                        <option value="@_fil.Id_Fil">@_fil.Nom_Fil</option>
-                                    }
-                                </select>
-                                <span asp-validation-for="Input.Type_User" class="text-danger"></span>
+                            <div class="col-md-6">
+                                <div class="Input-Model">
+                                    <label asp-for="Input.Type_User">Filière</label>
+                                    <select asp-for="Input.Type_User" class="form-control" style="width: 13rem; margin-left:-1rem">
+                                        @foreach (var _fil in Model.Filieres)
+                                        {
+                                            if (_Etud.Student.Filiere.Id_Fil == _fil.Id_Fil)
+                                            {
+                                                <option value="@_fil.Id_Fil" selected>@_fil.Nom_Fil</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@_fil.Id_Fil">@_fil.Nom_Fil</option>
+                                            }
+                                        }
+                                    </select>
+                                    <span asp-validation-for="Input.Type_User" class="text-danger"></span>
+                                </div>
+
                             </div>
                         </div>
+                           <div class="row">
+                               <div class="col-md-6">
+                                   <div class="Input-Model">
+                                       <label>Nombre d'absence</label>
+                                       <input style="color:#356c96; width: 13rem; text-align:center ; " class="form-control font-weight-bold" value="@_Etud.NbrAbs"  readonly />
+                                   </div>
+                               </div>
+                               <duv class="col-md-6">
+                                   <div class="Input-Model">
+                                       <label>Taux d'absence</label>
+                                       <input class="form-control font-weight-bold" value="@_Etud.TauxAbs %" style=" color:#356c96; width: 13rem; margin-left:-1rem; text-align:center;" readonly />
+                                   </div>
+                               </duv>
+                           </div>
+                           
+                           
                         <div class="card-footer" style="text-align:center">
                             <button type="submit" class="btn btn-fill btn-primary">Enregistrer les modifications</button>
                         </div>
@@ -201,7 +252,7 @@
         </div>
     </div>
     <!--Modal Delete-->
-    <div class="modal fade" id="del_@_Etud.User.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal fade" id="del_@_Etud.Student.User.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content style-modal" style="top: 100px ; border-radius: 2rem;">
                 <div class="modal-header">
@@ -213,20 +264,19 @@
                 <h5 class="font-modal" style="text-align:center;"> Easy Attendance </h5>
                 <div class="modal-body">
                     <p class="font-inputs-modal" style="font-weight:bold ; text-align:center">
-                        Est-ce que vous voullez vraiment supprimer l'étudiant <span class="font-del">@_Etud.User.Nom_User</span>  <span class="font-del">@_Etud.User.Prenom_User</span>
+                        Est-ce que vous voullez vraiment supprimer l'étudiant <span class="font-del">@_Etud.Student.User.Nom_User</span>  <span class="font-del">@_Etud.Student.User.Prenom_User</span>
                         immatriculé par :
                     </p>
-                    <form asp-page-handler="Delete" method="post" asp-route-id="@_Etud.User.Id">
+                    <form asp-page-handler="Delete" method="post" asp-route-id="@_Etud.Student.User.Id">
                         <div class="row" style="align-content:center">
-                            <div class="col-md-3"></div>
+                            <div class="col-md-2"></div>
                             <div class="col-md-6">
                                 <div class="form-group" style="text-align:center">
-                                    <input asp-for="_user.Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_Etud.User.Mat_User" readonly />
+                                    <input asp-for="_user.Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_Etud.Student.User.Mat_User" readonly />
                                     <br />
-                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                    <button type="submit" class="btn btn-danger" style="margin-right: 2rem;">Supprimer</button>
                                 </div>
                             </div>
-                            <div class="col-md-3"></div>
                         </div>
                     </form>
                 </div>

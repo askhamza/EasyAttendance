@@ -12,7 +12,7 @@ namespace Assiduite.Models
         public Etudiant Student { get; set; }
         public int NbrAbs { get; set; }
         public double TauxAbs { get; set; }
-        public StudentAbs(Etudiant _etudiant, int nbrAbs, double tauxAbs)
+        public StudentAbs(Etudiant _etudiant , int nbrAbs, double tauxAbs)
         {
             if (_etudiant == null)
             {

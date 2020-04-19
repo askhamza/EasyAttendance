@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Assiduite.Pages.Etudiants
 {
+    [Authorize]
     [AllowAnonymous]
     public class IndexModel : PageModel
     {
@@ -23,8 +24,7 @@ namespace Assiduite.Pages.Etudiants
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly ApplicationDbContext _db;
-        private readonly ApplicationDbContext _context;
+        public readonly ApplicationDbContext _db;
         public IList<Utilisateur> Utilisateur { get; set; }
         public IList<Etudiant> Etudiant { get; set; }
 
@@ -33,8 +33,7 @@ namespace Assiduite.Pages.Etudiants
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             RoleManager<IdentityRole> roleManager,
-            ApplicationDbContext db,
-            ApplicationDbContext context
+            ApplicationDbContext db
             )
         {
             _userManager = userManager;
@@ -42,7 +41,6 @@ namespace Assiduite.Pages.Etudiants
             _logger = logger;
             _roleManager = roleManager;
             _db = db;
-            _context = context;
         }
         private static Random random = new Random();
         public static string RandomString()
@@ -56,6 +54,8 @@ namespace Assiduite.Pages.Etudiants
         public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
+        [TempData]
+        public string ErrorMessage { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
@@ -88,23 +88,51 @@ namespace Assiduite.Pages.Etudiants
 
             [Display(Name = "Type d'utilisateur")]
             [Required(ErrorMessage = "Veuillez affecter à cet utilisateur un type")]
-            public int Type_User { get; set; } // Admin ***  Professeur  ***  Etudiant 
+            public int Type_User { get; set; } 
 
         }
 
         public IList<Models.Filiere> Filieres { get; set; }
         public IList<Utilisateur> Etudiants { get; set; }
         public IList<Etudiant> Student { get; set; }
+        public List<StudentAbs> _studentAbs { get; set; }
+        public int TotalSeance { get; set; }
+        public int TotalAbs { get; set; }
+        public int PourcentageAbs { get; set; }
+        public Etudiant _student { get; set; }
+        public Etudiant etud { get; set; }
         public async Task OnGetAsync(string returnUrl = null)
         {
+          
             Filieres = await _db.filiere.ToListAsync();
-                Student = await _db.etudiant
+                Student =  await _db.etudiant
                .Include(e => e.Filiere)
                .Include(e => e.User).ToListAsync();
             Etudiants = await _db.utilisateur.Where(e => e.Type_User =="Etudiant").ToListAsync();
+                //.Include(e => e.Etudiant).Include(e => e.Filiere)
+                
+            var nbr =  _db.utilisateur.Where(e => e.Type_User == "Etudiant").Count();
+            _studentAbs = new List<StudentAbs>();
+           
+            foreach (Utilisateur S in Etudiants)
+            {
+                _student = await _db.etudiant.Where(e => e.Id_User_Etudiant == S.Id).Include(e => e.Filiere).FirstOrDefaultAsync();
+                if (_student != null)
+                {
+                    TotalSeance = _db.presence.Where(e => e.Id_Etudiant_Pres == _student.Id_Etudiant && (e.Etat_Pres == 1 || e.Etat_Pres == 2)).Count();
+
+                    TotalAbs = await _db.presence.Where(e => e.Id_Etudiant_Pres == _student.Id_Etudiant && e.Etat_Pres == 1).CountAsync();
+
+                    double PourcentageAbs = 0;
+                    if (TotalSeance != 0) { 
+                        PourcentageAbs = ((double)TotalAbs / (double)TotalSeance) * 100;
+                    }
+                    _studentAbs.Add(new StudentAbs(_student, TotalAbs, Math.Round(PourcentageAbs,2)));
+                }
+            }
+           
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
         }
         public Utilisateur _user { get; set; }
         public Etudiant _etud { get; set; }
@@ -112,9 +140,9 @@ namespace Assiduite.Pages.Etudiants
         {
             if (id == null)
             {
-                return NotFound();
+                ModelState.AddModelError(string.Empty, "Id not found");
+                return Page();
             }
-
             _user = await _db.utilisateur.FindAsync(id);
             _etud =  _db.etudiant.Where(e => e.Id_User_Etudiant == id).FirstOrDefault();
 

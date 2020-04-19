@@ -93,7 +93,11 @@ namespace Assiduite.Pages.Profil
         public Utilisateur _user { get; set; }
         public Models.Filiere _filiere { get; set; }
         public Etudiant _etud { get; set; }
-    public async Task<IActionResult> OnGetAsync()
+        public int TotalSeance { get; set; }
+        public int TotalAbs { get; set; }
+        public int PourcentageAbs { get; set; }
+
+        public async Task<IActionResult> OnGetAsync()
     {
         var user = await _userManager.GetUserAsync(User);
         if (user == null)
@@ -105,6 +109,11 @@ namespace Assiduite.Pages.Profil
             {
                 _etud = _db.etudiant.Where(e => e.Id_User_Etudiant == _user.Id).FirstOrDefault();
                 _filiere = _db.filiere.Where(f => f.Id_Fil == _etud.Id_Fil_Etudiant).FirstOrDefault();
+                 TotalSeance = _db.presence.Where(e => e.Id_Etudiant_Pres == _etud.Id_Etudiant &&
+                                e.Etat_Pres == 1 || e.Etat_Pres == 2).Count();
+                 TotalAbs = _db.presence.Where(e => e.Id_Etudiant_Pres == _etud.Id_Etudiant &&
+                                e.Etat_Pres == 1).Count();
+                 PourcentageAbs = (TotalAbs / TotalSeance) * 100;
             }
             return Page();
             

@@ -14,7 +14,7 @@ namespace Assiduite.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ApplicationDbContext _db;
+        public readonly ApplicationDbContext _db;
 
         public IndexModel(ApplicationDbContext db)
         {
@@ -45,8 +45,7 @@ namespace Assiduite.Pages
 
         public IActionResult OnGet()
         {
-            _Salles =  _db.salle.ToList();
-
+         
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
