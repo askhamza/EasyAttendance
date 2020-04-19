@@ -124,26 +124,26 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => _Etud.Student.Mat_User)
+                                    @Html.DisplayFor(modelItem => _Etud.Student.User.Mat_User)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => _Etud.Student.Nom_User)
+                                    @Html.DisplayFor(modelItem => _Etud.Student.User.Nom_User)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => _Etud.Student.Prenom_User)
+                                    @Html.DisplayFor(modelItem => _Etud.Student.User.Prenom_User)
                                 </td>
                                 <td>
-                                   4IIR
+                                    @Html.DisplayFor(modelItem => _Etud.Student.Filiere.Nom_Fil)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => _Etud.NbrAbs)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => _Etud.TauxAbs)
+                                    @Html.DisplayFor(modelItem => _Etud.TauxAbs) %
                                 </td>
                                 <td>
-                                    <a data-toggle="modal" data-target="#edit_@_Etud.Student.Id" asp-page="./Edit">Modifier</a> |
-                                    <a data-toggle="modal" data-target="#del_@_Etud.Student.Id" asp-page="./Delete">Supprimer</a>
+                                    <a data-toggle="modal" data-target="#edit_@_Etud.Student.User.Id" asp-page="./Edit">Modifier</a> |
+                                    <a data-toggle="modal" data-target="#del_@_Etud.Student.User.Id" asp-page="./Delete">Supprimer</a>
                                 </td>
                             </tr>
 
@@ -158,7 +158,7 @@
 @foreach (var _Etud in Model._studentAbs)
 {
     <!-- Modal Edit -->
-    <div class="modal fade" id="edit_@_Etud.Student.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal fade" id="edit_@_Etud.Student.User.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content style-modal">
                 <div class="modal-header">
@@ -169,28 +169,28 @@
                 </div>
                 <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
                 <div class="modal-body">
-                    <form asp-page-handler="Edit" asp-route-id="@_Etud.Student.Id" method="post">
+                    <form asp-page-handler="Edit" asp-route-id="@_Etud.Student.User.Id" method="post">
                         <div style="display: flex ; justify-content: center;">
                             <div class="form-group" style="text-align:center">
                                 <label asp-for="Input.Mat_User">Matricule</label>
-                                <input name="Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_Etud.Student.Mat_User" readonly />
+                                <input name="Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_Etud.Student.User.Mat_User" readonly />
                                 <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
                             </div>
                         </div>
                         <div style="display: flex ; justify-content: center; flex-wrap: wrap">
                             <div class="Input-Model">
                                 <label asp-for="Input.Nom_User">Nom</label>
-                                <input name="Nom_User" class="form-control font-inputs-modal" value="@_Etud.Student.Nom_User" />
+                                <input name="Nom_User" class="form-control font-inputs-modal" value="@_Etud.Student.User.Nom_User" />
                                 <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
                             </div>
                             <div class="Input-Model">
                                 <label asp-for="Input.Prenom_User">Prénom</label>
-                                <input name="Prenom_User" class="form-control font-inputs-modal" value="@_Etud.Student.Prenom_User" />
+                                <input name="Prenom_User" class="form-control font-inputs-modal" value="@_Etud.Student.User.Prenom_User" />
                                 <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
                             </div>
                             <div class="Input-Model">
                                 <label asp-for="Input.Email"></label>
-                                <input name="Email" class="form-control font-inputs-modal" value="@_Etud.Student.Email" />
+                                <input name="Email" class="form-control font-inputs-modal" value="@_Etud.Student.User.Email" />
                                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
                             <div class="Input-Model">
@@ -213,7 +213,7 @@
         </div>
     </div>
     <!--Modal Delete-->
-    <div class="modal fade" id="del_@_Etud.Student.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal fade" id="del_@_Etud.Student.User.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content style-modal" style="top: 100px ; border-radius: 2rem;">
                 <div class="modal-header">
@@ -225,15 +225,15 @@
                 <h5 class="font-modal" style="text-align:center;"> Easy Attendance </h5>
                 <div class="modal-body">
                     <p class="font-inputs-modal" style="font-weight:bold ; text-align:center">
-                        Est-ce que vous voullez vraiment supprimer l'étudiant <span class="font-del">@_Etud.Student.Nom_User</span>  <span class="font-del">@_Etud.Student.Prenom_User</span>
+                        Est-ce que vous voullez vraiment supprimer l'étudiant <span class="font-del">@_Etud.Student.User.Nom_User</span>  <span class="font-del">@_Etud.Student.User.Prenom_User</span>
                         immatriculé par :
                     </p>
-                    <form asp-page-handler="Delete" method="post" asp-route-id="@_Etud.Student.Id">
+                    <form asp-page-handler="Delete" method="post" asp-route-id="@_Etud.Student.User.Id">
                         <div class="row" style="align-content:center">
                             <div class="col-md-3"></div>
                             <div class="col-md-6">
                                 <div class="form-group" style="text-align:center">
-                                    <input asp-for="_user.Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_Etud.Student.Mat_User" readonly />
+                                    <input asp-for="_user.Mat_User" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@_Etud.Student.User.Mat_User" readonly />
                                     <br />
                                     <button type="submit" class="btn btn-danger">Supprimer</button>
                                 </div>

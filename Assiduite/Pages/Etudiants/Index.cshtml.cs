@@ -105,21 +105,23 @@ namespace Assiduite.Pages.Etudiants
                .Include(e => e.Filiere)
                .Include(e => e.User).ToListAsync();
             Etudiants = await _db.utilisateur.Where(e => e.Type_User =="Etudiant").ToListAsync();
+                //.Include(e => e.Etudiant).Include(e => e.Filiere)
+                
             var nbr =  _db.utilisateur.Where(e => e.Type_User == "Etudiant").Count();
             _studentAbs = new List<StudentAbs>();
            
             foreach (Utilisateur S in Etudiants)
             {
-                _student = await _db.etudiant.Where(e => e.Id_User_Etudiant == S.Id).FirstOrDefaultAsync();
+                _student = await _db.etudiant.Where(e => e.Id_User_Etudiant == S.Id).Include(e => e.Filiere).FirstOrDefaultAsync();
                 if (_student != null)
                 {
-                    TotalSeance = _db.presence.Where(e => e.Id_Etudiant_Pres == _student.Id_Etudiant && e.Etat_Pres == 1 || e.Etat_Pres == 2).Count();
+                    TotalSeance = _db.presence.Where(e => e.Id_Etudiant_Pres == _student.Id_Etudiant && (e.Etat_Pres == 1 || e.Etat_Pres == 2)).Count();
 
                     TotalAbs = await _db.presence.Where(e => e.Id_Etudiant_Pres == _student.Id_Etudiant && e.Etat_Pres == 1).CountAsync();
 
-                    PourcentageAbs = (TotalAbs / TotalSeance) * 100;
+                    double PourcentageAbs = (TotalAbs / TotalSeance) * 100;
                     
-                    _studentAbs.Add(new StudentAbs(S, TotalAbs, PourcentageAbs));
+                    _studentAbs.Add(new StudentAbs(_student, TotalAbs, PourcentageAbs));
                 }
             }
            

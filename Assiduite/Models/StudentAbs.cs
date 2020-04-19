@@ -9,10 +9,10 @@ namespace Assiduite.Models
 {
     public class StudentAbs
     {
-        public Utilisateur Student { get; set; }
+        public Etudiant Student { get; set; }
         public int NbrAbs { get; set; }
-        public int TauxAbs { get; set; }
-        public StudentAbs(Utilisateur _etudiant , int nbrAbs, int tauxAbs)
+        public double TauxAbs { get; set; }
+        public StudentAbs(Etudiant _etudiant , int nbrAbs, double tauxAbs)
         {
             if (_etudiant == null)
             {
