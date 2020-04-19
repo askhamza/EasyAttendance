@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Assiduite.Data;
 using Assiduite.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Assiduite.Pages.Seance
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly Assiduite.Data.ApplicationDbContext _context;

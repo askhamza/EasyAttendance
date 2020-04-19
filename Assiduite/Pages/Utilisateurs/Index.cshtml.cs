@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Assiduite.Pages.Utilisateurs
 {
+    [Authorize]
     [AllowAnonymous]
     public class IndexModel : PageModel
     {
@@ -23,7 +24,7 @@ namespace Assiduite.Pages.Utilisateurs
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly ApplicationDbContext _db;
+        public readonly ApplicationDbContext _db;
 
         public IList<Utilisateur> Utilisateur { get; set; }
 
@@ -53,6 +54,8 @@ namespace Assiduite.Pages.Utilisateurs
         public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
+        [TempData]
+        public string ErrorMessage { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
         
@@ -88,12 +91,17 @@ namespace Assiduite.Pages.Utilisateurs
             public string Type_User { get; set; } // Admin ***  Professeur  ***  Etudiant 
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public ActionResult OnGet()
         {
-            Utilisateur = await _db.utilisateur.ToListAsync();
-            ReturnUrl = returnUrl;
+            if (!string.IsNullOrEmpty(ErrorMessage))
+            {
+                ModelState.AddModelError(string.Empty, ErrorMessage);
+            }
+            return Page();
+            //Utilisateur = await _db.utilisateur.Where(e=>e.Type_User != "Etudiant").ToListAsync();
+         /*   ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            
+            */
         }
         public Utilisateur _user { get; set; }
         public async Task<IActionResult> OnPostDelete(string? id)
@@ -128,6 +136,11 @@ namespace Assiduite.Pages.Utilisateurs
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            if(Input.Type_User == "Null")
+            {
+                ModelState.AddModelError(string.Empty, "Choisir un type à votre utilisateur ");
+                return Page();
+            }
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)

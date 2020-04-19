@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Assiduite.Pages.Etudiants
 {
+    [Authorize]
     [AllowAnonymous]
     public class IndexModel : PageModel
     {
@@ -23,7 +24,7 @@ namespace Assiduite.Pages.Etudiants
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly ApplicationDbContext _db;
+        public readonly ApplicationDbContext _db;
         public IList<Utilisateur> Utilisateur { get; set; }
         public IList<Etudiant> Etudiant { get; set; }
 
@@ -53,6 +54,8 @@ namespace Assiduite.Pages.Etudiants
         public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
+        [TempData]
+        public string ErrorMessage { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
@@ -100,6 +103,7 @@ namespace Assiduite.Pages.Etudiants
         public Etudiant etud { get; set; }
         public async Task OnGetAsync(string returnUrl = null)
         {
+          
             Filieres = await _db.filiere.ToListAsync();
                 Student =  await _db.etudiant
                .Include(e => e.Filiere)
@@ -119,9 +123,11 @@ namespace Assiduite.Pages.Etudiants
 
                     TotalAbs = await _db.presence.Where(e => e.Id_Etudiant_Pres == _student.Id_Etudiant && e.Etat_Pres == 1).CountAsync();
 
-                    double PourcentageAbs = ((double)TotalAbs / (double)TotalSeance) * 100;
-                    
-                    _studentAbs.Add(new StudentAbs(_student, TotalAbs, PourcentageAbs));
+                    double PourcentageAbs = 0;
+                    if (TotalSeance != 0) { 
+                        PourcentageAbs = ((double)TotalAbs / (double)TotalSeance) * 100;
+                    }
+                    _studentAbs.Add(new StudentAbs(_student, TotalAbs, Math.Round(PourcentageAbs,2)));
                 }
             }
            
@@ -134,9 +140,9 @@ namespace Assiduite.Pages.Etudiants
         {
             if (id == null)
             {
-                return NotFound();
+                ModelState.AddModelError(string.Empty, "Id not found");
+                return Page();
             }
-
             _user = await _db.utilisateur.FindAsync(id);
             _etud =  _db.etudiant.Where(e => e.Id_User_Etudiant == id).FirstOrDefault();
 
