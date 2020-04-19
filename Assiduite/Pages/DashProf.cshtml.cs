@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using Assiduite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Assiduite.Pages
 {
-    public class DashAdminModel : PageModel
+    public class DashProfModel : PageModel
     {
         public readonly Assiduite.Data.ApplicationDbContext _context;
 
-        public DashAdminModel(Assiduite.Data.ApplicationDbContext context)
+        public DashProfModel(Assiduite.Data.ApplicationDbContext context)
         {
             _context = context;
         }
@@ -22,9 +22,7 @@ namespace Assiduite.Pages
         public List<double> DayPourcentage_Abs { get; set; }
         public IList<Models.Seance> FutureSeance { get; set; }
         public IList<Models.Etudiant> Etudiants { get; set; }
-        public List<StudentAbs> _studentAbs { get; set; }
-
-
+                
         public async Task<IActionResult> OnGetAsync()
         {
             // Graph Nombre d'absence par filière
@@ -65,10 +63,14 @@ namespace Assiduite.Pages
             DayPourcentage_Abs = new List<double>();
             var Seances = await _context.seance.Where(s => s.Date_Seance < DateTime.Today )
                                                 .Where( s => s.Date_Seance > DateTime.Today.AddDays(-5)  )
+                                                .Where( s => s.Id_Prof_Seance == this.User.FindFirstValue(ClaimTypes.NameIdentifier))
                                                 .OrderBy( s => s.Date_Seance )
                                                 .ToArrayAsync();
+
             int Som_Day1 = 0, Som_Day2 = 0, Som_Day3 = 0, Som_Day4 = 0, Som_Day5 = 0;
             double Abs_Day1 = 0, Abs_Day2 = 0, Abs_Day3 = 0, Abs_Day4 = 0, Abs_Day5 = 0;
+
+            var i = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             int D = Seances[0].Date_Seance.Day;
 
@@ -109,36 +111,19 @@ namespace Assiduite.Pages
             //Future séance
             FutureSeance = await _context.seance
                                     .Where(s => s.Date_Seance > DateTime.Today)
+                                    .Where(s => s.Id_Prof_Seance == this.User.FindFirstValue( ClaimTypes.NameIdentifier ) )
                                     .Include(s => s.Matriere)
                                     .Include(s => s.Filiere)
                                     .Include(s => s.Salle)
                                     .ToArrayAsync();
 
             //Absence Etudiant
-            var Student = await _context.etudiant
-                                    .Include( s => s.User )
-                                    .Include( s => s.Filiere )
-                                    .ToListAsync();
-            _studentAbs = new List<StudentAbs>();
+            var Pres_Etudiant = await _context.presence.
+                                        Where(p => p.Etat_Pres == 1)
+                                        .OrderBy(p => p.Etat_Pres)
+                                        .ToArrayAsync();
 
-            foreach (Etudiant S in Student)
-            {
-                int TotalSeance = _context.presence.Where(e => e.Id_Etudiant_Pres == S.Id_Etudiant && (e.Etat_Pres == 1 || e.Etat_Pres == 2)).Count();
-
-                int TotalAbs = await _context.presence.Where(e => e.Id_Etudiant_Pres == S.Id_Etudiant && e.Etat_Pres == 1).CountAsync();
-
-                double PourcentageAbs = 0;
-
-                if ( TotalSeance != 0)
-                {
-                    PourcentageAbs = ((double)TotalAbs / (double)TotalSeance) * 100;
-                }
-
-                _studentAbs.Add(new StudentAbs(S, TotalAbs, Math.Round( PourcentageAbs , 2)));
-                
-            }
-            _studentAbs = _studentAbs.OrderByDescending(s => s.TauxAbs).ToList();
-
+                                   
             return Page();
         }
     }
