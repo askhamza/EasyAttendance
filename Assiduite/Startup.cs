@@ -44,6 +44,7 @@ namespace Assiduite
                 options.AddPolicy("RequireEtudiantRole",
                     Policy => Policy.RequireRole("Etudiant"));
             });
+            /*
             services.AddRazorPages()
                 .AddRazorPagesOptions(options =>
                 {
@@ -58,6 +59,7 @@ namespace Assiduite
                     options.Conventions.AuthorizeAreaPage("Identity", "/Account");
 
                 });
+                */
         }
     
 

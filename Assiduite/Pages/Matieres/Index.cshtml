@@ -123,7 +123,7 @@
                                             {
                                                 <div class="form-control font-inputs-modal txt-danger" style="text-align:center ; margin-left:1rem;"> Aucune filière n'est assigner à cette matière </div>
                                             }
-                                            @foreach (var Fil in item.Seance)
+                                            @foreach (var Fil in item.Seance )
                                             {
                                                 <div class="Input-Model">
                                                     <a class="form-control font-inputs-modal" href="/Matieres/ListeSeance?id=@Fil.Id_Seance">@Fil.Filiere.Annee_Fil @Fil.Filiere.Nom_Fil </a>
