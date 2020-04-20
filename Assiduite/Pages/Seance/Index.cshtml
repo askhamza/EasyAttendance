@@ -173,7 +173,7 @@
                     <!-- Modal Edit -->
                     <div class="modal fade" id="edit_@item.Id_Seance" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content style-modal">
+                            <div class="modal-content style-modal" style="top: -6rem;">
                                 <div class="modal-header">
                                     <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -185,40 +185,59 @@
                                     <form asp-page-handler="Edit" method="post">
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                         <input type="hidden" asp-for="Seance.Id_Seance" value="@item.Id_Seance" />
-                                        <div style="display: flex ; justify-content: center;">
-                                            <div class="form-group" style="text-align:center">
-                                                <label>Nom de la matière</label>
-                                                <input style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@item.Matriere.Nom_Mat" disabled />
-                                                <span class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div style="display: flex ; justify-content: center; flex-wrap: wrap">
-                                            <div class="Input-Model">
-                                                <label asp-for="Seance.Id_Mat_Seance">Nom de la matière</label>
-                                                <select asp-for="Seance.Id_Mat_Seance" class="form-control" asp-items="ViewBag.Id_Mat_Seance"></select>
-                                            </div>
-                                            <div class="Input-Model">
-                                                <label asp-for="Seance.Id_Prof_Seance">Professeur</label>   
-                                                <select asp-for="Seance.Id_Prof_Seance" class="form-control" asp-items="ViewBag.Id_Prof_Seance"></select>
-                                            </div>
-                                            <div class="Input-Model">
-                                                <label asp-for="Seance.Id_Fil_Seance">Filière</label>
-                                                <select asp-for="Seance.Id_Fil_Seance" class="form-control" asp-items="ViewBag.Id_Fil_Seance"></select>
-                                            </div>
-                                            <div class="Input-Model">
-                                                <label asp-for="Seance.Id_Salle_Seance">Salle</label>
-                                                <select asp-for="Seance.Id_Salle_Seance" class="form-control" asp-items="ViewBag.Id_Salle_Seance"></select>
-                                            </div>
-                                            <div class="Input-Model">
-                                                <label asp-for="Seance.HeureDebut_Seance">Début: (HH:MM)</label>
-                                                <input asp-for="Seance.HeureDebut_Seance" class="form-control" value="@item.HeureDebut_Seance">
-                                            </div>
-                                            <div class="Input-Model">
-                                                <label asp-for="Seance.HeureFin_Seance">Fin: (HH:MM)</label>
-                                                <input asp-for="Seance.HeureFin_Seance" class="form-control" value="@item.HeureFin_Seance" />
-                                            </div>
-                                        </div>
 
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label style="margin-left:7.5rem">Nom de la matière</label>
+                                                    <input style="text-align:center ; color:#356c96; margin-left:1rem;" class="form-control font-weight-bold" value="@item.Matriere.Nom_Mat" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="Input-Model">
+                                                    <label asp-for="Seance.Id_Mat_Seance">Nom de la matière</label>
+                                                    <select asp-for="Seance.Id_Mat_Seance" class="form-control font-inputs-modal" asp-items="ViewBag.Id_Mat_Seance" style="width: 13rem;" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="Input-Model">
+                                                    <label asp-for="Seance.Id_Prof_Seance">Professeur</label>
+                                                    <select asp-for="Seance.Id_Prof_Seance" class="form-control" asp-items="ViewBag.Id_Prof_Seance" style="width: 13rem; margin-left:-1rem" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="Input-Model">
+                                                    <label asp-for="Seance.Id_Fil_Seance">Filière</label>
+                                                    <select asp-for="Seance.Id_Fil_Seance" class="form-control" asp-items="ViewBag.Id_Fil_Seance" style="width: 13rem;" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="Input-Model">
+                                                    <label asp-for="Seance.Id_Salle_Seance">Salle</label>
+                                                    <select asp-for="Seance.Id_Salle_Seance" class="form-control" asp-items="ViewBag.Id_Salle_Seance" style="width: 13rem; margin-left:-1rem" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="Input-Model">
+                                                    <label asp-for="Seance.HeureDebut_Seance">Début: (HH:MM)</label>
+                                                    <input asp-for="Seance.HeureDebut_Seance" class="form-control" value="@item.HeureDebut_Seance" style="width: 13rem;" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="Input-Model">
+                                                    <label asp-for="Seance.Id_Salle_Seance">Fin: (HH:MM)</label>
+                                                    <input asp-for="Seance.HeureFin_Seance" class="form-control" value="@item.HeureFin_Seance" style="width: 13rem; margin-left:-1rem" />
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="card-footer" style="text-align:center">
                                             <button type="submit" class="btn btn-fill btn-primary">Enregistrer les modifications</button>
                                         </div>
