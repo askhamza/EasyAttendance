@@ -5,228 +5,282 @@
     ViewData["Title"] = "Gestion des séance";
 }
 
-<h1>Gestion de séance</h1>
 
-<p>
-    <a>Ajouter une nouvelle Séance</a>
-</p>
-
-<div class="row">
-    <form method="post" asp-page-handler="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group-input" style="display: flex; justify-content: center; ">
-            <div class="form-group">
-                <label asp-for="Seance.Id_Mat_Seance" class="control-label">Matière</label>
-                <select asp-for="Seance.Id_Mat_Seance" class="form-control" asp-items="ViewBag.Id_Mat_Seance"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Seance.Id_Prof_Seance" class="control-label">Professeur</label>
-                <select asp-for="Seance.Id_Prof_Seance" class="form-control" asp-items="ViewBag.Id_Prof_Seance"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Seance.Id_Fil_Seance" class="control-label">Filière</label>
-                <select asp-for="Seance.Id_Fil_Seance" class="form-control" asp-items="ViewBag.Id_Fil_Seance"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Seance.Id_Salle_Seance" class="control-label">Salle</label>
-                <select asp-for="Seance.Id_Salle_Seance" class="form-control" asp-items="ViewBag.Id_Salle_Seance"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Seance.HeureDebut_Seance" class="control-label"></label>
-                <input asp-for="Seance.HeureDebut_Seance" class="form-control" />
-                <span asp-validation-for="Seance.HeureDebut_Seance" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Seance.HeureFin_Seance" class="control-label"></label>
-                <input asp-for="Seance.HeureFin_Seance" class="form-control" />
-                <span asp-validation-for="Seance.HeureFin_Seance" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Seance.Date_Seance" class="control-label"></label>
-                <input asp-for="Seance.Date_Seance" class="form-control" />
-                <span asp-validation-for="Seance.Date_Seance" class="text-danger"></span>
+<div class="card">
+    <div class="card-header ">
+        <div class="row">
+            <div class="col-sm-6 text-left">
+                <h2 class="card-title">Gestion de séance</h2>
+                <h5 class="card-category">Ajouter une nouvelle séance</h5>
             </div>
         </div>
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+    <div class="card-body">
+        <div class="row container">
+            <div class="row">
+            <form method="post" asp-page-handler="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Seance.Id_Mat_Seance" class="control-label">Matière</label>
+                            <select asp-for="Seance.Id_Mat_Seance" class="form-control" asp-items="ViewBag.Id_Mat_Seance"></select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Seance.Id_Prof_Seance" class="control-label">Professeur</label>
+                            <select asp-for="Seance.Id_Prof_Seance" class="form-control" asp-items="ViewBag.Id_Prof_Seance"></select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Seance.Id_Fil_Seance" class="control-label">Filière</label>
+                            <select asp-for="Seance.Id_Fil_Seance" class="form-control" asp-items="ViewBag.Id_Fil_Seance"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Seance.Id_Salle_Seance" class="control-label">Salle</label>
+                            <select asp-for="Seance.Id_Salle_Seance" class="form-control" asp-items="ViewBag.Id_Salle_Seance"></select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Seance.HeureDebut_Seance" class="control-label"></label>
+                            <input asp-for="Seance.HeureDebut_Seance" class="form-control" />
+                            <span asp-validation-for="Seance.HeureDebut_Seance" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Seance.HeureFin_Seance" class="control-label"></label>
+                            <input asp-for="Seance.HeureFin_Seance" class="form-control" />
+                            <span asp-validation-for="Seance.HeureFin_Seance" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Seance.Date_Seance" class="control-label"></label>
+                            <input asp-for="Seance.Date_Seance" class="form-control" />
+                            <span asp-validation-for="Seance.Date_Seance" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="text-align:center">
+                        <div class="form-group">
+                        <input type="submit" value="Ajouter" class="btn btn-primary" style="top:1rem"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4"> </div>
+                </div>
+            </form>
+            </div>
         </div>
-    </form>
+    </div>
 </div>
 
-<table class="table" id="SeanceTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Seances[0].Matriere)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Seances[0].User)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Seances[0].Filiere)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Seances[0].Salle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Seances[0].HeureDebut_Seance)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Seances[0].HeureFin_Seance)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Seances[0].Date_Seance)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Seances)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Matriere.Nom_Mat)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Nom_User) @Html.DisplayFor(modelItem => item.User.Prenom_User)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Filiere.Annee_Fil) @Html.DisplayFor(modelItem => item.Filiere.Nom_Fil)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Salle.Nom_Salle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HeureDebut_Seance)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HeureFin_Seance)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date_Seance)
-                </td>
-                <td>
-                    <a data-toggle="modal" data-target="#edit_@item.Id_Seance" asp-route-id="@item.Id_Seance">Informations</a>
-                    <a data-toggle="modal" data-target="#del_@item.Id_Seance" asp-route-id="@item.Id_Seance">Supprimer</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
 
-@foreach (var item in Model.Seances)
-{
-    <!-- Modal Edit -->
-    <div class="modal fade" id="edit_@item.Id_Seance" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content style-modal">
-                <div class="modal-header">
-                    <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
-                <div class="modal-body">
-                    <form asp-page-handler="Edit" method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="Seance.Id_Seance" value="@item.Id_Seance" />
-                        <div style="display: flex ; justify-content: center;">
-                            <div class="form-group" style="text-align:center">
-                                <label>Nom de la matière</label>
-                                <input style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@item.Matriere.Nom_Mat" disabled />
-                                <span class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div style="display: flex ; justify-content: center; flex-wrap: wrap">
-                            <div class="Input-Model">
-                                <label asp-for="Seance.Id_Mat_Seance">Nom de la matière</label>
-                                <select asp-for="Seance.Id_Mat_Seance" class="form-control" asp-items="ViewBag.Id_Mat_Seance"></select>
-                            </div>
-                            <div class="Input-Model">
-                                <label asp-for="Seance.Id_Prof_Seance">Professeur</label>
-                                <select asp-for="Seance.Id_Prof_Seance" class="form-control" asp-items="ViewBag.Id_Prof_Seance"></select>
-                            </div>
-                            <div class="Input-Model">
-                                <label asp-for="Seance.Id_Fil_Seance">Filière</label>
-                                <select asp-for="Seance.Id_Fil_Seance" class="form-control" asp-items="ViewBag.Id_Fil_Seance"></select>
-                            </div>
-                            <div class="Input-Model">
-                                <label asp-for="Seance.Id_Salle_Seance">Salle</label>
-                                <select asp-for="Seance.Id_Salle_Seance" class="form-control" asp-items="ViewBag.Id_Salle_Seance"></select>
-                            </div>
-                            <div class="Input-Model">
-                                <label asp-for="Seance.HeureDebut_Seance">Début: (HH:MM)</label>
-                                <input asp-for="Seance.HeureDebut_Seance" class="form-control" value="@item.HeureDebut_Seance">
-                            </div>
-                            <div class="Input-Model">
-                                <label asp-for="Seance.HeureFin_Seance">Fin: (HH:MM)</label>
-                                <input asp-for="Seance.HeureFin_Seance" class="form-control" value="@item.HeureFin_Seance" />
-                            </div>
-                        </div>
-
-                        <div class="card-footer" style="text-align:center">
-                            <button type="submit" class="btn btn-fill btn-primary">Enregistrer les modifications</button>
-                        </div>
-                    </form>
+<div class="card">
+    <div class="card-header ">
+        <div class="row">
+            <div class="col-sm-6 text-left">
+                <h2 class="card-title">Gestion de séance</h2>
+                <h5 class="card-category">Ajouter une nouvelle séance</h5>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row container">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table" id="SeanceTable" style="text-align:center">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Seances[0].Matriere)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Seances[0].User)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Seances[0].Filiere)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Seances[0].Salle)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Seances[0].HeureDebut_Seance)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Seances[0].HeureFin_Seance)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Seances[0].Date_Seance)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Seances)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Matriere.Nom_Mat)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.User.Nom_User) @Html.DisplayFor(modelItem => item.User.Prenom_User)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Filiere.Annee_Fil) @Html.DisplayFor(modelItem => item.Filiere.Nom_Fil)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Salle.Nom_Salle)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HeureDebut_Seance)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HeureFin_Seance)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Date_Seance)
+                                    </td>
+                                    <td>
+                                       <a data-toggle="modal" data-target="#edit_@item.Id_Seance" asp-route-id="@item.Id_Seance" class="btn btn-info btn-round" style="padding: 0.5rem">
+                                            <i class="fal fa-info"></i>
+                                            Informations
+                                        </a>
+                                        <a  data-toggle="modal" data-target="#del_@item.Id_Seance" asp-route-id="@item.Id_Seance" class="btn btn-danger btn-round" style="padding: 0.5rem">
+                                            <i class="fal fa-trash-alt"></i>
+                                            Supprimer
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
+                @foreach (var item in Model.Seances)
+                {
+                    <!-- Modal Edit -->
+                    <div class="modal fade" id="edit_@item.Id_Seance" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content style-modal">
+                                <div class="modal-header">
+                                    <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
+                                <div class="modal-body">
+                                    <form asp-page-handler="Edit" method="post">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <input type="hidden" asp-for="Seance.Id_Seance" value="@item.Id_Seance" />
+                                        <div style="display: flex ; justify-content: center;">
+                                            <div class="form-group" style="text-align:center">
+                                                <label>Nom de la matière</label>
+                                                <input style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@item.Matriere.Nom_Mat" disabled />
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex ; justify-content: center; flex-wrap: wrap">
+                                            <div class="Input-Model">
+                                                <label asp-for="Seance.Id_Mat_Seance">Nom de la matière</label>
+                                                <select asp-for="Seance.Id_Mat_Seance" class="form-control" asp-items="ViewBag.Id_Mat_Seance"></select>
+                                            </div>
+                                            <div class="Input-Model">
+                                                <label asp-for="Seance.Id_Prof_Seance">Professeur</label>   
+                                                <select asp-for="Seance.Id_Prof_Seance" class="form-control" asp-items="ViewBag.Id_Prof_Seance"></select>
+                                            </div>
+                                            <div class="Input-Model">
+                                                <label asp-for="Seance.Id_Fil_Seance">Filière</label>
+                                                <select asp-for="Seance.Id_Fil_Seance" class="form-control" asp-items="ViewBag.Id_Fil_Seance"></select>
+                                            </div>
+                                            <div class="Input-Model">
+                                                <label asp-for="Seance.Id_Salle_Seance">Salle</label>
+                                                <select asp-for="Seance.Id_Salle_Seance" class="form-control" asp-items="ViewBag.Id_Salle_Seance"></select>
+                                            </div>
+                                            <div class="Input-Model">
+                                                <label asp-for="Seance.HeureDebut_Seance">Début: (HH:MM)</label>
+                                                <input asp-for="Seance.HeureDebut_Seance" class="form-control" value="@item.HeureDebut_Seance">
+                                            </div>
+                                            <div class="Input-Model">
+                                                <label asp-for="Seance.HeureFin_Seance">Fin: (HH:MM)</label>
+                                                <input asp-for="Seance.HeureFin_Seance" class="form-control" value="@item.HeureFin_Seance" />
+                                            </div>
+                                        </div>
 
-    <!--Modal Delete-->
-    <div class="modal fade" id="del_@item.Id_Seance" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content style-modal" style="top: 100px ; border-radius: 2rem;">
-                <div class="modal-header">
-                    <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <h5 class="font-modal" style="text-align:center;"> Easy Attendance </h5>
-                <div class="modal-body">
-                    <p class="font-inputs-modal" style="font-weight:bold ; text-align:center">
-                        Est-ce que vous voullez vraiment supprimer la matière <span class="font-del">@item.Matriere.Nom_Mat du @item.Date_Seance</span>
-                    </p>
-                    <form asp-page-handler="Delete" method="post">
-                        <div class="row" style="align-content:center">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="text-align:center">
-                                    <input type="hidden" name="id" value="@item.Id_Seance" />
-                                    <input type="submit" value="Delete" class="btn btn-danger" />
+                                        <div class="card-footer" style="text-align:center">
+                                            <button type="submit" class="btn btn-fill btn-primary">Enregistrer les modifications</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="col-md-3"></div>
                         </div>
-                    </form>
-                </div>
+                    </div>
 
-            </div>
-        </div>
-    </div>
-}
+                    <!--Modal Delete-->
+                    <div class="modal fade" id="del_@item.Id_Seance" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content style-modal" style="top: 100px ; border-radius: 2rem;">
+                                <div class="modal-header">
+                                    <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <h5 class="font-modal" style="text-align:center;"> Easy Attendance </h5>
+                                <div class="modal-body">
+                                    <p class="font-inputs-modal" style="font-weight:bold ; text-align:center">
+                                        Est-ce que vous voullez vraiment supprimer la matière <span class="font-del">@item.Matriere.Nom_Mat du @item.Date_Seance</span>
+                                    </p>
+                                    <form asp-page-handler="Delete" method="post">
+                                        <div class="row" style="align-content:center">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-6">
+                                                <div class="form-group" style="text-align:center">
+                                                    <input type="hidden" name="id" value="@item.Id_Seance" />
+                                                    <input type="submit" value="Delete" class="btn btn-danger" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3"></div>
+                                        </div>
+                                    </form>
+                                </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-    <script>
-        $(document).ready(function () {
-            var table = $('#SeanceTable').DataTable({
-                "pagingType": "simple",
-                "language": {
-                    "lengthMenu": "Affichage _MENU_ séance par page",
-                    "info": "Page: _PAGE_ sur _PAGES_",
-                },
-                "paginate": {
-                    "first": "Première",
-                    "last": "Dernière",
-                    "previous": "Precedent",
-                    "next": "Suivant",
+                            </div>
+                        </div>
+                    </div>
                 }
-            });
-            $(table.table().container()).removeClass('form-inline');
-        });
-    </script>
-}
+
+                @section Scripts {
+                    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+                    <script>
+                        $(document).ready(function () {
+                            var table = $('#SeanceTable').DataTable({
+                                "pagingType": "simple",
+                                "language": {
+                                    "lengthMenu": "Affichage _MENU_ séances par page",
+                                    "info": "Page: _PAGE_ sur _PAGES_",
+                                },
+                                "paginate": {
+                                    "first": "Première",
+                                    "last": "Dernière",
+                                    "previous": "Precedent",
+                                    "next": "Suivant",
+                                }
+                            });
+                            $(table.table().container()).removeClass('form-inline');
+                        });
+                    </script>
+                }

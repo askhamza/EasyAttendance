@@ -10,8 +10,8 @@
     <div class="card-header ">
         <div class="row">
             <div class="col-sm-6 text-left">
-                <h2 class="card-title">Gestion des Etudiants</h2>
-                <h5 class="card-category">Ajouter un Etudiant</h5>
+                <h2 class="card-title">Gestion de Etudiant</h2>
+                <h5 class="card-category">Ajouter un nouveau Etudiant</h5>
             </div>
         </div>
     </div>
@@ -143,8 +143,15 @@
                                     @Html.DisplayFor(modelItem => _Etud.TauxAbs) %
                                 </td>
                                 <td>
-                                    <a data-toggle="modal" data-target="#edit_@_Etud.Student.User.Id" asp-page="./Edit">Modifier</a> |
-                                    <a data-toggle="modal" data-target="#del_@_Etud.Student.User.Id" asp-page="./Delete">Supprimer</a>
+                                    
+                                    <a data-toggle="modal" data-target="#edit_@_Etud.Student.User.Id" asp-page="./Edit" class="btn btn-info btn-round" style="padding: 0.5rem">
+                                        <i class="fal fa-info"></i>
+                                        Informations
+                                    </a>
+                                    <a data-toggle="modal" data-target="#del_@_Etud.Student.User.Id" asp-page="./Delete" class="btn btn-danger btn-round" style="padding: 0.5rem">
+                                        <i class="fal fa-trash-alt"></i>
+                                        Supprimer
+                                    </a>
                                 </td>
                             </tr>
 
@@ -294,7 +301,7 @@
             var table = $('#UserTable').DataTable({
                 "pagingType": "simple",
                 "language": {
-                    "lengthMenu": "Affichage _MENU_ matières par page",
+                    "lengthMenu": "Affichage _MENU_ Etudiants par page",
                     "info": "Page: _PAGE_ sur _PAGES_",
                 },
                 "paginate": {

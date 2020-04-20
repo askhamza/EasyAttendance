@@ -4,17 +4,19 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Assiduite.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace Assiduite.Pages
-{
-    public class DashProfModel : PageModel
+namespace Assiduite.Pages.DashProf
+    {
+    [Authorize]
+    public class IndexModel : PageModel
     {
         public readonly Assiduite.Data.ApplicationDbContext _context;
 
-        public DashProfModel(Assiduite.Data.ApplicationDbContext context)
+        public  IndexModel(Assiduite.Data.ApplicationDbContext context)
         {
             _context = context;
         }
@@ -72,8 +74,7 @@ namespace Assiduite.Pages
             int Som_Day1 = 0, Som_Day2 = 0, Som_Day3 = 0, Som_Day4 = 0, Som_Day5 = 0;
             double Abs_Day1 = 0, Abs_Day2 = 0, Abs_Day3 = 0, Abs_Day4 = 0, Abs_Day5 = 0;
 
-            int D = Seances[0].Date_Seance.Day;
-
+             int D = Seances[0].Date_Seance.Day;
             foreach ( var Seance in Seances)
             {
                 int index = Seance.Date_Seance.Day - D;

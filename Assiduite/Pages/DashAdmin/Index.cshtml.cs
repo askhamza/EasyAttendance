@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Assiduite.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace Assiduite.Pages
+namespace Assiduite.Pages.DashAdmin
 {
-    public class DashAdminModel : PageModel
+    [Authorize]
+    public class IndexModel : PageModel
     {
         public readonly Assiduite.Data.ApplicationDbContext _context;
 
-        public DashAdminModel(Assiduite.Data.ApplicationDbContext context)
+        public IndexModel(Assiduite.Data.ApplicationDbContext context)
         {
             _context = context;
         }
