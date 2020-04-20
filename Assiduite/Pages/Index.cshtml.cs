@@ -9,6 +9,7 @@ using Assiduite.Data;
 using Assiduite.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace Assiduite.Pages
 {
@@ -16,13 +17,15 @@ namespace Assiduite.Pages
     {
         public readonly ApplicationDbContext _db;
 
-        public IndexModel(ApplicationDbContext db)
+        public IndexModel(ApplicationDbContext db,
+            UserManager<IdentityUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
         [BindProperty]
         public InputModel Input { get; set; }
-
+        private readonly UserManager<IdentityUser> _userManager;
         public string ReturnUrl { get; set; }
         [TempData]
         public string ErrorMessage { get; set; }
@@ -42,14 +45,143 @@ namespace Assiduite.Pages
         public IList<Models.Seance> _seances { get; set; }
         public IList<Presence> _listePresence { get; set; }
         public Presence _etatEtudiant { get; set; }
-
-        public IActionResult OnGet()
+        private static Random random = new Random();
+        public static string RandomString()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            return new string(Enumerable.Repeat(chars, 4)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+        public async Task<IActionResult> OnGetAsync()
         {
          
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
+
+            /*
+             * CREATION DE FILIERE
+            foreach( var Filiere in _db.filiere.ToList())
+            {
+                List<Utilisateur> users = new List<Utilisateur>();
+                for (int i = 0; i < 20; i++)
+                {
+                    var email = RandomString() + "@" + RandomString() + ".com";
+                    var name = RandomString();
+                    var prenom = RandomString();
+                    string mat = name + '_' + prenom + '_' + RandomString();
+
+                    users.Add(new Utilisateur
+                    {
+                        UserName = email,
+                        Email = email,
+                        Nom_User = name,
+                        Prenom_User = prenom,
+                        Mat_User = mat,
+                        Type_User = "Etudiant",
+                    });
+                }
+
+                foreach (var user in users)
+                {
+                    await _userManager.CreateAsync(user, "P@ssw0rd");
+
+                    _db.etudiant.Add(new Etudiant
+                    {
+                        Id_User_Etudiant = user.Id,
+                        Id_Fil_Etudiant = Filiere.Id_Fil,
+                    });
+                }
+            }
+            _db.SaveChanges();
+            
+
+            var prof = _db.utilisateur.Where(e => e.Type_User == "Professeur").ToList();
+            var Fillieres = _db.filiere.ToList();
+            var Salles = _db.salle.ToList();
+            foreach ( var Matiere in _db.matiere.ToList())
+            {
+                List<Models.Seance> SeancesAv = new List<Models.Seance>();
+                List<Models.Seance> SeancesAp = new List<Models.Seance>();
+
+                int randomIndexProf = random.Next( prof.Count );
+                int randomIndexSalle = random.Next(Salles.Count);
+                Random rnd = new Random();
+                
+                int i = 1;
+                foreach ( var Fil in Fillieres)
+                {
+                    var SeanceAv = new Models.Seance
+                    {
+                        Id_Prof_Seance = prof[randomIndexProf].Id,
+                        Id_Fil_Seance = Fil.Id_Fil,
+                        Id_Mat_Seance = Matiere.Id_Mat,
+                        Id_Salle_Seance = Salles[randomIndexSalle].Id_Salle ,
+                        HeureDebut_Seance = "10:00",
+                        HeureFin_Seance = "12:00",
+                        Date_Seance = DateTime.Today.AddDays( -i ),
+                    };
+                    var SeanceAp = new Models.Seance
+                    {
+                        Id_Prof_Seance = prof[randomIndexProf].Id,
+                        Id_Fil_Seance = Fil.Id_Fil,
+                        Id_Mat_Seance = Matiere.Id_Mat,
+                        Id_Salle_Seance = Salles[randomIndexSalle].Id_Salle,
+                        HeureDebut_Seance = "10:00",
+                        HeureFin_Seance = "12:00",
+                        Date_Seance = DateTime.Today.AddDays(i),
+                    };
+
+                    SeancesAv.Add(SeanceAv); SeancesAp.Add(SeanceAp);
+
+                    _db.seance.Add(SeanceAv); _db.seance.Add(SeanceAp);
+                    i++;
+                }
+
+                await _db.SaveChangesAsync();
+                
+                foreach( var Seance in SeancesAv)
+                {
+                    List<Etudiant> Etudiants = await _db.etudiant.Where(e => e.Id_Fil_Etudiant == Seance.Id_Fil_Seance).ToListAsync();
+
+                    foreach (Etudiant e in Etudiants)
+                    {
+                        var etat = rnd.Next(1, 3);
+                        var P = new Presence
+                        {
+                            Id_Seance_Pres = Seance.Id_Seance,
+                            Id_Etudiant_Pres = e.Id_Etudiant,
+                            Etat_Pres = etat,
+                        };
+
+                        _db.presence.Add(P);
+
+                    }
+
+                }
+
+                foreach (var Seance in SeancesAp)
+                {
+                    List<Etudiant> Etudiants = await _db.etudiant.Where(e => e.Id_Fil_Etudiant == Seance.Id_Fil_Seance).ToListAsync();
+
+                    foreach (Etudiant e in Etudiants)
+                    {
+                        var P = new Presence
+                        {
+                            Id_Seance_Pres = Seance.Id_Seance,
+                            Id_Etudiant_Pres = e.Id_Etudiant,
+                            Etat_Pres = -1,
+                        };
+
+                        _db.presence.Add(P);
+
+                    }
+
+                }
+
+            }
+            */
             return Page();
         }
 
