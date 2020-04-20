@@ -55,6 +55,8 @@ namespace Assiduite
                     options.Conventions.AuthorizeFolder("/Seance", "RequireAdministrateurRole");
                     options.Conventions.AuthorizeFolder("/DashAdmin", "RequireAdministrateurRole");
                     options.Conventions.AuthorizeFolder("/DashProf", "RequireProfesseurRole");
+                    options.Conventions.AuthorizeAreaPage("Identity", "/Account");
+
                 });
         }
     
