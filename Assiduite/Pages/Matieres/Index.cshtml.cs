@@ -31,7 +31,7 @@ namespace Assiduite.Pages.Matieres
         public async Task<IActionResult> OnGetAsync( int? id)
         {
             Matieres = await _context.matiere
-                .ToListAsync();
+                                .ToListAsync();
 
             _Matieres = new List<MatiereSeance>();
 

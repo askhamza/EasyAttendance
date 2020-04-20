@@ -141,7 +141,7 @@
                         <div style="display: flex ; justify-content: center; flex-wrap: wrap">
                             <div class="Input-Model">
                                 <label asp-for="Seance.Id_Mat_Seance">Nom de la matière</label>
-                                <select asp-for="Seance.Id_Mat_Seance" class="form-control" asp-items="ViewBag.Id_Mat_Seance"></select>
+                                <select asp-for="Seance.Id_Mat_Seance" class="form-control" asp-items="ViewBag.Id_Mat_Seance" ></select>
                             </div>
                             <div class="Input-Model">
                                 <label asp-for="Seance.Id_Prof_Seance">Professeur</label>
@@ -226,7 +226,7 @@
                     "next": "Suivant",
                 }
             });
-            $(table.table().container()).removeClass('form-inline');
-        });
+            $('.dataTables_wrapper').removeClass('form-inline');
+        }
     </script>
 }

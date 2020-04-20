@@ -1,5 +1,5 @@
 ﻿@page
-@model Assiduite.Pages.Matieres.ListeSeanceModel
+@model Assiduite.Pages.Matieres.ListeSeanceProfModel
 @{
     ViewData["Title"] = "Listes de présence";
 }
@@ -21,7 +21,7 @@
 <div style="display: flex ; justify-content: center; color: white; margin-top: 1rem; align-items: center">
 
     @{
-        var pourcentage = (Seance.Presences.Where(p => p.Etat_Pres == 2).Count() / @Seance.Presences.Count()) * 100;
+        var pourcentage = (Seance.Presences.Count() != 0)? (double)(Seance.Presences.Where(p => p.Etat_Pres == 2).Count() / (double)Seance.Presences.Count()) * 100 : 0;
     }
 
     @if (pourcentage != 0)

@@ -1,0 +1,159 @@
+﻿@page
+@model Assiduite.Pages.Matieres.MatiereProfModel
+@{
+    ViewData["Title"] = "MatiereProf";
+}
+
+<div style="display:flex ; justify-content: center">
+    <div>
+        <h2>
+            Liste des matières
+        </h2>
+    </div>
+</div>
+
+
+<table class="table" style="text-align: center">
+    <thead>
+        <tr>
+            <th>
+                Matiere
+            </th>
+            <th>
+                Filière
+            </th>
+            <th>
+                Nbr d'absence
+            </th>
+            <th>
+                Taux ( % )
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var Matiere in Model._MatieresPres)
+        {
+            <tr>
+                <td>
+                    @Matiere.Seance.Matriere.Nom_Mat
+                </td>
+                <td>
+                    @Matiere.Seance.Filiere.Annee_Fil @Matiere.Seance.Filiere.Nom_Fil
+                </td>
+                <td>
+                    @Matiere.nbrAbs
+                </td>
+                <td>
+                    @Matiere.tauxAbs %
+                </td>
+                <td>
+                    <a href="/Matieres/ListeSeanceProf?id=@Matiere.Seance.Id_Seance" class="btn btn-info btn-round" style="padding: 0.5rem">
+                        <i class="fal fa-info"></i>
+                        Informations
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@foreach (var Seance in Model._MtdAbs)
+{
+    <div style="display: flex ; justify-content: center; color: white; margin-top: 1rem; align-items: center">
+
+        <a data-toggle="collapse" href="#collapse_@Seance.mtd.Id_Mat" role="button"
+            aria-expanded="false" aria-controls="collapseExample"
+            class="btn btn-secondary"
+            style=" padding-left: 1rem; padding-right: 1rem; padding-top: 0.5rem; padding-bottom: 0.5rem;">
+            <i class="fal fa-angle-down"></i>
+        </a>
+        
+
+        <div class="div-container">
+            <strong>Matiere : </strong> @Seance.mtd.Nom_Mat
+        </div>
+
+        <div class="div-container">
+            <strong>Filière : </strong> @Seance.std[0].Student.Filiere.Annee_Fil @Seance.std[0].Student.Filiere.Nom_Fil
+        </div>
+
+        <div class="div-container">
+            <strong>Etudiants : </strong> @Seance.std.Count()
+        </div>
+
+    </div>
+
+    {
+        <div class="collapse" id="collapse_@Seance.mtd.Id_Mat">
+            <div class="card card-body">
+                <table class="table" style="text-align: center">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nom
+                            </th>
+                            <th>
+                                Prenom
+                            </th>
+                            <th>
+                                Nbr Absence
+                            </th>
+                            <th>
+                                Taux ( % )
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var Etudiant in Seance.std)
+                        {
+                            <tr>
+                                <td>
+                                    @Etudiant.Student.User.Nom_User
+                                </td>
+                                <td>
+                                    @Etudiant.Student.User.Prenom_User
+                                </td>
+                                <td>
+                                    @Etudiant.NbrAbs
+                                </td>
+                                <td>
+                                    @Etudiant.TauxAbs %
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    <hr />
+}
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $('.table').DataTable({
+                "pagingType": "simple",
+                "language": {
+                    "lengthMenu": "Affichage _MENU_ matiere par page",
+                    "info": "Page: _PAGE_ sur _PAGES_",
+                },
+                "paginate": {
+                    "first": "Première",
+                    "last": "Dernière",
+                    "previous": "Precedent",
+                    "next": "Suivant",
+                }
+            });
+
+            $('.dataTables_wrapper').removeClass('form-inline');
+        });
+    </script>
+
+}
