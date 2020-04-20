@@ -222,7 +222,7 @@ namespace Assiduite.Pages.Etudiants
                     _logger.LogInformation("User created a new account with password.");
 
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
                     var _etud = new Etudiant
                     {
                         Id_User_Etudiant = user.Id,
@@ -233,7 +233,7 @@ namespace Assiduite.Pages.Etudiants
 
 
 
-                    return LocalRedirect(returnUrl);
+                    return Redirect("~/Etudiants");
 
                 }
                 foreach (var error in result.Errors)

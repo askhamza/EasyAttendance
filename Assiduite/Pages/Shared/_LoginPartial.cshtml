@@ -2,25 +2,25 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <li class="nav-item">
-            <a class="nav-link" asp-area="Identity" title="Manage">Bonjour @User.Identity.Name !</a>
-        </li>
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                <button type="submit" class="nav-link btn btn-link">Se déconnecter</button>
-            </form>
-        </li>
-
+    <ul class="navbar-nav">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Identity" title="Manage">Bonjour @User.Identity.Name !</a>
+            </li>
+            <!--<li class="nav-item">
+              <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                  <button type="submit" class="nav-link btn btn-link">Se déconnecter</button>
+              </form>
+          </li>
+          -->
             <li class="search-bar input-group">
                 <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal">
                     <i class="tim-icons icon-zoom-split"></i>
                     <span class="d-lg-none d-md-block">Chercher par matricule</span>
                 </button>
             </li>
-            
+
             <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                     <div class="photo">
