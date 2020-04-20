@@ -26,6 +26,11 @@ namespace Assiduite.Pages.Seance
 
         [BindProperty]
         public Models.Seance Seance { get; set; }
+        public List<Models.Seance> _seances { get; set; }
+        public List<Models.Filiere> _filieres { get; set; }
+        public List<Models.Matiere> _matieres { get; set; }
+        public List<Models.Salle> _salles { get; set; }
+        public List<Models.Utilisateur> _profs { get; set; }
 
         public async Task<IActionResult> OnGetAsync( int? id )
         {
@@ -50,24 +55,19 @@ namespace Assiduite.Pages.Seance
             }
 
             List<Object> Filiere_List = new List<object>();
-            foreach (var Filieres in _context.filiere)
-                Filiere_List.Add(new
-                {
-                    Id = Filieres.Id_Fil,
-                    Name = Filieres.Annee_Fil + " " + Filieres.Nom_Fil
-                }); 
-            ViewData["Id_Fil_Seance"] = new SelectList(Filiere_List, "Id", "Name");
-            ViewData["Id_Mat_Seance"] = new SelectList(_context.matiere, "Id_Mat", "Nom_Mat");
-            ViewData["Id_Salle_Seance"] = new SelectList(_context.salle, "Id_Salle", "Nom_Salle");
 
-            List<Object> Prof_List = new List<object>();
-            foreach (var Prof in _context.utilisateur.Where(e=> e.Type_User =="Professeur"))
-                Prof_List.Add(new
-                {
-                    Id = Prof.Id,
-                    Name = Prof.Nom_User + " " + Prof.Prenom_User
-                });
-            ViewData["Id_Prof_Seance"] = new SelectList( Prof_List , "Id", "Name" );
+            _seances = new List<Models.Seance>();
+            _filieres = new List<Models.Filiere>();
+            _matieres = new List<Models.Matiere>();
+            _salles = new List<Models.Salle>();
+            _profs = new List<Models.Utilisateur>();
+
+
+            _seances = _context.seance.ToList();
+            _filieres = _context.filiere.ToList();
+            _matieres = _context.matiere.ToList();
+            _salles = _context.salle.ToList();
+            _profs = _context.utilisateur.Where(e => e.Type_User == "Professeur").ToList();
 
             return Page();
         }

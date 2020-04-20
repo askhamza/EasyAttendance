@@ -17,19 +17,39 @@
         <div class="form-group-input" style="display: flex; justify-content: center; ">
             <div class="form-group">
                 <label asp-for="Seance.Id_Mat_Seance" class="control-label">Matière</label>
-                <select asp-for="Seance.Id_Mat_Seance" class="form-control" asp-items="ViewBag.Id_Mat_Seance"></select>
+                <select asp-for="Seance.Id_Mat_Seance" class="form-control" style="width: 13rem; margin-left:-1rem">
+                    @foreach (var _fil in Model._matieres)
+                        {
+                        <option value="@_fil.Id_Mat">@_fil.Nom_Mat</option>
+                        }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Seance.Id_Prof_Seance" class="control-label">Professeur</label>
-                <select asp-for="Seance.Id_Prof_Seance" class="form-control" asp-items="ViewBag.Id_Prof_Seance"></select>
+                <select asp-for="Seance.Id_Prof_Seance" class="form-control" style="width: 13rem; margin-left:-1rem">
+                    @foreach (var _fil in Model._profs)
+                    {
+                        <option value="@_fil.Id">@_fil.Nom_User @_fil.Prenom_User</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Seance.Id_Fil_Seance" class="control-label">Filière</label>
-                <select asp-for="Seance.Id_Fil_Seance" class="form-control" asp-items="ViewBag.Id_Fil_Seance"></select>
+                <select asp-for="Seance.Id_Fil_Seance" class="form-control" style="width: 13rem; margin-left:-1rem">
+                    @foreach (var _fil in Model._filieres)
+                     {
+                        <option value="@_fil.Id_Fil">@_fil.Annee_Fil @_fil.Nom_Fil</option>
+                     }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Seance.Id_Salle_Seance" class="control-label">Salle</label>
-                <select asp-for="Seance.Id_Salle_Seance" class="form-control" asp-items="ViewBag.Id_Salle_Seance"></select>
+                <select asp-for="Seance.Id_Salle_Seance" class="form-control" style="width: 13rem; margin-left:-1rem">
+                    @foreach (var _fil in Model._salles)
+                    {
+                        <option value="@_fil.Id_Salle">@_fil.Nom_Salle</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Seance.HeureDebut_Seance" class="control-label"></label>
@@ -141,19 +161,71 @@
                         <div style="display: flex ; justify-content: center; flex-wrap: wrap">
                             <div class="Input-Model">
                                 <label asp-for="Seance.Id_Mat_Seance">Nom de la matière</label>
-                                <select asp-for="Seance.Id_Mat_Seance" class="form-control" asp-items="ViewBag.Id_Mat_Seance" ></select>
+                                <select asp-for="Seance.Id_Mat_Seance" class="form-control" style="width: 13rem; margin-left:-1rem">
+                                    @foreach (var _fil in Model._matieres)
+                                    {
+                                        if ( item.Id_Mat_Seance == _fil.Id_Mat)
+                                        {
+                                            <option value="@_fil.Id_Mat" selected>@_fil.Nom_Mat</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@_fil.Id_Mat">@_fil.Nom_Mat</option>
+                                        }
+                                        
+                                    }
+                                </select>
                             </div>
                             <div class="Input-Model">
                                 <label asp-for="Seance.Id_Prof_Seance">Professeur</label>
-                                <select asp-for="Seance.Id_Prof_Seance" class="form-control" asp-items="ViewBag.Id_Prof_Seance"></select>
+                                <select asp-for="Seance.Id_Prof_Seance" class="form-control" style="width: 13rem; margin-left:-1rem">
+                                    @foreach (var _fil in Model._profs)
+                                    {
+                                        if (item.Id_Prof_Seance == _fil.Id)
+                                        {
+                                            <option value="@_fil.Id" selected>@_fil.Nom_User @_fil.Prenom_User</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@_fil.Id">@_fil.Nom_User @_fil.Prenom_User</option>
+                                        }
+
+                                    }
+                                </select>
                             </div>
                             <div class="Input-Model">
                                 <label asp-for="Seance.Id_Fil_Seance">Filière</label>
-                                <select asp-for="Seance.Id_Fil_Seance" class="form-control" asp-items="ViewBag.Id_Fil_Seance"></select>
+                                <select asp-for="Seance.Id_Fil_Seance" class="form-control" style="width: 13rem; margin-left:-1rem">
+                                    @foreach (var _fil in Model._filieres)
+                                    {
+                                        if (item.Id_Fil_Seance == _fil.Id_Fil)
+                                        {
+                                            <option value="@_fil.Id_Fil" selected>@_fil.Annee_Fil @_fil.Nom_Fil</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@_fil.Id_Fil">@_fil.Annee_Fil @_fil.Nom_Fil</option>
+                                        }
+
+                                    }
+                                </select>
                             </div>
                             <div class="Input-Model">
                                 <label asp-for="Seance.Id_Salle_Seance">Salle</label>
-                                <select asp-for="Seance.Id_Salle_Seance" class="form-control" asp-items="ViewBag.Id_Salle_Seance"></select>
+                                <select asp-for="Seance.Id_Salle_Seance" class="form-control" style="width: 13rem; margin-left:-1rem">
+                                    @foreach (var _fil in Model._salles)
+                                    {
+                                        if (item.Id_Salle_Seance == _fil.Id_Salle)
+                                        {
+                                            <option value="@_fil.Id_Salle" selected>@_fil.Nom_Salle</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@_fil.Id_Salle">@_fil.Nom_Salle</option>
+                                        }
+
+                                    }
+                                </select>
                             </div>
                             <div class="Input-Model">
                                 <label asp-for="Seance.HeureDebut_Seance">Début: (HH:MM)</label>
