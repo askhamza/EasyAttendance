@@ -5,147 +5,213 @@
     ViewData["Title"] = "Gestion des salles";
 }
 
-<h1>Gestion des salles</h1>
-
-<p>
-    <a>Ajouter une nouvelle matière</a>
-</p>
-
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" asp-page-handler="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Salle.Nom_Salle" class="control-label"></label>
-                <input asp-for="Salle.Nom_Salle" class="form-control" />
-                <span asp-validation-for="Salle.Nom_Salle" class="text-danger"></span>
+<div class="card">
+    <div class="card-header ">
+        <div class="row">
+            <div class="col-sm-6 text-left">
+                <h2 class="card-title">Gestion de salle</h2>
+                <h5 class="card-category">Ajouter une nouvelle salle</h5>
             </div>
-            <div class="form-group">
-                <label asp-for="Salle.Capacite_Salle" class="control-label"></label>
-                <input asp-for="Salle.Capacite_Salle" class="form-control" />
-                <span asp-validation-for="Salle.Capacite_Salle" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row container">
+            <div class="row">
+                <div class="col-md-4">
+                    <form method="post" asp-page-handler="Create">
+                        <div class="row">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Salle.Nom_Salle"></label>
+                                    <input asp-for="Salle.Nom_Salle" class="form-control" style="width:27rem;" />
+                                    <span asp-validation-for="Salle.Nom_Salle" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" style="margin-left: 23rem;">
+                                    <label asp-for="Salle.Capacite_Salle"></label>
+                                    <input asp-for="Salle.Capacite_Salle" class="form-control" min="1" style="width:27rem;" />
+                                    <span asp-validation-for="Salle.Capacite_Salle" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-fill btn-primary" style="text-align:center">Ajouter</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Ajouter" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<table class="table" id="SalleTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Salles[0].Nom_Salle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Salles[0].Capacite_Salle)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Salles)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nom_Salle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Capacite_Salle)
-                </td>
-                <td>
-                    <a data-toggle="modal" data-target="#edit_@item.Id_Salle" asp-route-id="@item.Id_Salle">Informations</a>
-                    <a data-toggle="modal" data-target="#del_@item.Id_Salle" asp-route-id="@item.Id_Salle">Supprimer</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-@foreach (var item in Model.Salles)
-{
-    <!-- Modal Edit -->
-    <div class="modal fade" id="edit_@item.Id_Salle" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content style-modal">
-                <div class="modal-header">
-                    <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
-                <div class="modal-body">
-                    <form asp-page-handler="Edit" method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="Salle.Id_Salle" value="@item.Id_Salle" />
-                        <div style="display: flex ; justify-content: center;">
-                            <div class="form-group" style="text-align:center">
-                                <label>Nom de la salle</label>
-                                <input style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@item.Nom_Salle" disabled />
-                                <span class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div style="display: flex ; justify-content: center; flex-wrap: wrap">
-                            <div class="Input-Model">
-                                <label asp-for="Salle.Nom_Salle">Nom de la salle</label>
-                                <input asp-for="Salle.Nom_Salle" class="form-control font-inputs-modal" value="@item.Nom_Salle" />
-                                <span asp-validation-for="Salle.Nom_Salle" class="text-danger"></span>
-                            </div>
-                            <div class="Input-Model">
-                                <label asp-for="Salle.Capacite_Salle">Nom de la filière</label>
-                                <input asp-for="Salle.Capacite_Salle" class="form-control font-inputs-modal" value="@item.Capacite_Salle" />
-                                <span asp-validation-for="Salle.Capacite_Salle" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="card-footer" style="text-align:center">
-                            <button type="submit" class="btn btn-fill btn-primary">Enregistrer les modifications</button>
-                        </div>
-                    </form>
-                </div>
+<div class="card">
+    <div class="card-header ">
+        <div class="row">
+            <div class="col-sm-6 text-left">
+                <h2 class="card-title">Gestion de salle</h2>
+                <h5 class="card-category">Ajouter une nouvelle salle</h5>
             </div>
         </div>
     </div>
-
-    <!--Modal Delete-->
-    <div class="modal fade" id="del_@item.Id_Salle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content style-modal" style="top: 100px ; border-radius: 2rem;">
-                <div class="modal-header">
-                    <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <h5 class="font-modal" style="text-align:center;"> Easy Attendance </h5>
-                <div class="modal-body">
-                    <p class="font-inputs-modal" style="font-weight:bold ; text-align:center">
-                        Est-ce que vous voullez vraiment supprimer la matière <span class="font-del">@item.Nom_Salle</span>
-                    </p>
-                    <form asp-page-handler="Delete" method="post">
-                        <div class="row" style="align-content:center">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="text-align:center">
-                                    <input type="hidden" name="id" value="@item.Id_Salle" />
-                                    <input type="submit" value="Delete @item.Id_Salle" class="btn btn-danger" />
-                                </div>
-                            </div>
-                            <div class="col-md-3"></div>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
+    <div class="card-body">
+        <div class="row container">
+            <div class="col-md-12">
+            <table class="table" id="SalleTable" style="text-align:center">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Salles[0].Nom_Salle)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Salles[0].Capacite_Salle)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Salles)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nom_Salle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Capacite_Salle)
+                            </td>
+                            <td>
+                               
+                                <a data-toggle="modal" data-target="#edit_@item.Id_Salle" asp-route-id="@item.Id_Salle" class="btn btn-info btn-round" style="padding: 0.5rem">
+                                    <i class="fal fa-info"></i>
+                                    Informations
+                                </a>
+                                <a data-toggle="modal"  data-target="#del_@item.Id_Salle" asp-route-id="@item.Id_Salle" class="btn btn-danger btn-round" style="padding: 0.5rem">
+                                    <i class="fal fa-trash-alt"></i>
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+           </div>
         </div>
     </div>
-}
+</div>
 
-@section Scripts {
+            @foreach (var item in Model.Salles)
+            {
+                <!-- Modal Edit -->
+                <div class="modal fade" id="edit_@item.Id_Salle" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content style-modal">
+                            <div class="modal-header">
+                                <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
+                            <div class="modal-body">
+                                <form asp-page-handler="Edit" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="Salle.Id_Salle" value="@item.Id_Salle" />
 
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label style="margin-left:7.5rem">Nom de la salle</label>
+                                                <input style="text-align:center ; color:#356c96; margin-left:1rem;" class="form-control font-weight-bold" value="@item.Nom_Salle" readonly />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="Input-Model">
+                                                <label asp-for="Salle.Nom_Salle">Nom de la salle</label>
+                                                <input asp-for="Salle.Nom_Salle" class="form-control font-inputs-modal" value="@item.Nom_Salle" style="width: 13rem; text-align:center;" />
+                                                <span asp-validation-for="Salle.Nom_Salle" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="Input-Model">
+                                                <label asp-for="Salle.Capacite_Salle">Capacité de la salle</label>
+                                                <input asp-for="Salle.Capacite_Salle"  class="form-control font-inputs-modal"  min="1" value="@item.Capacite_Salle" style="width: 13rem;text-align:center; margin-left:-1rem" />
+                                                <span asp-validation-for="Salle.Capacite_Salle" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer" style="text-align:center">
+                                        <button type="submit" class="btn btn-fill btn-primary">Enregistrer les modifications</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modal Delete-->
+                <div class="modal fade" id="del_@item.Id_Salle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content style-modal" style="top: 100px ; border-radius: 2rem;">
+                            <div class="modal-header">
+                                <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <h5 class="font-modal" style="text-align:center;"> Easy Attendance </h5>
+
+                            <div class="modal-body">
+                                <p class="font-inputs-modal" style="font-weight:bold ; text-align:center">
+                                    Est-ce que vous voullez vraiment supprimer la salle <span class="font-del">@item.Nom_Salle</span>
+                                </p>
+                                <form asp-page-handler="Delete" method="post">
+                                    <div class="row" style="align-content:center">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-6">
+                                            <div class="form-group" style="text-align:center">
+                                                <input type="hidden" name="id" value="@item.Id_Salle" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" readonly />
+                                                <br />
+                                                <button type="submit" class="btn btn-danger" style="margin-right: 2rem;">Supprimer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @section Scripts {
+
+                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+                <script>
+                    $(document).ready(function () {
+                        var table = $('#SalleTable').DataTable({
+                            "pagingType": "simple",
+                            "language": {
+                                "lengthMenu": "Affichage _MENU_ salles par page",
+                                "info": "Page: _PAGE_ sur _PAGES_",
+                            },
+                            "paginate": {
+                                "first": "Première",
+                                "last": "Dernière",
+                                "previous": "Precedent",
+                                "next": "Suivant",
+                            }
+                        });
+                        $(table.table().container()).removeClass('form-inline');
+                    });
+                </script>
 
     <script>
         $(document).ready(function () {
@@ -165,5 +231,3 @@
             $('.dataTables_wrapper').removeClass('form-inline');
         });
     </script>
-
-}

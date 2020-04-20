@@ -182,15 +182,15 @@ namespace Assiduite.Pages.Utilisateurs
                         await _roleManager.CreateAsync(new IdentityRole(GestionRole.ProfUser));
                     }
 
-                    if (user.Type_User == "E")
+                    if (user.Type_User == "Etudiant")
                     {
                         await _userManager.AddToRoleAsync(user, GestionRole.EtudUser);
                     }
-                    else if (user.Type_User == "A")
+                    else if (user.Type_User == "Administrateur")
                     {
                         await _userManager.AddToRoleAsync(user, GestionRole.AdminUser);
                     }
-                    else if (user.Type_User == "P")
+                    else if (user.Type_User == "Professeur")
                     {
                         await _userManager.AddToRoleAsync(user, GestionRole.ProfUser);
                     }

@@ -1,9 +1,8 @@
 ﻿@page
-@model Assiduite.Pages.DashAdminModel
+@model Assiduite.Pages.DashProf.IndexModel
 @{
     ViewData["Title"] = "Dashboard";
 }
-
 
 <div class="content">
     
@@ -49,7 +48,7 @@
                             Matiere
                         </th>
                         <th>
-                            Prof
+                            Salle
                         </th>
                         <th>
                             Filière
@@ -67,10 +66,10 @@
                         {
                             <tr>
                                 <td>
-                                    @Seance.Matriere.Nom_Mat ( @Seance.Salle.Nom_Salle )
+                                    @Seance.Matriere.Nom_Mat
                                 </td>
                                 <td>
-                                    @Seance.User.Nom_User @Seance.User.Prenom_User
+                                    @Seance.Salle.Nom_Salle
                                 </td>
                                 <td>
                                     @Seance.Filiere.Annee_Fil @Seance.Filiere.Nom_Fil

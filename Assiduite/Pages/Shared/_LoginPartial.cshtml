@@ -12,56 +12,50 @@
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
                 <button type="submit" class="nav-link btn btn-link">Se déconnecter</button>
             </form>
-        </li>
+        </li>-->
 
-        <li class="search-bar input-group">
-            <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal">
-                <i class="tim-icons icon-zoom-split"></i>
-                <span class="d-lg-none d-md-block">Chercher par matricule</span>
-            </button>
-        </li>
-        <li class="dropdown nav-item">
-            <a href="" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <div class="notification d-none d-lg-block d-xl-block"></div>
-                <i class="tim-icons icon-sound-wave"></i>
-                <p class="d-lg-none">
-                    Notifications
-                </p>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                <li class="nav-link"><a href="#" class="nav-item dropdown-item">Mike John responded to your email</a></li>
-                <li class="nav-link"><a href="" class="nav-item dropdown-item">You have 5 more tasks</a></li>
-                <li class="nav-link"><a href="" class="nav-item dropdown-item">Your friend Michael is in town</a></li>
-                <li class="nav-link"><a href="" class="nav-item dropdown-item">Another notification</a></li>
-                <li class="nav-link"><a href="" class="nav-item dropdown-item">Another one</a></li>
-            </ul>
-        </li>
-        <li class="dropdown nav-item">
-            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <div class="photo">
-                    <img src="~/assets/img/anime3.png" alt="Profile Photo">
-                </div>
-                <b class="caret d-none d-lg-block d-xl-block"></b>
-                <p class="d-lg-none">
-                    Se déconnecter
-                </p>
-            </a>
-            <ul class="dropdown-menu dropdown-navbar">
-                <li class="nav-link"><a href="/Profil" class="nav-item dropdown-item">Profile</a></li>
-                <li class="nav-link"><a href="" class="nav-item dropdown-item">Parramétrage</a></li>
-                <li class="dropdown-divider"></li>
-                <li class="nav-link"><a href="" class="nav-item dropdown-item">Déconnection</a></li>
-            </ul>
-        </li>
-        <li class="separator d-lg-none"></li>
-    }
-    else
-    {
+            <li class="search-bar input-group">
+                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal">
+                    <i class="tim-icons icon-zoom-split"></i>
+                    <span class="d-lg-none d-md-block">Chercher par matricule</span>
+                </button>
+            </li>
+            
+            <li class="dropdown nav-item">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <div class="photo">
+                        <img src="~/assets/img/anime3.png" alt="Profile Photo">
+                    </div>
+                    <b class="caret d-none d-lg-block d-xl-block"></b>
+                    <p class="d-lg-none">
+                        Se déconnecter
+                    </p>
+                </a>
+                <ul class="dropdown-menu dropdown-navbar">
+                    <li class="nav-link"><a href="~/Profil" class="nav-item dropdown-item">Profile</a></li>
+                    <!--<li class="nav-link"><a href="" class="nav-item dropdown-item">Parramétrage</a></li>-->
+                    <li class="dropdown-divider"></li>
+                    <li class="nav-link">
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                            <Button type="submit" class="nav-item dropdown-item">Déconnection</Button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+            <li class="separator d-lg-none"></li>
+        }
+        else
+        {
+            <!--
         <li class="nav-item">
             <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">S'enregistrer</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Se connecter</a>
-        </li>
-    }
-</ul>
+        </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="~/Index">Scanner Matricule</a>
+            </li>
+            <li class="nav-item">
+                <!-- <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Se connecter</a>-->
+                <a class="nav-link" href="~/Connexion">Se connecter</a>
+            </li>
+        }
+    </ul>

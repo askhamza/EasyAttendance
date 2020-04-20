@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Assiduite.Models;
+using Assiduite.Data;
 
 namespace Assiduite.Pages.Connexion
 {
@@ -20,14 +22,17 @@ namespace Assiduite.Pages.Connexion
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        public readonly ApplicationDbContext _db;
 
         public LoginModel(SignInManager<IdentityUser> signInManager,
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,
+             ApplicationDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _db = db;
         }
 
         [BindProperty]
@@ -70,7 +75,7 @@ namespace Assiduite.Pages.Connexion
 
             ReturnUrl = returnUrl;
         }
-
+        public Utilisateur _user { get; set; }
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -81,7 +86,22 @@ namespace Assiduite.Pages.Connexion
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    _user =  _db.utilisateur.Where(e => e.Email == Input.Email).FirstOrDefault();
+                    if(_user.Type_User == "Administrateur")
+                    {
+                       // return  RedirectToPage("./DashAdmin");
+                        return Redirect("~/DashAdmin");
+                    }
+                    else if (_user.Type_User == "Professeur")
+                    {
+                        return Redirect("~/DashProf");
+                    }
+                    else
+                    {
+                        return Redirect("~/Profil");
+                    }
+                    // return LocalRedirect(returnUrl);
+
                 }
                 if (result.RequiresTwoFactor)
                 {
