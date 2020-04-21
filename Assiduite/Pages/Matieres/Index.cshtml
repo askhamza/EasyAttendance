@@ -16,21 +16,19 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row container">
+        <div class="container">
             <form method="post" asp-page-handler="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label asp-for="Matiere.Nom_Mat" class="control-label"></label>
-                            <input asp-for="Matiere.Nom_Mat" class="form-control" style="width:25rem" />
-                            <span asp-validation-for="Matiere.Nom_Mat" class="text-danger"></span>
-                        </div>
+                <div class="form-group-input">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group-item">
+                        <label asp-for="Matiere.Nom_Mat" class="control-label"></label>
+                        <input asp-for="Matiere.Nom_Mat" class="form-control" />
+                        <span asp-validation-for="Matiere.Nom_Mat" class="text-danger"></span>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <input type="submit" value="Ajouter" class="btn btn-primary" style="top:1rem"/>
-                        </div>
+                </div>
+                <div class="form-group-input">
+                    <div class="form-group-item">
+                        <input type="submit" value="Ajouter" class="btn btn-primary" style="top:1rem" />
                     </div>
                 </div>
             </form>
@@ -38,14 +36,6 @@
     </div>
 </div>
 <div class="card">
-    <div class="card-header ">
-        <div class="row">
-            <div class="col-sm-6 text-left">
-                <h2 class="card-title">Gestion de matière</h2>
-                <h5 class="card-category">Ajouter une nouvelle matière</h5>
-            </div>
-        </div>
-    </div>
     <div class="card-body">
         <div class="row container">
             <div class="col-md-12">
@@ -88,142 +78,131 @@
     </div>
 </div>
 
-            @foreach (var item in (IEnumerable<Models.MatiereSeance>)ViewData["_Matieres"])
-            {
-                <!-- Modal Matiere -->
-                <div class="modal fade" id="pres_@item.Matiere.Id_Mat" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content style-modal">
-                            <div class="modal-header">
-                                <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
-                            <div class="modal-body">
-                                <input type="hidden" asp-for="Matiere.Id_Mat" value="@item.Matiere.Id_Mat" />
-
-
-                                <div class="row">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label style="margin-left:7rem">Nom de la matière</label>
-                                            <input style="text-align:center ; color:#356c96; margin-left:1rem;" class="form-control font-weight-bold" value="@item.Matiere.Nom_Mat" readonly />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            @if (item.Seance.Count == 0)
-                                            {
-                                                <div class="form-control font-inputs-modal txt-danger" style="text-align:center ; margin-left:1rem;"> Aucune filière n'est assigner à cette matière </div>
-                                            }
-                                            @foreach (var Fil in item.Seance )
-                                            {
-                                                <div class="Input-Model">
-                                                    <a class="form-control font-inputs-modal" href="/Matieres/ListeSeance?id=@Fil.Id_Seance">@Fil.Filiere.Annee_Fil @Fil.Filiere.Nom_Fil </a>
-                                                    <span asp-validation-for="@Fil.Filiere.Id_Fil" class="text-danger"></span>
-                                                </div>
-                                            }
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4"></div>
-                                </div>
-                            </div>
-                                <div class="card-footer" style="text-align:center">
-                                    <button type="submit" class="btn btn-fill btn-primary">Enregistrer les modifications</button>
-                                </div>
+@foreach (var item in (IEnumerable<Models.MatiereSeance>)ViewData["_Matieres"])
+{
+            <!-- Modal Filiere -->
+            <div class="modal fade" id="pres_@item.Matiere.Id_Mat" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content style-modal">
+                        <div class="modal-header">
+                            <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                    </div>
-                </div>
-                
-                <!-- Modal Edit -->
-                <div class="modal fade" id="edit_@item.Matiere.Id_Mat" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content style-modal">
-                            <div class="modal-header">
-                                <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                        <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
+                        <div class="modal-body">
+                            <input type="hidden" asp-for="Matiere.Id_Mat" value="@item.Matiere.Id_Mat" />
+                            <div style="display: flex ; justify-content: center;">
+                                <div class="form-group" style="text-align:center">
+                                    <label>Nom de la matière</label>
+                                    <input style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" value="@item.Matiere.Nom_Mat" disabled />
+                                    <span class="text-danger"></span>
+                                </div>
                             </div>
-                            <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
-                            <div class="modal-body">
-                                <form asp-page-handler="Edit" method="post">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <input type="hidden" asp-for="Matiere.Id_Mat" value="@item.Matiere.Id_Mat" />
-                                    <div class="row">
-                                        <div class="col-md-1"></div>
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label style="margin-left:7rem">Nom de la matière</label>
-                                                <input style="text-align:center ; color:#356c96; margin-left:1rem;" class="form-control font-weight-bold" value="@item.Matiere.Nom_Mat" readonly />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4"></div>
+                            <hr />
+                            <div style="display: flex ; justify-content: center; flex-wrap: wrap">
+                                @if (item.Seance.Count == 0)
+                                {
+                                    <div class="Input-Model">
+                                        <div class="font-inputs-modal txt-danger"> Aucune filière n'est assigner à cette matière </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-1"></div>
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label asp-for="Matiere.Nom_Mat" style="margin-left:7rem">Nom de la matière</label>
-                                                <input type="text" asp-for="Matiere.Nom_Mat" class="form-control" value="@item.Matiere.Nom_Mat"  style="text-align:center ; margin-left:1rem;" />
-                                                <span asp-validation-for="Matiere.Nom_Mat" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4"></div>
+                                }
+                                @foreach (var Fil in item.Seance)
+                                {
+                                    <div class="Input-Model">
+                                        <a class="font-inputs-modal" href="/Matieres/ListeSeance?id=@Fil.Id_Seance">@Fil.Filiere.Annee_Fil @Fil.Filiere.Nom_Fil </a>
+                                        <span asp-validation-for="@Fil.Filiere.Id_Fil" class="text-danger"></span>
                                     </div>
-                                    <div class="card-footer" style="text-align:center">
-                                        <button type="submit" class="btn btn-fill btn-primary">Enregistrer les modifications</button>
-                                    </div>
-                                </form>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Modal Delete -->
-                <div class="modal fade" id="del_@item.Matiere.Id_Mat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content style-modal" style="top: 100px ; border-radius: 2rem;">
-                            <div class="modal-header">
-                                <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+    <!-- Modal Edit -->
+    <div class="modal fade" id="edit_@item.Matiere.Id_Mat" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content style-modal">
+                <div class="modal-header">
+                    <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
+                <div class="modal-body">
+                    <form asp-page-handler="Edit" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Matiere.Id_Mat" value="@item.Matiere.Id_Mat" />
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label style="margin-left:7rem">Nom de la matière</label>
+                                    <input style="text-align:center ; color:#356c96; margin-left:1rem;" class="form-control font-weight-bold" value="@item.Matiere.Nom_Mat" readonly />
+                                </div>
                             </div>
-                            <h5 class="font-modal" style="text-align:center;"> Easy Attendance </h5>
-                            <div class="modal-body">
-                                <p class="font-inputs-modal" style="font-weight:bold ; text-align:center">
-                                    Est-ce que vous voullez vraiment supprimer la matière <span class="font-del">@item.Matiere.Nom_Mat</span>
-                                </p>
-                                <form asp-page-handler="Delete" method="post">
-                                    <div class="row" style="align-content:center">
-                                        <div class="col-md-2"></div>
-                                        <div class="col-md-6">
-                                            <div class="form-group" style="text-align:center">
-                                                <input type="hidden" name="id" value="@item.Matiere.Id_Mat" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" readonly />
-                                                <br />
-                                                <button type="submit" class="btn btn-danger" style="margin-right: 2rem;">Supprimer</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label asp-for="Matiere.Nom_Mat" style="margin-left:7rem">Nom de la matière</label>
+                                    <input type="text" asp-for="Matiere.Nom_Mat" class="form-control" value="@item.Matiere.Nom_Mat" style="text-align:center ; margin-left:1rem;" />
+                                    <span asp-validation-for="Matiere.Nom_Mat" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="card-footer" style="text-align:center">
+                            <button type="submit" class="btn btn-fill btn-primary">Enregistrer les modifications</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete -->
+    <div class="modal fade" id="del_@item.Matiere.Id_Mat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content style-modal" style="top: 100px ; border-radius: 2rem;">
+                <div class="modal-header">
+                    <img src="~/EasyAttendance.png" style=" margin-left: auto; margin-right: auto; width:2rem ; height:auto" />
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <h5 class="font-modal" style="text-align:center;"> Easy Attendance </h5>
+                <div class="modal-body">
+                    <p class="font-inputs-modal" style="font-weight:bold ; text-align:center">
+                        Est-ce que vous voullez vraiment supprimer la matière <span class="font-del">@item.Matiere.Nom_Mat</span>
+                    </p>
+                    <form asp-page-handler="Delete" method="post">
+                        <div class="row" style="align-content:center">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-6">
+                                <div class="form-group" style="text-align:center">
+                                    <input type="hidden" name="id" value="@item.Matiere.Id_Mat" style="text-align:center ; color:#356c96;" class="form-control font-weight-bold" readonly />
+                                    <br />
+                                    <button type="submit" class="btn btn-danger" style="margin-right: 2rem;">Supprimer</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
+            </div>
+        </div>
+    </div>
 
-            }
+}
 
-            @section Scripts {
+@section Scripts {
 
-                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
         $(document).ready(function () {
@@ -244,4 +223,4 @@
         });
     </script>
 
-            }
+}

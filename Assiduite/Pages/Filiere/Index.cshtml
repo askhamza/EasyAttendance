@@ -17,27 +17,25 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row container">
+        <div class="container">
             <form method="post" asp-page-handler="Create">
-                <div class="row">
+                <div class="form-group-input">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="Filiere.Nom_Fil"></label>
-                            <input asp-for="Filiere.Nom_Fil" class="form-control" style="width:27rem;" />
-                            <span asp-validation-for="Filiere.Nom_Fil" class="text-danger"></span>
-                        </div>
+                    <div class="form-group-item">
+                        <label asp-for="Filiere.Nom_Fil"></label>
+                        <input asp-for="Filiere.Nom_Fil" class="form-control" style="width:27rem;" />
+                        <span asp-validation-for="Filiere.Nom_Fil" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="Filiere.Annee_Fil" style="margin-left:9rem"></label>
-                            <input asp-for="Filiere.Annee_Fil" class="form-control" max="5" min="0" style="width:27rem;margin-left: 9rem;" />
-                            <span asp-validation-for="Filiere.Annee_Fil" class="text-danger"></span>
-                        </div>
+                    <div class="form-group-item">
+                        <label asp-for="Filiere.Annee_Fil" style="margin-left:9rem"></label>
+                        <input asp-for="Filiere.Annee_Fil" class="form-control" max="5" min="0" style="width:27rem;margin-left: 9rem;" />
+                        <span asp-validation-for="Filiere.Annee_Fil" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-fill btn-primary" style="text-align:center">Ajouter</button>
+                <div class="form-group-input">
+                    <div class="form-group-item">
+                        <button type="submit" class="btn btn-fill btn-primary" style="text-align:center">Ajouter</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -46,14 +44,6 @@
 
 <!--Card for list all filiere-->
 <div class="card">
-    <div class="card-header ">
-        <div class="row">
-            <div class="col-sm-6 text-left">
-                <h5 class="card-category">Etudiant</h5>
-                <h2 class="card-title">Tout les Etudiants</h2>
-            </div>
-        </div>
-    </div>
     <div class="card-body">
         <div class="row container">
             <div class="col-md-12">
@@ -133,14 +123,14 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="Input-Model">
+                                <div class="">
                                     <label asp-for="Filiere.Nom_Fil">Nom de la filière</label>
                                     <input asp-for="Filiere.Nom_Fil" class="form-control font-inputs-modal"  value="@item.Nom_Fil" style="width: 13rem;" />
                                     <span asp-validation-for="Filiere.Nom_Fil" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="Input-Model">
+                                <div class="">
                                     <label asp-for="Filiere.Annee_Fil">Année de la filière</label>
                                     <input asp-for="Filiere.Annee_Fil" class="form-control font-inputs-modal" max="5" min="1" value="@item.Annee_Fil" style="width: 13rem; margin-left:-1rem" />
                                     <span asp-validation-for="Filiere.Annee_Fil" class="text-danger"></span>

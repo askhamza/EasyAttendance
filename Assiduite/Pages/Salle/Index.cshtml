@@ -15,46 +15,32 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row container">
-            <div class="row">
-                <div class="col-md-4">
-                    <form method="post" asp-page-handler="Create">
-                        <div class="row">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label asp-for="Salle.Nom_Salle"></label>
-                                    <input asp-for="Salle.Nom_Salle" class="form-control" style="width:27rem;" />
-                                    <span asp-validation-for="Salle.Nom_Salle" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="margin-left: 23rem;">
-                                    <label asp-for="Salle.Capacite_Salle"></label>
-                                    <input asp-for="Salle.Capacite_Salle" class="form-control" min="1" style="width:27rem;" />
-                                    <span asp-validation-for="Salle.Capacite_Salle" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-fill btn-primary" style="text-align:center">Ajouter</button>
-                        </div>
-                    </form>
+        <div class="container">
+            <form method="post" asp-page-handler="Create">
+                <div class="form-group-input">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group-item">
+                        <label asp-for="Salle.Nom_Salle"></label>
+                        <input asp-for="Salle.Nom_Salle" class="form-control"  />
+                        <span asp-validation-for="Salle.Nom_Salle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group-item" style="margin-left: 23rem;">
+                        <label asp-for="Salle.Capacite_Salle"></label>
+                        <input asp-for="Salle.Capacite_Salle" class="form-control" min="1"  />
+                        <span asp-validation-for="Salle.Capacite_Salle" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
+                <div class="form-group-input">
+                    <div class="form-group-item">
+                        <button type="submit" class="btn btn-fill btn-primary" style="text-align:center">Ajouter</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 <div class="card">
-    <div class="card-header ">
-        <div class="row">
-            <div class="col-sm-6 text-left">
-                <h2 class="card-title">Gestion de salle</h2>
-                <h5 class="card-category">Ajouter une nouvelle salle</h5>
-            </div>
-        </div>
-    </div>
     <div class="card-body">
         <div class="row container">
             <div class="col-md-12">
@@ -131,14 +117,14 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="Input-Model">
+                                <div class="">
                                     <label asp-for="Salle.Nom_Salle">Nom de la salle</label>
                                     <input asp-for="Salle.Nom_Salle" class="form-control font-inputs-modal" value="@item.Nom_Salle" style="width: 13rem; text-align:center;" />
                                     <span asp-validation-for="Salle.Nom_Salle" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="Input-Model">
+                                <div class="">
                                     <label asp-for="Salle.Capacite_Salle">Capacité de la salle</label>
                                     <input asp-for="Salle.Capacite_Salle" class="form-control font-inputs-modal" min="1" value="@item.Capacite_Salle" style="width: 13rem;text-align:center; margin-left:-1rem" />
                                     <span asp-validation-for="Salle.Capacite_Salle" class="text-danger"></span>

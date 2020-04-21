@@ -40,8 +40,8 @@ namespace Assiduite.Pages.Matieres
                 var seance = _context.seance.Where(s => s.Id_Mat_Seance == Mat.Id_Mat)
                                                                             .Include(s => s.Filiere)
                                                                             .ToList();
-
-                _Matieres.Add(new MatiereSeance( Mat, seance ) );
+                var Specseance = seance.GroupBy(s => s.Id_Fil_Seance).Select(x => x.First()).ToList();
+                _Matieres.Add(new MatiereSeance( Mat, Specseance) );
             }
 
             if( id != null)

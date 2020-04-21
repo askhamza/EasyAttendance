@@ -16,65 +16,50 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row container">
-
+        <div class="container">
             <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                <div class="row container">
+                <div class="form-group-input">
                     <div class="form-group">
                         <label asp-for="Input.Email"></label>
-                        <input asp-for="Input.Email" class="form-control" style="width:60rem;" />
+                        <input asp-for="Input.Email" class="form-control" />
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="Input.Nom_User">Nom</label>
-                            <input asp-for="Input.Nom_User" class="form-control" style="width:27rem;" />
-                            <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
-                        </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Nom_User">Nom</label>
+                        <input asp-for="Input.Nom_User" class="form-control"  />
+                        <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group" style="margin-left: 7rem;">
-                            <label asp-for="Input.Prenom_User">Prénom</label>
-                            <input asp-for="Input.Prenom_User" class="form-control" style="width:27rem;" />
-                            <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
-                        </div>
+                    <div class="form-group" style="">
+                        <label asp-for="Input.Prenom_User">Prénom</label>
+                        <input asp-for="Input.Prenom_User" class="form-control"  />
+                        <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="Input.Password">Mot de passe </label>
-                            <input asp-for="Input.Password" class="form-control" style="width:27rem;" />
-                            <span asp-validation-for="Input.Password" class="text-danger"></span>
-                        </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Password">Mot de passe </label>
+                        <input asp-for="Input.Password" class="form-control"  />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group" style="margin-left: 7rem;">
-                            <label asp-for="Input.ConfirmPassword"> Confirmation de Mot de passe</label>
-                            <input asp-for="Input.ConfirmPassword" class="form-control" style="width:27rem;" />
-                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                        </div>
+                    <div class="form-group" style="">
+                        <label asp-for="Input.ConfirmPassword"> Confirmation de Mot de passe</label>
+                        <input asp-for="Input.ConfirmPassword" class="form-control"  />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label asp-for="Input.Type_User">Filière</label>
-                            <select asp-for="Input.Type_User" class="form-control" style="width:60rem;">
-                                @foreach (var _fil in Model._db.filiere.ToArray())
-                                {
-                                    <option value="@_fil.Id_Fil">@_fil.Nom_Fil</option>
-                                }
-                            </select>
-                            <span asp-validation-for="Input.Type_User" class="text-danger"></span>
-                        </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Type_User">Filière</label>
+                        <select asp-for="Input.Type_User" class="form-control" >
+                            @foreach (var _fil in Model._db.filiere.ToArray())
+                            {
+                                <option value="@_fil.Id_Fil">@_fil.Nom_Fil</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Input.Type_User" class="text-danger"></span>
                     </div>
                 </div>
                 <div asp-validation-summary="All" style="color:#dc3545 ;"></div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-fill btn-primary">Ajouter</button>
+                <div class="form-group-input">
+                    <div class="form-group-item">
+                        <button type="submit" class="btn btn-fill btn-primary">Ajouter</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -83,14 +68,6 @@
 
 <!-- Card for list All users-->
 <div class="card">
-    <div class="card-header ">
-        <div class="row">
-            <div class="col-sm-6 text-left">
-                <h5 class="card-category">Etudiant</h5>
-                <h2 class="card-title">Tout les Etudiants</h2>
-            </div>
-        </div>
-    </div>
     <div class="card-body">
         <div class="row">
             <div class="col-md-12">
@@ -178,45 +155,41 @@
                 <h5 style="text-align:center; font-weight: bold"> Easy Attendance </h5>
                 <div class="modal-body">
                     <form asp-page-handler="Edit" asp-route-id="@_Etud.Student.User.Id" method="post">
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label asp-for="Input.Mat_User" style="margin-left:7.5rem">Matricule</label>
-                                    <input  name="Mat_User" style="text-align:center ; color:#356c96; margin-left:1rem;" class="form-control font-weight-bold" value="@_Etud.Student.User.Mat_User" readonly />
-                                    <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
-                                </div>
-                            </div> 
-                            <div class="col-md-4"></div>
+                        <div style="display: flex; justify-content: center;">
+                            <div class="form-group" >
+                                <label asp-for="Input.Mat_User">Matricule</label>
+                                <input  name="Mat_User" style="text-align:center ; color:#356c96; " class="form-control font-weight-bold" value="@_Etud.Student.User.Mat_User" readonly />
+                                <span asp-validation-for="Input.Mat_User" class="text-danger"></span>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="Input-Model">
+                                <div class="">
                                     <label asp-for="Input.Nom_User"  >Nom</label>
                                     <input asp-for="Input.Nom_User" name="Nom_User" class="form-control font-inputs-modal" value="@_Etud.Student.User.Nom_User"  style="width: 13rem;" />
                                     <span asp-validation-for="Input.Nom_User" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="Input-Model">
+                                <div class="">
                                     <label asp-for="Input.Prenom_User">Prénom</label>
-                                    <input asp-for="Input.Prenom_User" name="Prenom_User" class="form-control font-inputs-modal" value="@_Etud.Student.User.Prenom_User" style="width: 13rem; margin-left:-1rem"  />
+                                    <input asp-for="Input.Prenom_User" name="Prenom_User" class="form-control font-inputs-modal" value="@_Etud.Student.User.Prenom_User" style="width: 13rem; "  />
                                     <span asp-validation-for="Input.Prenom_User" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="Input-Model">
+                                <div class="">
                                     <label asp-for="Input.Email"></label>
                                     <input name="Email" class="form-control font-inputs-modal" value="@_Etud.Student.User.Email" style="width: 13rem;" />
                                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="Input-Model">
+                                <div class="">
                                     <label asp-for="Input.Type_User">Filière</label>
-                                    <select asp-for="Input.Type_User" class="form-control" style="width: 13rem; margin-left:-1rem">
+                                    <select asp-for="Input.Type_User" class="form-control" style="width: 13rem; ">
                                         @foreach (var _fil in Model.Filieres)
                                         {
                                             if (_Etud.Student.Filiere.Id_Fil == _fil.Id_Fil)
@@ -236,15 +209,15 @@
                         </div>
                            <div class="row">
                                <div class="col-md-6">
-                                   <div class="Input-Model">
+                                   <div class="">
                                        <label>Nombre d'absence</label>
                                        <input style="color:#356c96; width: 13rem; text-align:center ; " class="form-control font-weight-bold" value="@_Etud.NbrAbs"  readonly />
                                    </div>
                                </div>
                                <duv class="col-md-6">
-                                   <div class="Input-Model">
+                                   <div class="">
                                        <label>Taux d'absence</label>
-                                       <input class="form-control font-weight-bold" value="@_Etud.TauxAbs %" style=" color:#356c96; width: 13rem; margin-left:-1rem; text-align:center;" readonly />
+                                       <input class="form-control font-weight-bold" value="@_Etud.TauxAbs %" style=" color:#356c96; width: 13rem;  text-align:center;" readonly />
                                    </div>
                                </duv>
                            </div>

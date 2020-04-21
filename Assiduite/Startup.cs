@@ -49,13 +49,14 @@ namespace Assiduite
                 {
                     options.Conventions.AuthorizeFolder("/Etudiants", "RequireAdministrateurRole");
                     options.Conventions.AuthorizeFolder("/Utilisateurs", "RequireAdministrateurRole");
-                    options.Conventions.AuthorizeFolder("/Matieres", "RequireAdministrateurRole");
                     options.Conventions.AuthorizeFolder("/Filiere", "RequireAdministrateurRole");
                     options.Conventions.AuthorizeFolder("/Salle", "RequireAdministrateurRole");
                     options.Conventions.AuthorizeFolder("/Seance", "RequireAdministrateurRole");
                     options.Conventions.AuthorizeFolder("/DashAdmin", "RequireAdministrateurRole");
                     options.Conventions.AuthorizeFolder("/DashProf", "RequireProfesseurRole");
                     options.Conventions.AuthorizeAreaPage("Identity", "/Account");
+                    options.Conventions.AuthorizePage("/Matieres/MatiereProf", "RequireProfesseurRole");
+                    options.Conventions.AuthorizePage("/Matieres/ListeSeanceProf", "RequireProfesseurRole");
 
                 });
                 

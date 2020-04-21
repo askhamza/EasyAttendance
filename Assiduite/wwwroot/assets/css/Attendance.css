@@ -20413,10 +20413,16 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .Input-Model {
-    margin-bottom: 10px;
     position: relative;
-    width: 10rem;
+    width: 7rem;
     margin: 1rem;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 1rem;
+}
+
+.Input-Model:hover {
+    border: 1px solid #356c96;
 }
 
 .div-container{
@@ -20440,6 +20446,10 @@ Copyright (c) 2015 Daniel Eden
 
 .display-content {
     width: 36rem;
+    margin: 1rem;
+}
+
+.form-group-item{
     margin: 1rem;
 }
 
