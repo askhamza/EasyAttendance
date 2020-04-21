@@ -61,8 +61,44 @@ namespace Assiduite.Pages
             }
 
             /*
-             * CREATION DE FILIERE
-            foreach( var Filiere in _db.filiere.ToList())
+            //Creation d'administrateur
+            for( int i = 0; i < 5; i++)
+            {
+                var user = new Utilisateur
+                {
+                    UserName = "admin"+i + "@admin.com",
+                    Email = "admin" + i + "@admin.com",
+                    Nom_User = "admin" + i,
+                    Prenom_User = "admin" + i,
+                    Mat_User = "admin" + i,
+                    Type_User = "Administrateur",
+                };
+
+                await _userManager.CreateAsync(user, "P@ssw0rd");
+                await _userManager.AddToRoleAsync(user, GestionRole.AdminUser);
+
+            }
+
+            // Creation de prof
+            for (int i = 0; i < 20; i++)
+            {
+                var user = new Utilisateur
+                {
+                    UserName = "prof" + i + "@admin.com",
+                    Email = "prof" + i + "@admin.com",
+                    Nom_User = "prof" + i,
+                    Prenom_User = "prof" + i,
+                    Mat_User = "prof" + i,
+                    Type_User = "Professeur",
+                };
+
+                await _userManager.CreateAsync(user, "P@ssw0rd");
+                await _userManager.AddToRoleAsync(user, GestionRole.ProfUser);
+
+            }
+
+            // CREATION DE FILIERE
+            foreach ( var Filiere in _db.filiere.ToList())
             {
                 List<Utilisateur> users = new List<Utilisateur>();
                 for (int i = 0; i < 20; i++)
@@ -86,6 +122,7 @@ namespace Assiduite.Pages
                 foreach (var user in users)
                 {
                     await _userManager.CreateAsync(user, "P@ssw0rd");
+                    await _userManager.AddToRoleAsync(user, GestionRole.EtudUser);
 
                     _db.etudiant.Add(new Etudiant
                     {
@@ -96,7 +133,7 @@ namespace Assiduite.Pages
             }
             _db.SaveChanges();
             
-
+            // Creation de seance
             var prof = _db.utilisateur.Where(e => e.Type_User == "Professeur").ToList();
             var Fillieres = _db.filiere.ToList();
             var Salles = _db.salle.ToList();

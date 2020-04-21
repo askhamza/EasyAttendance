@@ -70,7 +70,8 @@ namespace Assiduite.Pages.DashProf
                                                 .Where( s => s.Date_Seance > DateTime.Today.AddDays(-5)  )
                                                 .Where( s => s.Id_Prof_Seance == HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier) )
                                                 .OrderBy( s => s.Date_Seance )
-                                                .ToArrayAsync();
+                                                .ToListAsync();
+
             int Som_Day1 = 0, Som_Day2 = 0, Som_Day3 = 0, Som_Day4 = 0, Som_Day5 = 0;
             double Abs_Day1 = 0, Abs_Day2 = 0, Abs_Day3 = 0, Abs_Day4 = 0, Abs_Day5 = 0;
 
