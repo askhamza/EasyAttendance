@@ -30,7 +30,8 @@ namespace Assiduite.Pages.Matieres
                                         .Include(s => s.Filiere)
                                         .ToArrayAsync();
 
-            var SpecSeances = Seances.GroupBy(s => s.Id_Mat_Seance)
+            var SpecSeances = Seances.OrderBy(s => s.Date_Seance)
+                                        .GroupBy(s => s.Id_Mat_Seance)
                                         .Select(x => x.First());
 
 

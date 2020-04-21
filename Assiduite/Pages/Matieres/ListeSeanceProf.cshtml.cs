@@ -30,7 +30,9 @@ namespace Assiduite.Pages.Matieres
         {
             if (id == null) return NotFound();
 
-            var Seance = await _context.seance.Where(s => s.Id_Seance == id).ToListAsync();
+            var Seance = await _context.seance.Where(s => s.Id_Seance == id)
+                                    .OrderBy(s => s.Date_Seance)
+                                    .ToListAsync();
 
             if (Seance.Count() != 0)
             {
@@ -43,6 +45,7 @@ namespace Assiduite.Pages.Matieres
                                     .ToArrayAsync();
                 Seances = await _context.seance.Where( s => s.Id_Fil_Seance == id_Fil)
                                     .Where( s => s.Id_Prof_Seance == Seance[0].Id_Prof_Seance)
+                                    .OrderBy(s => s.Date_Seance)
                                     .ToListAsync();
 
                 Matiere = await _context.matiere.FirstOrDefaultAsync( m => m.Id_Mat == id_Mat );

@@ -42,6 +42,7 @@ namespace Assiduite.Pages.Matieres
                                     .Include( e => e.User )
                                     .ToArrayAsync();
                 Seances = await _context.seance.Where( s => s.Id_Fil_Seance == id_Fil)
+                                    .OrderBy(s => s.Date_Seance)
                                     .ToListAsync();
 
                 Matiere = await _context.matiere.FirstOrDefaultAsync( m => m.Id_Mat == id_Mat );
@@ -50,7 +51,7 @@ namespace Assiduite.Pages.Matieres
                 foreach( var _seance in Seances)
                 {
                     var pres = _context.presence.Where( p => p.Id_Seance_Pres == _seance.Id_Seance )
-                                                .Include( p => p.Etudiant )
+                                                .Include( p => p.Etudiant)
                                                 .ToList();
 
                     foreach( var Etudiant in pres)

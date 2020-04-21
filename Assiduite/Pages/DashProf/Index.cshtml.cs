@@ -71,44 +71,55 @@ namespace Assiduite.Pages.DashProf
                                                 .Where( s => s.Id_Prof_Seance == HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier) )
                                                 .OrderBy( s => s.Date_Seance )
                                                 .ToListAsync();
-
-            int Som_Day1 = 0, Som_Day2 = 0, Som_Day3 = 0, Som_Day4 = 0, Som_Day5 = 0;
-            double Abs_Day1 = 0, Abs_Day2 = 0, Abs_Day3 = 0, Abs_Day4 = 0, Abs_Day5 = 0;
-
-             int D = Seances[0].Date_Seance.Day;
-            foreach ( var Seance in Seances)
+            if( Seances.Count() != 0)
             {
-                int index = Seance.Date_Seance.Day - D;
+                int Som_Day1 = 0, Som_Day2 = 0, Som_Day3 = 0, Som_Day4 = 0, Som_Day5 = 0;
+                double Abs_Day1 = 0, Abs_Day2 = 0, Abs_Day3 = 0, Abs_Day4 = 0, Abs_Day5 = 0;
 
-                var _Presences = await _context.presence.Where(p => p.Id_Seance_Pres == Seance.Id_Seance).ToArrayAsync();
-                foreach( var p in _Presences)
+                int D = Seances[0].Date_Seance.Day;
+                foreach (var Seance in Seances)
                 {
-                    if( p.Etat_Pres == 1 )
-                        switch( index)
-                        {
-                            case 0: Abs_Day1++; break;
-                            case 1: Abs_Day2++; break;
-                            case 2: Abs_Day3++; break;
-                            case 3: Abs_Day4++; break;
-                            case 4: Abs_Day5++; break;
-                        }
+                    int index = Seance.Date_Seance.Day - D;
+
+                    var _Presences = await _context.presence.Where(p => p.Id_Seance_Pres == Seance.Id_Seance).ToArrayAsync();
+                    foreach (var p in _Presences)
+                    {
+                        if (p.Etat_Pres == 1)
+                            switch (index)
+                            {
+                                case 0: Abs_Day1++; break;
+                                case 1: Abs_Day2++; break;
+                                case 2: Abs_Day3++; break;
+                                case 3: Abs_Day4++; break;
+                                case 4: Abs_Day5++; break;
+                            }
+                    }
+
+                    switch (index)
+                    {
+                        case 0: Som_Day1 += _Presences.Count(); break;
+                        case 1: Som_Day2 += _Presences.Count(); break;
+                        case 2: Som_Day3 += _Presences.Count(); break;
+                        case 3: Som_Day4 += _Presences.Count(); break;
+                        case 4: Som_Day5 += _Presences.Count(); break;
+                    }
                 }
 
-                switch (index)
-                {
-                    case 0: Som_Day1 += _Presences.Count(); break;
-                    case 1: Som_Day2 += _Presences.Count(); break;
-                    case 2: Som_Day3 += _Presences.Count(); break;
-                    case 3: Som_Day4 += _Presences.Count(); break;
-                    case 4: Som_Day5 += _Presences.Count(); break;
-                }
+                DayPourcentage_Abs.Add((Som_Day1 != 0) ? (Abs_Day1 / Som_Day1 * 100) : 0);
+                DayPourcentage_Abs.Add((Som_Day2 != 0) ? (Abs_Day2 / Som_Day2 * 100) : 0);
+                DayPourcentage_Abs.Add((Som_Day3 != 0) ? (Abs_Day3 / Som_Day3 * 100) : 0);
+                DayPourcentage_Abs.Add((Som_Day4 != 0) ? (Abs_Day4 / Som_Day4 * 100) : 0);
+                DayPourcentage_Abs.Add((Som_Day5 != 0) ? (Abs_Day5 / Som_Day5 * 100) : 0);
             }
-
-            DayPourcentage_Abs.Add((Som_Day1 != 0) ? (Abs_Day1 / Som_Day1 * 100) : 0);
-            DayPourcentage_Abs.Add((Som_Day2 != 0) ? (Abs_Day2 / Som_Day2 * 100) : 0);
-            DayPourcentage_Abs.Add((Som_Day3 != 0) ? (Abs_Day3 / Som_Day3 * 100) : 0);
-            DayPourcentage_Abs.Add((Som_Day4 != 0) ? (Abs_Day4 / Som_Day4 * 100) : 0);
-            DayPourcentage_Abs.Add((Som_Day5 != 0) ? (Abs_Day5 / Som_Day5 * 100) : 0);
+            else
+            {
+                DayPourcentage_Abs.Add(0);
+                DayPourcentage_Abs.Add(0);
+                DayPourcentage_Abs.Add(0);
+                DayPourcentage_Abs.Add(0);
+                DayPourcentage_Abs.Add(0);
+            }
+            
 
             //Future séance
             FutureSeance = await _context.seance
